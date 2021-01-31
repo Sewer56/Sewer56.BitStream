@@ -270,16 +270,16 @@ namespace Sewer56.BitStream
             }
 
             // Combine the high bits of the value to write with the high bits of the first byte and write.
+            int numLowBits = numBits - firstBitsAvailable;
             valueMask = GetMask(firstBitsAvailable);
             firstMask = ~valueMask;
-            Stream.Write((byte)((firstByte & firstMask) | (value & valueMask)), localByteIndex);
+            Stream.Write((byte)((firstByte & firstMask) | (value >> numLowBits) & valueMask), localByteIndex);
 
             // Read the second byte and combine its low bits with the low bits of the value to write.
             byte secondByte = Stream.Read(localByteIndex + 1);
-            int numRemain = numBits - firstBitsAvailable;
-
-            valueMask = GetMask(numRemain);
-            int numSecond = ByteNumBits - numRemain;
+            
+            valueMask = GetMask(numLowBits);
+            int numSecond = ByteNumBits - numLowBits;
             uint secondMask = GetMask(numSecond);
             Stream.Write((byte)(((value & valueMask) << numSecond) | (secondByte & secondMask)), localByteIndex + 1);
         }

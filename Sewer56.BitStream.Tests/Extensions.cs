@@ -43,7 +43,7 @@ namespace Sewer56.BitStream.Tests
                 };
 
                 // Read values.
-                Assert.Equal(expected, stream.ReadStruct<TestStruct>());
+                Assert.Equal(expected, stream.ReadGeneric<TestStruct>());
             }
         }
 
@@ -82,11 +82,11 @@ namespace Sewer56.BitStream.Tests
                 };
 
                 // Read values.
-                Assert.Equal(expected, stream.ReadStruct<TestStruct>());
+                Assert.Equal(expected, stream.ReadGeneric<TestStruct>());
 
                 // Seek back.
                 stream.SeekRelative(-sizeof(TestStruct));
-                Assert.Equal(expected, stream.ReadStruct<TestStruct>());
+                Assert.Equal(expected, stream.ReadGeneric<TestStruct>());
             }
         }
 

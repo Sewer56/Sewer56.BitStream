@@ -1,5 +1,6 @@
 ﻿using Sewer56.BitStream.ByteStreams;
 using System;
+using System.ComponentModel;
 using Xunit;
 using static Sewer56.BitStream.Tests.Helpers.Helpers;
 
@@ -40,6 +41,36 @@ namespace Sewer56.BitStream.Tests
             (str, val, num) => str.Write64((ulong)val, num),
             (str, num) => str.Read64(num)
         );
+
+        [Fact]
+        public void WriteBoundary()
+        {
+            var arrayStream = CreateArrayStream(sizeof(ulong) + 1, 0);
+            var bitStream = new BitStream<ArrayByteStream>(arrayStream);
+
+            int bitsPlayers = 4;
+            int bitsFlags   = 6;
+
+            int expectedPlayers = 3;
+            int expectedFlags;
+
+            for (int x = 0; x < 63; x++)
+            {
+                expectedFlags = x;
+                ResetArray(arrayStream.Array, 0x0);
+
+                bitStream.BitIndex = 0;
+                bitStream.Write8((byte)expectedPlayers, bitsPlayers);
+                bitStream.Write8((byte)expectedFlags, bitsFlags);
+
+                bitStream.BitIndex = 0;
+                int playerCount = bitStream.Read8(bitsPlayers);
+                ushort flags = bitStream.Read8(bitsFlags);
+
+                Assert.Equal(expectedPlayers, playerCount);
+                Assert.Equal(expectedFlags, flags);
+            }
+        }
 
         private void WriteTest(int maxNumBits, Action<BitStream<ArrayByteStream>, ulong, int> writeValue, Func<BitStream<ArrayByteStream>, int, ulong> readValue)
         {
