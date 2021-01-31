@@ -197,6 +197,7 @@ namespace Sewer56.BitStream
 
             else if (typeof(T) == typeof(long)) return Number.Cast<T>(Read64(numBits));
             else if (typeof(T) == typeof(ulong)) return Number.Cast<T>(Read64(numBits));
+
 #if DEBUG
             // Debug-only because exceptions prevent inlining.
             else throw new InvalidCastException();
@@ -413,7 +414,7 @@ namespace Sewer56.BitStream
         /// <typeparam name="T">The type of value to be read from the stream.</typeparam>
         /// <returns>The read in struct.</returns>
         [MethodImpl(AggressiveOptimization)]
-        public T ReadStruct<T>() where T : unmanaged
+        public T ReadGeneric<T>() where T : unmanaged
         {
             Span<byte> stackSpan = stackalloc byte[sizeof(T)];
             for (int x = 0; x < stackSpan.Length; x++)
@@ -426,9 +427,35 @@ namespace Sewer56.BitStream
         /// Reads an unmanaged struct from the current <see cref="BitStream"/>.
         /// </summary>
         /// <typeparam name="T">The type of value to be read from the stream.</typeparam>
+        /// <returns>The read in struct.</returns>
+        [MethodImpl(AggressiveOptimization)]
+        public T ReadGeneric<T>(int numBits) where T : unmanaged
+        {
+            Span<byte> stackSpan = stackalloc byte[sizeof(T)];
+            int remainingBits = numBits;
+
+            for (int x = 0; x < stackSpan.Length; x++)
+            {
+                if (remainingBits < ByteNumBits)
+                {
+                    stackSpan[x] = Read<byte>(remainingBits);
+                    break;
+                }
+
+                stackSpan[x] = Read<byte>(ByteNumBits);
+                remainingBits -= ByteNumBits;
+            }
+
+            return Unsafe.ReadUnaligned<T>(ref MemoryMarshal.GetReference(stackSpan));
+        }
+
+        /// <summary>
+        /// Reads an unmanaged struct from the current <see cref="BitStream"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of value to be read from the stream.</typeparam>
         /// <param name="value">The value read from the stream.</param>
         [MethodImpl(AggressiveInlining)]
-        public void ReadStruct<T>(out T value) where T : unmanaged => value = ReadStruct<T>();
+        public void ReadGeneric<T>(out T value) where T : unmanaged => value = ReadGeneric<T>();
 
         /// <summary>
         /// Appends an unmanaged struct to the current <see cref="BitStream"/>.
@@ -436,11 +463,75 @@ namespace Sewer56.BitStream
         /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
         /// <param name="value">The value to write to the stream.</param>
         [MethodImpl(AggressiveOptimization)]
-        public void WriteStruct<T>(ref T value) where T : unmanaged
+        public void WriteGeneric<T>(ref T value) where T : unmanaged
         {
             var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
             for (int x = 0; x < sizeof(T); x++)
                 Write<byte>(valuePtr[x], ByteNumBits);
+        }
+
+        /// <summary>
+        /// Appends an unmanaged struct to the current <see cref="BitStream"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
+        /// <param name="value">The value to write to the stream.</param>
+        [MethodImpl(AggressiveOptimization)]
+        public void WriteGeneric<T>(T value) where T : unmanaged
+        {
+            var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
+            for (int x = 0; x < sizeof(T); x++)
+                Write<byte>(valuePtr[x], ByteNumBits);
+        }
+
+        /// <summary>
+        /// Appends an unmanaged struct to the current <see cref="BitStream"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
+        /// <param name="value">The value to write to the stream.</param>
+        /// <param name="numBits">Number of bits to write to the stream.</param>
+        [MethodImpl(AggressiveOptimization)]
+        public void WriteGeneric<T>(ref T value, int numBits) where T : unmanaged
+        {
+            var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
+            int remainingBits = numBits;
+
+            for (int x = 0; x < sizeof(T); x++)
+            {
+                if (remainingBits < ByteNumBits)
+                {
+                    Write<byte>(valuePtr[x], remainingBits);
+                    break;
+                }
+
+                Write<byte>(valuePtr[x], ByteNumBits);
+                remainingBits -= ByteNumBits;
+            }
+        }
+
+        /// <summary>
+        /// Appends an unmanaged struct to the current <see cref="BitStream"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
+        /// <param name="value">The value to write to the stream.</param>
+
+        /// <param name="numBits">Number of bits to write to the stream.</param>
+        [MethodImpl(AggressiveOptimization)]
+        public void WriteGeneric<T>(T value, int numBits) where T : unmanaged
+        {
+            var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
+            int remainingBits = numBits;
+
+            for (int x = 0; x < sizeof(T); x++)
+            {
+                if (remainingBits < ByteNumBits)
+                {
+                    Write<byte>(valuePtr[x], remainingBits);
+                    break;
+                }
+
+                Write<byte>(valuePtr[x], ByteNumBits);
+                remainingBits -= ByteNumBits;
+            }
         }
 
         /// <summary>

@@ -27,7 +27,7 @@ namespace Sewer56.BitStream.Tests
                     Long = (long)int.MaxValue + x,
                 };
 
-                stream.WriteStruct(ref expected);
+                stream.WriteGeneric(ref expected);
             }
 
             // Read all values.
@@ -66,7 +66,7 @@ namespace Sewer56.BitStream.Tests
                     Long = (long)int.MaxValue + x,
                 };
 
-                stream.WriteStruct(ref expected);
+                stream.WriteGeneric(ref expected);
             }
 
             // Read all values.

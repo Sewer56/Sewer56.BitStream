@@ -113,7 +113,7 @@ var actual = stream.Deserialize<TestStruct>();
 ```
 
 ### Reading/Writing Structures (No Interface)
-If you want to just write structs without any bit packing whatsoever, you can use `ReadStruct<T>` and `WriteStruct<T>` in order to read/write unmanaged structures. 
+If you want to just write structs without any bit packing whatsoever, you can use `ReadGeneric<T>` and `WriteGeneric<T>` in order to read/write unmanaged structures. 
 
 ```csharp
 var expected = new TestStruct
@@ -125,11 +125,11 @@ var expected = new TestStruct
 };
 
 // Write struct to memory.
-stream.WriteStruct(ref expected);
+stream.WriteGeneric(ref expected);
 
 // Seek and read the struct back.
 stream.SeekRelative(-sizeof(TestStruct));
-var actual = stream.ReadStruct<TestStruct>();
+var actual = stream.ReadGeneric<TestStruct>();
 
 // They should be equal.
 Assert.Equal(expected, actual);
