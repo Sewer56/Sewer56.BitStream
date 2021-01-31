@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<Authors>Sewer56</Authors>
+	<Product />
+	<Copyright>Sewer56</Copyright>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<Description>Efficient reusable BitStream library with support for generics; no virtual function calls, zero heap allocations.</Description>
+  </PropertyGroup>
+
+</Project>
