@@ -49,26 +49,30 @@ namespace Sewer56.BitStream.Tests
             var bitStream = new BitStream<ArrayByteStream>(arrayStream);
 
             int bitsPlayers = 4;
-            int bitsFlags   = 6;
 
-            int expectedPlayers = 3;
-            int expectedFlags;
-
-            for (int x = 0; x < 63; x++)
+            for (int numPlayers = 0; numPlayers < 16; numPlayers++)
             {
-                expectedFlags = x;
-                ResetArray(arrayStream.Array, 0x0);
+                int expectedPlayers = numPlayers;
+                for (int bitsFlags = 5; bitsFlags < 9; bitsFlags++)
+                {
+                    int maxFlags = (1 << bitsFlags) - 1;
+                    for (int y = 0; y < maxFlags; y++)
+                    {
+                        int expectedFlags = y;
+                        ResetArray(arrayStream.Array, 0x0);
 
-                bitStream.BitIndex = 0;
-                bitStream.Write8((byte)expectedPlayers, bitsPlayers);
-                bitStream.Write8((byte)expectedFlags, bitsFlags);
+                        bitStream.BitIndex = 0;
+                        bitStream.Write8((byte)expectedPlayers, bitsPlayers);
+                        bitStream.Write8((byte)expectedFlags, bitsFlags);
 
-                bitStream.BitIndex = 0;
-                int playerCount = bitStream.Read8(bitsPlayers);
-                ushort flags = bitStream.Read8(bitsFlags);
+                        bitStream.BitIndex = 0;
+                        int playerCount = bitStream.Read8(bitsPlayers);
+                        ushort flags    = bitStream.Read8(bitsFlags);
 
-                Assert.Equal(expectedPlayers, playerCount);
-                Assert.Equal(expectedFlags, flags);
+                        Assert.Equal(expectedPlayers, playerCount);
+                        Assert.Equal(expectedFlags, flags);
+                    }
+                }
             }
         }
 
