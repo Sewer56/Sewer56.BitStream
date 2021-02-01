@@ -548,6 +548,28 @@ namespace Sewer56.BitStream
         /// <typeparam name="T">Any type implementing <see cref="IBitPackable{TSelf}"/>.</typeparam>
         [MethodImpl(AggressiveInlining)]
         public T Deserialize<T>() where T : IBitPackable<T>, new() => new T().FromStream(ref this);
+
+        /// <summary>
+        /// Writes a <see cref="Span{T}"/> of bytes to the stream.
+        /// </summary>
+        /// <param name="value">The span to write.</param>
+        [MethodImpl(AggressiveInlining)]
+        public void Write(Span<byte> value)
+        {
+            for (int x = 0; x < value.Length; x++)
+                Write8(value[x], ByteNumBits);
+        }
+
+        /// <summary>
+        /// Reads a given number of bytes into a <see cref="Span{T}"/> buffer.
+        /// </summary>
+        /// <param name="buffer">Span to write to.</param>
+        [MethodImpl(AggressiveInlining)]
+        public void Read(Span<byte> buffer)
+        {
+            for (int x = 0; x < buffer.Length; x++)
+                buffer[x] = Read8(ByteNumBits);
+        }
         #endregion
 
         #region Utilities
