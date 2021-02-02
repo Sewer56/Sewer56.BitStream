@@ -38,6 +38,7 @@ namespace Sewer56.BitStream
         private const int ByteNumBits = sizeof(byte) * 8;
         private const int ShortNumBits = sizeof(short) * 8;
         private const int IntNumBits = sizeof(int) * 8;
+        private const int LongNumBits = sizeof(long) * 8;
 
         /// <summary>
         /// Absolute index of the next bit to access.
@@ -570,6 +571,63 @@ namespace Sewer56.BitStream
             for (int x = 0; x < buffer.Length; x++)
                 buffer[x] = Read8(ByteNumBits);
         }
+
+        /// <summary>
+        /// Reads a specified signed type (up to 64 bits) from the stream.
+        /// </summary>
+        /// <typeparam name="T">Any of the following: byte, sbyte, short, ushort, int, uint, long, ulong.</typeparam>
+        /// <param name="numBits">Number of bits to read. Max: 64.</param>
+        /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
+        [MethodImpl(AggressiveInlining)]
+        public T ReadSigned<T>(int numBits)
+        {
+            if (typeof(T) == typeof(long)) return Number.Cast<T>(SignExtend((long)Number.Cast<T, ulong>(Read<T>(numBits)), numBits));
+            else if (typeof(T) == typeof(ulong)) return Number.Cast<T>(SignExtend((long) Number.Cast<T, ulong>(Read<T>(numBits)), numBits));
+
+            else if (typeof(T) == typeof(uint)) return Number.Cast<T>(SignExtend(Number.Cast<T, uint>(Read<T>(numBits)), numBits));
+            else if (typeof(T) == typeof(int)) return Number.Cast<T>(SignExtend(Number.Cast<T, int>(Read<T>(numBits)), numBits));
+
+            else if (typeof(T) == typeof(short)) return Number.Cast<T>(SignExtend(Number.Cast<T, short>(Read<T>(numBits)), numBits));
+            else if (typeof(T) == typeof(ushort)) return Number.Cast<T>(SignExtend(Number.Cast<T, ushort>(Read<T>(numBits)), numBits));
+            else if (typeof(T) == typeof(byte)) return Number.Cast<T>(SignExtend(Number.Cast<T, byte>(Read<T>(numBits)), numBits));
+            else if (typeof(T) == typeof(sbyte)) return Number.Cast<T>(SignExtend(Number.Cast<T, sbyte>(Read<T>(numBits)), numBits));
+
+#if DEBUG
+            // Debug-only because exceptions prevent inlining.
+            else throw new InvalidCastException();
+#else
+            else return default;
+#endif
+        }
+
+        /// <summary>
+        /// Writes a specified signed type (up to 64 bits) to the stream.
+        /// Number of bits determined from type.
+        /// </summary>
+        /// <typeparam name="T">Any of the following: byte, sbyte, short, ushort, int, uint, long, ulong.</typeparam>
+        /// <param name="value">The value to write.</param>
+        /// <param name="numBits">Number of bits to write.</param>
+        /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
+        [MethodImpl(AggressiveInlining)]
+        public void WriteSigned<T>(T value, int numBits) where T : unmanaged
+        {
+            if (typeof(T) == typeof(byte)) Write8((byte) SignShrink(Number.Cast<T, byte>(value)), numBits);
+            else if (typeof(T) == typeof(sbyte)) Write8((byte) SignShrink(Number.Cast<T, byte>(value)), numBits);
+
+            else if (typeof(T) == typeof(short)) Write16((ushort) SignShrink(Number.Cast<T, ushort>(value)), numBits);
+            else if (typeof(T) == typeof(ushort)) Write16((ushort) SignShrink(Number.Cast<T, ushort>(value)), numBits);
+
+            else if (typeof(T) == typeof(int)) Write32((uint) SignShrink((int)Number.Cast<T, uint>(value)), numBits);
+            else if (typeof(T) == typeof(uint)) Write32((uint) SignShrink((int)Number.Cast<T, uint>(value)), numBits);
+
+            else if (typeof(T) == typeof(long)) Write64((ulong) SignShrink((long)Number.Cast<T, ulong>(value)), numBits);
+            else if (typeof(T) == typeof(ulong)) Write64((ulong) SignShrink((long)Number.Cast<T, ulong>(value)), numBits);
+#if DEBUG
+            // Debug-only because exceptions prevent inlining.
+            else throw new InvalidCastException();
+#endif
+        }
+
         #endregion
 
         #region Utilities
@@ -597,6 +655,26 @@ namespace Sewer56.BitStream
         /// </summary>
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
         private ulong GetMaskLong(int numBits) => ((ulong)1 << numBits) - 1;
+
+        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+        private int SignShrink(int value) => SignExtend(value, IntNumBits);
+
+        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+        private long SignShrink(long value) => SignExtend(value, LongNumBits);
+
+        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+        private int SignExtend(int value, int numBits)
+        {
+            var mask = 1 << (numBits - 1);
+            return (value ^ mask) - mask;
+        }
+
+        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+        private long SignExtend(long value, int numBits)
+        {
+            long mask = 1L << (numBits - 1);
+            return (value ^ mask) - mask;
+        }
         #endregion
     }
 }
