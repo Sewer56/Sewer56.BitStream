@@ -628,6 +628,49 @@ namespace Sewer56.BitStream
 #endif
         }
 
+        /// <summary>
+        /// Reads a null terminated string from a given stream.
+        /// </summary>
+        /// <param name="maxLengthBytes">Maximum length in bytes.</param>
+        /// <param name="encoding">The encoding to use.</param>
+        public string ReadString(int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
+        {
+            encoding ??= System.Text.Encoding.UTF8;
+            Span<byte> span = stackalloc byte[maxLengthBytes];
+
+            int length = 0;
+            byte currentCharacter;
+            do
+            {
+                currentCharacter = Read<byte>();
+                span[length] = currentCharacter;
+                length += 1;
+            }
+            while (currentCharacter != 0x0);
+
+            return encoding.GetString(span.Slice(0, length - 1));
+        }
+
+        /// <summary>
+        /// Writes a string to a given string.
+        /// </summary>
+        /// <param name="text">The text to write to the stream.</param>
+        /// <param name="maxLengthBytes">Maximum length in bytes.</param>
+        /// <param name="encoding">The encoding to use.</param>
+        public void WriteString(string text, int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
+        {
+            encoding ??= System.Text.Encoding.UTF8;
+            Span<byte> span = stackalloc byte[maxLengthBytes];
+            int encodedBytes = encoding.GetBytes(text, span);
+
+            var sliced = span.Slice(0, encodedBytes);
+            for (int x = 0; x < sliced.Length; x++)
+                Write(sliced[x]);
+
+            // Null delimiter
+            Write<byte>(0x0);
+        }
+
         #endregion
 
         #region Utilities
