@@ -2,12 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	<Authors>Sewer56</Authors>
-	<Product />
-	<Copyright>Sewer56</Copyright>
-	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Description>Efficient reusable BitStream library with support for generics; no virtual function calls, zero heap allocations.</Description>
+	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	  <Authors>Sewer56</Authors>
+	  <Product />
+	  <Copyright>Sewer56</Copyright>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <Description>Efficient reusable BitStream library with support for generics; no virtual function calls, zero heap allocations.</Description>
+	  <PackageProjectUrl>https://github.com/Sewer56/Sewer56.BitStream</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/Sewer56/Sewer56.BitStream</RepositoryUrl>
+	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>

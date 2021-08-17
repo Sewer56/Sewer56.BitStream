@@ -1,6 +1,10 @@
 # Sewer56.BitStream
 Efficient reusable BitStream library with support for generics; no virtual function calls, zero heap allocations.
 
+<a href="https://www.nuget.org/packages/Sewer56.BitStream">
+	<img src="https://img.shields.io/nuget/v/Sewer56.BitStream.svg" alt="NuGet" />
+</a>
+
 ## Introduction
 Bitstreams unlike regular streams, operate at the bit level, allowing you to read/write bits.
 
