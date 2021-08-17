@@ -9,6 +9,14 @@ namespace Sewer56.BitStream.Tests
     public class Write
     {
         [Fact]
+        public void WriteBit() => WriteTest
+        (
+            1,
+            (str, val, num) => str.WriteBit((byte)val),
+            (str, num) => str.ReadBit()
+        );
+
+        [Fact]
         public void Write8() => WriteTest
         (
             8, 

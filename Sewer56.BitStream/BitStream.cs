@@ -89,6 +89,29 @@ namespace Sewer56.BitStream
         }
 
         /// <summary>
+        /// Reads a single bit from the stream.
+        /// </summary>
+        /// <returns>The read value, stored in the least-significant bits.</returns>
+        [MethodImpl(AggressiveOptimization)]
+        public byte ReadBit()
+        {
+            const int bitCount = 1;
+            const uint mask = 0b01;
+
+            // Calculate where we are in the stream and advance.
+            int bitIndex   = BitIndex;
+            int byteOffset = bitIndex / ByteNumBits;
+            int bitOffset  = bitIndex % ByteNumBits;
+            BitIndex += bitCount;
+
+            // Read the byte containing the bit we want and mask.
+            byte highByte = Stream.Read(byteOffset);
+            int highBitsAfterRead = ByteNumBits - bitOffset - bitCount;
+            uint highMask = mask << highBitsAfterRead;
+            return (byte)((highByte & highMask) >> highBitsAfterRead);
+        }
+
+        /// <summary>
         /// Read up to 8 bits starting at <see cref="BitIndex"/>.
         /// </summary>
         /// <param name="numBits">Number of bits to read.</param>
@@ -233,6 +256,30 @@ namespace Sewer56.BitStream
 #else
             else return default;
 #endif
+        }
+
+        /// <summary>
+        /// Writes a single bit starting at <see cref="BitIndex"/>.
+        /// </summary>
+        /// <param name="value">Value to write.</param>
+        public void WriteBit(byte value)
+        {
+            const int numBits = 1;
+            const int singleBitMask = 0b01;
+
+            // Calculate where we are in the stream and advance.
+            int bitIndex = BitIndex;
+            int localByteIndex = bitIndex / ByteNumBits;
+            int localBitIndex = bitIndex % ByteNumBits;
+            BitIndex = bitIndex + numBits;
+
+            // Read the first byte, mix with our value and write back.
+            byte firstByte = Stream.Read(localByteIndex);
+            int firstBitsAvailable = ByteNumBits - localBitIndex;
+            int firstBitsAfterWrite = firstBitsAvailable - numBits;
+            var firstMask = (GetMask(localBitIndex) << firstBitsAvailable) | GetMask(firstBitsAfterWrite); // Masks out bits except those to write.
+            uint valueMask = singleBitMask;
+            Stream.Write((byte)((firstByte & firstMask) | ((value & valueMask) << firstBitsAfterWrite)), localByteIndex);
         }
 
         /// <summary>

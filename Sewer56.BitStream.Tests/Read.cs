@@ -8,6 +8,9 @@ namespace Sewer56.BitStream.Tests
     public class Read
     {
         [Fact]
+        public void ReadBit() => ReadTest(1, (expected, numBits, stream) => Assert.Equal((byte) expected, stream.ReadBit()));
+
+        [Fact]
         public void Read8() => ReadTest(8, (expected, numBits, stream) => Assert.Equal((byte) expected, stream.Read<byte>(numBits)));
 
         [Fact]

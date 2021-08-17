@@ -12,6 +12,7 @@
 	  <RepositoryUrl>https://github.com/Sewer56/Sewer56.BitStream</RepositoryUrl>
 	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <Version>1.1.0</Version>
   </PropertyGroup>
 
 </Project>
