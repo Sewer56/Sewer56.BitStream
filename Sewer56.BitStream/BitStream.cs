@@ -92,6 +92,9 @@ namespace Sewer56.BitStream
         /// Reads a single bit from the stream.
         /// </summary>
         /// <returns>The read value, stored in the least-significant bits.</returns>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveOptimization)]
         public byte ReadBit()
         {
@@ -116,6 +119,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <param name="numBits">Number of bits to read.</param>
         /// <returns>The read value, stored in the least-significant bits.</returns>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveOptimization)]
         public byte Read8(int numBits)
         {
@@ -155,6 +161,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <param name="numBits">Number of bits to read.</param>
         /// <returns>The read value, stored in the least-significant bits.</returns>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
         public ushort Read16(int numBits)
         {
@@ -172,6 +181,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <param name="numBits">Number of bits to read.</param>
         /// <returns>The read value, stored in the least-significant bits.</returns>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
         public uint Read32(int numBits)
         {
@@ -189,6 +201,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <param name="numBits">Number of bits to read.</param>
         /// <returns>The read value, stored in the least-significant bits.</returns>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
         public ulong Read64(int numBits)
         {
@@ -262,6 +277,9 @@ namespace Sewer56.BitStream
         /// Writes a single bit starting at <see cref="BitIndex"/>.
         /// </summary>
         /// <param name="value">Value to write.</param>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         public void WriteBit(byte value)
         {
             const int numBits = 1;
@@ -287,6 +305,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <param name="value">Value to write.</param>
         /// <param name="numBits">Number of bits to write.</param>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         public void Write8(byte value, int numBits)
         {
             // Calculate where we are in the stream and advance.
@@ -337,6 +358,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <param name="value">Value to write.</param>
         /// <param name="numBits">Number of bits to write.</param>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         public void Write16(ushort value, int numBits)
         {
             if (numBits <= ByteNumBits)
@@ -355,6 +379,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <param name="value">Value to write.</param>
         /// <param name="numBits">Number of bits to write.</param>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         public void Write32(uint value, int numBits)
         {
             if (numBits <= ShortNumBits)
@@ -373,6 +400,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <param name="value">Value to write.</param>
         /// <param name="numBits">Number of bits to write.</param>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         public void Write64(ulong value, int numBits)
         {
             if (numBits <= IntNumBits)
@@ -461,6 +491,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <typeparam name="T">The type of value to be read from the stream.</typeparam>
         /// <returns>The read in struct.</returns>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveOptimization)]
         public T ReadGeneric<T>() where T : unmanaged
         {
@@ -476,6 +509,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <typeparam name="T">The type of value to be read from the stream.</typeparam>
         /// <returns>The read in struct.</returns>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveOptimization)]
         public T ReadGeneric<T>(int numBits) where T : unmanaged
         {
@@ -510,6 +546,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
         /// <param name="value">The value to write to the stream.</param>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveOptimization)]
         public void WriteGeneric<T>(ref T value) where T : unmanaged
         {
@@ -523,6 +562,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
         /// <param name="value">The value to write to the stream.</param>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveOptimization)]
         public void WriteGeneric<T>(T value) where T : unmanaged
         {
@@ -537,6 +579,9 @@ namespace Sewer56.BitStream
         /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
         /// <param name="value">The value to write to the stream.</param>
         /// <param name="numBits">Number of bits to write to the stream.</param>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveOptimization)]
         public void WriteGeneric<T>(ref T value, int numBits) where T : unmanaged
         {
@@ -561,8 +606,10 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
         /// <param name="value">The value to write to the stream.</param>
-
         /// <param name="numBits">Number of bits to write to the stream.</param>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveOptimization)]
         public void WriteGeneric<T>(T value, int numBits) where T : unmanaged
         {
@@ -680,6 +727,9 @@ namespace Sewer56.BitStream
         /// </summary>
         /// <param name="maxLengthBytes">Maximum length in bytes.</param>
         /// <param name="encoding">The encoding to use.</param>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         public string ReadString(int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
         {
             encoding ??= System.Text.Encoding.UTF8;
@@ -704,6 +754,9 @@ namespace Sewer56.BitStream
         /// <param name="text">The text to write to the stream.</param>
         /// <param name="maxLengthBytes">Maximum length in bytes.</param>
         /// <param name="encoding">The encoding to use.</param>
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         public void WriteString(string text, int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
         {
             encoding ??= System.Text.Encoding.UTF8;
@@ -752,6 +805,9 @@ namespace Sewer56.BitStream
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
         private long SignShrink(long value) => SignExtend(value, LongNumBits);
 
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
         private int SignExtend(int value, int numBits)
         {
@@ -759,6 +815,9 @@ namespace Sewer56.BitStream
             return (value ^ mask) - mask;
         }
 
+#if NET5_0_OR_GREATER
+        [SkipLocalsInit]
+#endif
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
         private long SignExtend(long value, int numBits)
         {
