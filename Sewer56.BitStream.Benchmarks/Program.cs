@@ -8,7 +8,7 @@ namespace Sewer56.BitStream.Benchmarks
         static void Main(string[] args)
         {
             BenchmarkRunner.Run<ReadBenchmark>();
-            //BenchmarkRunner.Run<WriteBenchmark>();
+            BenchmarkRunner.Run<ReadBenchmark_Streams>();
         }
     }
 }

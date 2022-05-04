@@ -1,23 +1,10 @@
-﻿using System;
-using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Jobs;
+﻿using BenchmarkDotNet.Attributes;
 using Sewer56.BitStream.ByteStreams;
 
 namespace Sewer56.BitStream.Benchmarks
 {
-    [SimpleJob(RuntimeMoniker.CoreRt31)]
-    [SimpleJob(RuntimeMoniker.CoreRt50)]
-    public class ReadBenchmark
+    public class ReadBenchmark : ReadBenchmarkBase
     {
-        private const int NumBytes = 10000;
-        private readonly byte[] _data;
-
-        public ReadBenchmark()
-        {
-            _data = new byte[NumBytes];
-            new Random().NextBytes(_data);
-        }
-
         [Benchmark]
         public int ReadBit()
         {
