@@ -53,7 +53,7 @@ jobs:
       
     - name: Test
       run: |
-           dotnet test ./Sewer56.BitStream.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="../../$env:CODE_COVERAGE_PATH" --% /p:Exclude=\"[xunit.*]*\"
+           dotnet test ./Sewer56.BitStream.sln -c Debug /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:SkipAutoProps=true /p:CoverletOutput="../$env:CODE_COVERAGE_PATH" --% /p:Exclude=\"[xunit.*]*\"
            
     - name: Codecov
         # You may pin to the exact commit or the version.

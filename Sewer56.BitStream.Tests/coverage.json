@@ -1,0 +1,3820 @@
+{
+  "Sewer56.BitStream.dll": {
+    "C:\\Users\\sewer\\Desktop\\Projects\\Sewer56.BitStream\\Sewer56.BitStream\\BitStream.cs": {
+      "Sewer56.BitStream.BitStream`1": {
+        "System.Int32 Sewer56.BitStream.BitStream`1::get_BitIndex()": {
+          "Lines": {
+            "46": 18815520
+          },
+          "Branches": []
+        },
+        "System.Int32 Sewer56.BitStream.BitStream`1::get_ByteOffset()": {
+          "Lines": {
+            "51": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Sewer56.BitStream.BitStream`1::get_BitOffset()": {
+          "Lines": {
+            "56": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Sewer56.BitStream.BitStream`1::get_NextByteIndex()": {
+          "Lines": {
+            "66": 0,
+            "67": 0,
+            "68": 0,
+            "69": 0,
+            "70": 0,
+            "71": 0,
+            "72": 0
+          },
+          "Branches": []
+        },
+        "TByteStream Sewer56.BitStream.BitStream`1::get_Stream()": {
+          "Lines": {
+            "78": 9238172
+          },
+          "Branches": []
+        },
+        "System.Byte Sewer56.BitStream.BitStream`1::ReadBit()": {
+          "Lines": {
+            "102": 16,
+            "107": 16,
+            "108": 16,
+            "109": 16,
+            "110": 16,
+            "113": 16,
+            "114": 16,
+            "115": 16,
+            "116": 16,
+            "117": 16
+          },
+          "Branches": []
+        },
+        "System.Byte Sewer56.BitStream.BitStream`1::Read8(System.Int32)": {
+          "Lines": {
+            "131": 4100957,
+            "133": 4100957,
+            "134": 4100957,
+            "135": 4100957,
+            "136": 4100957,
+            "139": 4100957,
+            "140": 4100957,
+            "141": 4100957,
+            "144": 4100957,
+            "145": 4088581,
+            "146": 4088581,
+            "147": 4088581,
+            "151": 12376,
+            "153": 12376,
+            "154": 12376,
+            "155": 12376,
+            "157": 12376,
+            "158": 12376,
+            "159": 12376,
+            "160": 12376,
+            "161": 4100957
+          },
+          "Branches": [
+            {
+              "Line": 144,
+              "Offset": 72,
+              "EndOffset": 74,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 4088581
+            },
+            {
+              "Line": 144,
+              "Offset": 72,
+              "EndOffset": 105,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 12376
+            }
+          ]
+        },
+        "System.UInt16 Sewer56.BitStream.BitStream`1::Read16(System.Int32)": {
+          "Lines": {
+            "177": 2233543,
+            "178": 2233543,
+            "179": 525678,
+            "181": 1707865,
+            "182": 1707865,
+            "183": 1707865,
+            "184": 1707865,
+            "185": 2233543
+          },
+          "Branches": [
+            {
+              "Line": 178,
+              "Offset": 10,
+              "EndOffset": 12,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 525678
+            },
+            {
+              "Line": 178,
+              "Offset": 10,
+              "EndOffset": 23,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1707865
+            }
+          ]
+        },
+        "System.UInt32 Sewer56.BitStream.BitStream`1::Read32(System.Int32)": {
+          "Lines": {
+            "201": 1182427,
+            "202": 1182427,
+            "203": 131822,
+            "205": 1050605,
+            "206": 1050605,
+            "207": 1050605,
+            "208": 1050605,
+            "209": 1182427
+          },
+          "Branches": [
+            {
+              "Line": 202,
+              "Offset": 11,
+              "EndOffset": 13,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 131822
+            },
+            {
+              "Line": 202,
+              "Offset": 11,
+              "EndOffset": 24,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1050605
+            }
+          ]
+        },
+        "System.UInt64 Sewer56.BitStream.BitStream`1::Read64(System.Int32)": {
+          "Lines": {
+            "225": 1279,
+            "226": 1279,
+            "227": 512,
+            "229": 767,
+            "230": 767,
+            "231": 767,
+            "232": 767,
+            "233": 1279
+          },
+          "Branches": [
+            {
+              "Line": 226,
+              "Offset": 11,
+              "EndOffset": 13,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 512
+            },
+            {
+              "Line": 226,
+              "Offset": 11,
+              "EndOffset": 25,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 767
+            }
+          ]
+        },
+        "T Sewer56.BitStream.BitStream`1::Read(System.Int32)": {
+          "Lines": {
+            "243": 1192814,
+            "244": 1205118,
+            "245": 1180510,
+            "247": 1180510,
+            "248": 1180638,
+            "250": 2359996,
+            "251": 1024,
+            "253": 512,
+            "254": 1024,
+            "258": 0,
+            "262": 1192814
+          },
+          "Branches": [
+            {
+              "Line": 244,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 12304
+            },
+            {
+              "Line": 244,
+              "Offset": 28,
+              "EndOffset": 48,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1180510
+            },
+            {
+              "Line": 245,
+              "Offset": 75,
+              "EndOffset": 77,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 245,
+              "Offset": 75,
+              "EndOffset": 95,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1180510
+            },
+            {
+              "Line": 247,
+              "Offset": 122,
+              "EndOffset": 124,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 247,
+              "Offset": 122,
+              "EndOffset": 142,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1180510
+            },
+            {
+              "Line": 248,
+              "Offset": 171,
+              "EndOffset": 173,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 128
+            },
+            {
+              "Line": 248,
+              "Offset": 171,
+              "EndOffset": 191,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 1180382
+            },
+            {
+              "Line": 250,
+              "Offset": 220,
+              "EndOffset": 222,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 1179614
+            },
+            {
+              "Line": 250,
+              "Offset": 220,
+              "EndOffset": 240,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 768
+            },
+            {
+              "Line": 251,
+              "Offset": 269,
+              "EndOffset": 271,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 256
+            },
+            {
+              "Line": 251,
+              "Offset": 269,
+              "EndOffset": 286,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 512
+            },
+            {
+              "Line": 253,
+              "Offset": 315,
+              "EndOffset": 317,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 253,
+              "Offset": 315,
+              "EndOffset": 332,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 512
+            },
+            {
+              "Line": 254,
+              "Offset": 361,
+              "EndOffset": 363,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 512
+            },
+            {
+              "Line": 254,
+              "Offset": 361,
+              "EndOffset": 378,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            }
+          ]
+        },
+        "T Sewer56.BitStream.BitStream`1::Read()": {
+          "Lines": {
+            "272": 131020,
+            "273": 261275,
+            "274": 765,
+            "276": 1020,
+            "277": 510,
+            "279": 765,
+            "280": 255,
+            "282": 510,
+            "283": 0,
+            "286": 0,
+            "290": 131020
+          },
+          "Branches": [
+            {
+              "Line": 273,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 130255
+            },
+            {
+              "Line": 273,
+              "Offset": 28,
+              "EndOffset": 55,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 765
+            },
+            {
+              "Line": 274,
+              "Offset": 82,
+              "EndOffset": 84,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 274,
+              "Offset": 82,
+              "EndOffset": 109,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 765
+            },
+            {
+              "Line": 276,
+              "Offset": 136,
+              "EndOffset": 138,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 255
+            },
+            {
+              "Line": 276,
+              "Offset": 136,
+              "EndOffset": 163,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 510
+            },
+            {
+              "Line": 277,
+              "Offset": 192,
+              "EndOffset": 194,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 277,
+              "Offset": 192,
+              "EndOffset": 219,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 510
+            },
+            {
+              "Line": 279,
+              "Offset": 248,
+              "EndOffset": 250,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 255
+            },
+            {
+              "Line": 279,
+              "Offset": 248,
+              "EndOffset": 275,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 255
+            },
+            {
+              "Line": 280,
+              "Offset": 304,
+              "EndOffset": 306,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 280,
+              "Offset": 304,
+              "EndOffset": 328,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 255
+            },
+            {
+              "Line": 282,
+              "Offset": 357,
+              "EndOffset": 359,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 255
+            },
+            {
+              "Line": 282,
+              "Offset": 357,
+              "EndOffset": 381,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 283,
+              "Offset": 410,
+              "EndOffset": 412,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 283,
+              "Offset": 410,
+              "EndOffset": 434,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::WriteBit(System.Byte)": {
+          "Lines": {
+            "300": 8,
+            "305": 8,
+            "306": 8,
+            "307": 8,
+            "308": 8,
+            "311": 8,
+            "312": 8,
+            "313": 8,
+            "314": 8,
+            "315": 8,
+            "316": 8,
+            "317": 8
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::Write8(System.Byte,System.Int32)": {
+          "Lines": {
+            "328": 4091983,
+            "330": 4091983,
+            "331": 4091983,
+            "332": 4091983,
+            "333": 4091983,
+            "337": 4091983,
+            "338": 3091092,
+            "339": 3091092,
+            "340": 3091092,
+            "344": 1000891,
+            "345": 1000891,
+            "346": 1000891,
+            "349": 1000891,
+            "350": 990895,
+            "351": 990895,
+            "352": 990895,
+            "353": 990895,
+            "354": 990895,
+            "358": 9996,
+            "359": 9996,
+            "360": 9996,
+            "361": 9996,
+            "364": 9996,
+            "366": 9996,
+            "367": 9996,
+            "368": 9996,
+            "369": 9996,
+            "370": 4091983
+          },
+          "Branches": [
+            {
+              "Line": 337,
+              "Offset": 27,
+              "EndOffset": 29,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 4081567
+            },
+            {
+              "Line": 337,
+              "Offset": 27,
+              "EndOffset": 35,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 10416
+            },
+            {
+              "Line": 337,
+              "Offset": 40,
+              "EndOffset": 42,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 3091092
+            },
+            {
+              "Line": 337,
+              "Offset": 40,
+              "EndOffset": 72,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1000891
+            },
+            {
+              "Line": 349,
+              "Offset": 118,
+              "EndOffset": 120,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 990895
+            },
+            {
+              "Line": 349,
+              "Offset": 118,
+              "EndOffset": 198,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 9996
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::Write16(System.UInt16,System.Int32)": {
+          "Lines": {
+            "381": 2231751,
+            "382": 2231751,
+            "383": 525230,
+            "384": 525230,
+            "385": 525230,
+            "388": 1706521,
+            "389": 1706521,
+            "390": 1706521,
+            "391": 2231751
+          },
+          "Branches": [
+            {
+              "Line": 382,
+              "Offset": 10,
+              "EndOffset": 12,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 525230
+            },
+            {
+              "Line": 382,
+              "Offset": 10,
+              "EndOffset": 25,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1706521
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::Write32(System.UInt32,System.Int32)": {
+          "Lines": {
+            "402": 1181403,
+            "403": 1181403,
+            "404": 131438,
+            "405": 131438,
+            "406": 131438,
+            "409": 1049965,
+            "410": 1049965,
+            "411": 1049965,
+            "412": 1181403
+          },
+          "Branches": [
+            {
+              "Line": 403,
+              "Offset": 11,
+              "EndOffset": 13,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 131438
+            },
+            {
+              "Line": 403,
+              "Offset": 11,
+              "EndOffset": 26,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1049965
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::Write64(System.UInt64,System.Int32)": {
+          "Lines": {
+            "423": 767,
+            "424": 767,
+            "425": 256,
+            "426": 256,
+            "427": 256,
+            "430": 511,
+            "431": 511,
+            "432": 511,
+            "433": 767
+          },
+          "Branches": [
+            {
+              "Line": 424,
+              "Offset": 11,
+              "EndOffset": 13,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 256
+            },
+            {
+              "Line": 424,
+              "Offset": 11,
+              "EndOffset": 26,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 511
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::Write(T,System.Int32)": {
+          "Lines": {
+            "444": 8160,
+            "445": 16320,
+            "446": 0,
+            "448": 0,
+            "449": 0,
+            "451": 0,
+            "452": 0,
+            "454": 0,
+            "455": 0,
+            "458": 0,
+            "460": 8160
+          },
+          "Branches": [
+            {
+              "Line": 445,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 8160
+            },
+            {
+              "Line": 445,
+              "Offset": 28,
+              "EndOffset": 49,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 446,
+              "Offset": 76,
+              "EndOffset": 78,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 446,
+              "Offset": 76,
+              "EndOffset": 97,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 448,
+              "Offset": 124,
+              "EndOffset": 126,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 448,
+              "Offset": 124,
+              "EndOffset": 145,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 449,
+              "Offset": 172,
+              "EndOffset": 174,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 449,
+              "Offset": 172,
+              "EndOffset": 193,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 451,
+              "Offset": 222,
+              "EndOffset": 224,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 451,
+              "Offset": 222,
+              "EndOffset": 243,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 452,
+              "Offset": 272,
+              "EndOffset": 274,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 452,
+              "Offset": 272,
+              "EndOffset": 290,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 454,
+              "Offset": 319,
+              "EndOffset": 321,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 454,
+              "Offset": 319,
+              "EndOffset": 337,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 455,
+              "Offset": 366,
+              "EndOffset": 368,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 455,
+              "Offset": 366,
+              "EndOffset": 384,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::Write(T)": {
+          "Lines": {
+            "471": 131020,
+            "472": 261275,
+            "473": 765,
+            "475": 1020,
+            "476": 510,
+            "478": 765,
+            "479": 255,
+            "481": 510,
+            "482": 0,
+            "485": 0,
+            "487": 131020
+          },
+          "Branches": [
+            {
+              "Line": 472,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 130255
+            },
+            {
+              "Line": 472,
+              "Offset": 28,
+              "EndOffset": 56,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 765
+            },
+            {
+              "Line": 473,
+              "Offset": 83,
+              "EndOffset": 85,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 473,
+              "Offset": 83,
+              "EndOffset": 111,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 765
+            },
+            {
+              "Line": 475,
+              "Offset": 138,
+              "EndOffset": 140,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 255
+            },
+            {
+              "Line": 475,
+              "Offset": 138,
+              "EndOffset": 166,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 510
+            },
+            {
+              "Line": 476,
+              "Offset": 193,
+              "EndOffset": 195,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 476,
+              "Offset": 193,
+              "EndOffset": 221,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 510
+            },
+            {
+              "Line": 478,
+              "Offset": 250,
+              "EndOffset": 252,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 255
+            },
+            {
+              "Line": 478,
+              "Offset": 250,
+              "EndOffset": 278,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 255
+            },
+            {
+              "Line": 479,
+              "Offset": 307,
+              "EndOffset": 309,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 479,
+              "Offset": 307,
+              "EndOffset": 332,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 255
+            },
+            {
+              "Line": 481,
+              "Offset": 361,
+              "EndOffset": 363,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 255
+            },
+            {
+              "Line": 481,
+              "Offset": 361,
+              "EndOffset": 386,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 482,
+              "Offset": 415,
+              "EndOffset": 417,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 482,
+              "Offset": 415,
+              "EndOffset": 440,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::Seek(System.Int32,System.Byte)": {
+          "Lines": {
+            "496": 2359228
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::SeekRelative(System.Int32,System.Byte)": {
+          "Lines": {
+            "503": 255
+          },
+          "Branches": []
+        },
+        "T Sewer56.BitStream.BitStream`1::ReadGeneric()": {
+          "Lines": {
+            "517": 765,
+            "518": 765,
+            "519": 26010,
+            "520": 12240,
+            "522": 765,
+            "523": 765
+          },
+          "Branches": [
+            {
+              "Line": 519,
+              "Offset": 59,
+              "EndOffset": 25,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 12240
+            },
+            {
+              "Line": 519,
+              "Offset": 59,
+              "EndOffset": 61,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 765
+            }
+          ]
+        },
+        "T Sewer56.BitStream.BitStream`1::ReadGeneric(System.Int32)": {
+          "Lines": {
+            "537": 0,
+            "538": 0,
+            "539": 0,
+            "541": 0,
+            "542": 0,
+            "543": 0,
+            "544": 0,
+            "545": 0,
+            "546": 0,
+            "549": 0,
+            "550": 0,
+            "551": 0,
+            "553": 0,
+            "554": 0
+          },
+          "Branches": [
+            {
+              "Line": 541,
+              "Offset": 102,
+              "EndOffset": 28,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 543,
+              "Offset": 37,
+              "EndOffset": 39,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 543,
+              "Offset": 37,
+              "EndOffset": 59,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 541,
+              "Offset": 102,
+              "EndOffset": 104,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::ReadGeneric(T&)": {
+          "Lines": {
+            "562": 0
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::WriteGeneric(T&)": {
+          "Lines": {
+            "576": 510,
+            "577": 510,
+            "578": 17340,
+            "579": 8160,
+            "580": 510
+          },
+          "Branches": [
+            {
+              "Line": 578,
+              "Offset": 39,
+              "EndOffset": 12,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 8160
+            },
+            {
+              "Line": 578,
+              "Offset": 39,
+              "EndOffset": 41,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 510
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::WriteGeneric(T)": {
+          "Lines": {
+            "594": 0,
+            "595": 0,
+            "596": 0,
+            "597": 0,
+            "598": 0
+          },
+          "Branches": [
+            {
+              "Line": 596,
+              "Offset": 40,
+              "EndOffset": 13,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 596,
+              "Offset": 40,
+              "EndOffset": 42,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::WriteGeneric(T&,System.Int32)": {
+          "Lines": {
+            "613": 0,
+            "614": 0,
+            "615": 0,
+            "617": 0,
+            "618": 0,
+            "619": 0,
+            "620": 0,
+            "621": 0,
+            "622": 0,
+            "625": 0,
+            "626": 0,
+            "627": 0,
+            "628": 0
+          },
+          "Branches": [
+            {
+              "Line": 617,
+              "Offset": 72,
+              "EndOffset": 14,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 619,
+              "Offset": 21,
+              "EndOffset": 23,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 619,
+              "Offset": 21,
+              "EndOffset": 38,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 617,
+              "Offset": 72,
+              "EndOffset": 74,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::WriteGeneric(T,System.Int32)": {
+          "Lines": {
+            "643": 0,
+            "644": 0,
+            "645": 0,
+            "647": 0,
+            "648": 0,
+            "649": 0,
+            "650": 0,
+            "651": 0,
+            "652": 0,
+            "655": 0,
+            "656": 0,
+            "657": 0,
+            "658": 0
+          },
+          "Branches": [
+            {
+              "Line": 647,
+              "Offset": 73,
+              "EndOffset": 15,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 649,
+              "Offset": 22,
+              "EndOffset": 24,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 649,
+              "Offset": 22,
+              "EndOffset": 39,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 647,
+              "Offset": 73,
+              "EndOffset": 75,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::Serialize(T&)": {
+          "Lines": {
+            "666": 255
+          },
+          "Branches": []
+        },
+        "T Sewer56.BitStream.BitStream`1::Deserialize()": {
+          "Lines": {
+            "673": 255
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::Write(System.Span`1<System.Byte>)": {
+          "Lines": {
+            "681": 0,
+            "682": 0,
+            "683": 0,
+            "684": 0
+          },
+          "Branches": [
+            {
+              "Line": 682,
+              "Offset": 38,
+              "EndOffset": 5,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 682,
+              "Offset": 38,
+              "EndOffset": 40,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::Read(System.Span`1<System.Byte>)": {
+          "Lines": {
+            "692": 0,
+            "693": 0,
+            "694": 0,
+            "695": 0
+          },
+          "Branches": [
+            {
+              "Line": 693,
+              "Offset": 37,
+              "EndOffset": 5,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 693,
+              "Offset": 37,
+              "EndOffset": 39,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        },
+        "T Sewer56.BitStream.BitStream`1::ReadSigned(System.Int32)": {
+          "Lines": {
+            "705": 1179614,
+            "706": 1179614,
+            "707": 1179614,
+            "709": 1179614,
+            "710": 2359228,
+            "712": 0,
+            "713": 0,
+            "714": 0,
+            "715": 0,
+            "719": 0,
+            "723": 1179614
+          },
+          "Branches": [
+            {
+              "Line": 706,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 706,
+              "Offset": 28,
+              "EndOffset": 60,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1179614
+            },
+            {
+              "Line": 707,
+              "Offset": 87,
+              "EndOffset": 89,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 707,
+              "Offset": 87,
+              "EndOffset": 119,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1179614
+            },
+            {
+              "Line": 709,
+              "Offset": 146,
+              "EndOffset": 148,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 709,
+              "Offset": 146,
+              "EndOffset": 179,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1179614
+            },
+            {
+              "Line": 710,
+              "Offset": 208,
+              "EndOffset": 210,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 1179614
+            },
+            {
+              "Line": 710,
+              "Offset": 208,
+              "EndOffset": 240,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 712,
+              "Offset": 269,
+              "EndOffset": 271,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 712,
+              "Offset": 269,
+              "EndOffset": 301,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 713,
+              "Offset": 330,
+              "EndOffset": 332,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 713,
+              "Offset": 330,
+              "EndOffset": 359,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 714,
+              "Offset": 388,
+              "EndOffset": 390,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 714,
+              "Offset": 388,
+              "EndOffset": 417,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 715,
+              "Offset": 446,
+              "EndOffset": 448,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 715,
+              "Offset": 446,
+              "EndOffset": 475,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::WriteSigned(T,System.Int32)": {
+          "Lines": {
+            "735": 1179614,
+            "736": 1179614,
+            "737": 1179614,
+            "739": 1179614,
+            "740": 1179614,
+            "742": 2359228,
+            "743": 0,
+            "745": 0,
+            "746": 0,
+            "749": 0,
+            "751": 1179614
+          },
+          "Branches": [
+            {
+              "Line": 736,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 736,
+              "Offset": 28,
+              "EndOffset": 56,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1179614
+            },
+            {
+              "Line": 737,
+              "Offset": 83,
+              "EndOffset": 85,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 737,
+              "Offset": 83,
+              "EndOffset": 111,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1179614
+            },
+            {
+              "Line": 739,
+              "Offset": 138,
+              "EndOffset": 140,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 739,
+              "Offset": 138,
+              "EndOffset": 166,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1179614
+            },
+            {
+              "Line": 740,
+              "Offset": 193,
+              "EndOffset": 195,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 740,
+              "Offset": 193,
+              "EndOffset": 221,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 1179614
+            },
+            {
+              "Line": 742,
+              "Offset": 250,
+              "EndOffset": 252,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 1179614
+            },
+            {
+              "Line": 742,
+              "Offset": 250,
+              "EndOffset": 277,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 743,
+              "Offset": 306,
+              "EndOffset": 308,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 743,
+              "Offset": 306,
+              "EndOffset": 330,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 745,
+              "Offset": 359,
+              "EndOffset": 361,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 745,
+              "Offset": 359,
+              "EndOffset": 383,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 746,
+              "Offset": 412,
+              "EndOffset": 414,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 746,
+              "Offset": 412,
+              "EndOffset": 436,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.String Sewer56.BitStream.BitStream`1::ReadString(System.Int32,System.Text.Encoding)": {
+          "Lines": {
+            "762": 10000,
+            "763": 10000,
+            "766": 10000,
+            "772": 10000,
+            "775": 130000,
+            "776": 130000,
+            "777": 130000,
+            "778": 130000,
+            "779": 130000,
+            "780": 130000,
+            "782": 10000,
+            "786": 10000
+          },
+          "Branches": [
+            {
+              "Line": 763,
+              "Offset": 2,
+              "EndOffset": 4,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 10000
+            },
+            {
+              "Line": 763,
+              "Offset": 2,
+              "EndOffset": 11,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 10000
+            },
+            {
+              "Line": 780,
+              "Offset": 61,
+              "EndOffset": 30,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 130000
+            },
+            {
+              "Line": 780,
+              "Offset": 61,
+              "EndOffset": 63,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 10000
+            }
+          ]
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::WriteString(System.String,System.Int32,System.Text.Encoding)": {
+          "Lines": {
+            "798": 10000,
+            "799": 10000,
+            "801": 10000,
+            "802": 10000,
+            "803": 10000,
+            "807": 260000,
+            "808": 120000,
+            "811": 10000,
+            "812": 10000
+          },
+          "Branches": [
+            {
+              "Line": 799,
+              "Offset": 2,
+              "EndOffset": 4,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 10000
+            },
+            {
+              "Line": 799,
+              "Offset": 2,
+              "EndOffset": 11,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 10000
+            },
+            {
+              "Line": 807,
+              "Offset": 95,
+              "EndOffset": 57,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 120000
+            },
+            {
+              "Line": 807,
+              "Offset": 95,
+              "EndOffset": 97,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 10000
+            }
+          ]
+        },
+        "System.Span`1<System.Byte> Sewer56.BitStream.BitStream`1::GetBytes(T&,System.Span`1<System.Byte>)": {
+          "Lines": {
+            "825": 0,
+            "826": 0,
+            "827": 0,
+            "828": 0
+          },
+          "Branches": []
+        },
+        "System.UInt32 Sewer56.BitStream.BitStream`1::GetMask(System.Int32)": {
+          "Lines": {
+            "838": 9872508
+          },
+          "Branches": []
+        },
+        "System.UInt64 Sewer56.BitStream.BitStream`1::GetMaskLong(System.Int32)": {
+          "Lines": {
+            "848": 511
+          },
+          "Branches": []
+        },
+        "System.Int32 Sewer56.BitStream.BitStream`1::SignShrink(System.Int32)": {
+          "Lines": {
+            "855": 1179614
+          },
+          "Branches": []
+        },
+        "System.Int64 Sewer56.BitStream.BitStream`1::SignShrink(System.Int64)": {
+          "Lines": {
+            "862": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Sewer56.BitStream.BitStream`1::SignExtend(System.Int32,System.Int32)": {
+          "Lines": {
+            "873": 2359228,
+            "874": 2359228,
+            "875": 2359228,
+            "876": 2359228
+          },
+          "Branches": []
+        },
+        "System.Int64 Sewer56.BitStream.BitStream`1::SignExtend(System.Int64,System.Int32)": {
+          "Lines": {
+            "887": 0,
+            "888": 0,
+            "889": 0,
+            "890": 0
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.BitStream`1::.ctor(TByteStream,System.Int32)": {
+          "Lines": {
+            "86": 11941,
+            "87": 11941,
+            "88": 11941,
+            "89": 11941
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\sewer\\Desktop\\Projects\\Sewer56.BitStream\\Sewer56.BitStream\\Misc\\Number.cs": {
+      "Sewer56.BitStream.Misc.Number": {
+        "TTo Sewer56.BitStream.Misc.Number::Cast(System.Byte)": {
+          "Lines": {
+            "14": 280974,
+            "15": 561948,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "27": 0,
+            "31": 280974
+          },
+          "Branches": [
+            {
+              "Line": 15,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 280974
+            },
+            {
+              "Line": 15,
+              "Offset": 28,
+              "EndOffset": 48,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 16,
+              "Offset": 75,
+              "EndOffset": 77,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 16,
+              "Offset": 75,
+              "EndOffset": 95,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 122,
+              "EndOffset": 124,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 122,
+              "EndOffset": 146,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 18,
+              "Offset": 175,
+              "EndOffset": 177,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 18,
+              "Offset": 175,
+              "EndOffset": 199,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 19,
+              "Offset": 228,
+              "EndOffset": 230,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 19,
+              "Offset": 228,
+              "EndOffset": 252,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 20,
+              "Offset": 281,
+              "EndOffset": 283,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 20,
+              "Offset": 281,
+              "EndOffset": 305,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 334,
+              "EndOffset": 336,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 334,
+              "EndOffset": 359,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 22,
+              "Offset": 388,
+              "EndOffset": 390,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 22,
+              "Offset": 388,
+              "EndOffset": 410,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 23,
+              "Offset": 439,
+              "EndOffset": 441,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 23,
+              "Offset": 439,
+              "EndOffset": 461,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 24,
+              "Offset": 490,
+              "EndOffset": 492,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 24,
+              "Offset": 490,
+              "EndOffset": 512,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            }
+          ]
+        },
+        "TTo Sewer56.BitStream.Misc.Number::Cast(System.SByte)": {
+          "Lines": {
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "48": 0,
+            "52": 0
+          },
+          "Branches": [
+            {
+              "Line": 36,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 36,
+              "Offset": 28,
+              "EndOffset": 48,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 37,
+              "Offset": 75,
+              "EndOffset": 77,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 37,
+              "Offset": 75,
+              "EndOffset": 95,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 38,
+              "Offset": 122,
+              "EndOffset": 124,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 38,
+              "Offset": 122,
+              "EndOffset": 146,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 39,
+              "Offset": 175,
+              "EndOffset": 177,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 39,
+              "Offset": 175,
+              "EndOffset": 200,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 40,
+              "Offset": 229,
+              "EndOffset": 231,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 40,
+              "Offset": 229,
+              "EndOffset": 253,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 41,
+              "Offset": 282,
+              "EndOffset": 284,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 41,
+              "Offset": 282,
+              "EndOffset": 306,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 42,
+              "Offset": 335,
+              "EndOffset": 337,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 42,
+              "Offset": 335,
+              "EndOffset": 360,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 389,
+              "EndOffset": 391,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 389,
+              "EndOffset": 411,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 44,
+              "Offset": 440,
+              "EndOffset": 442,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 44,
+              "Offset": 440,
+              "EndOffset": 462,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 45,
+              "Offset": 491,
+              "EndOffset": 493,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 45,
+              "Offset": 491,
+              "EndOffset": 513,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            }
+          ]
+        },
+        "TTo Sewer56.BitStream.Misc.Number::Cast(System.Int16)": {
+          "Lines": {
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "69": 0,
+            "73": 0
+          },
+          "Branches": [
+            {
+              "Line": 57,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 57,
+              "Offset": 28,
+              "EndOffset": 52,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 58,
+              "Offset": 79,
+              "EndOffset": 81,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 58,
+              "Offset": 79,
+              "EndOffset": 104,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 59,
+              "Offset": 133,
+              "EndOffset": 135,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 59,
+              "Offset": 133,
+              "EndOffset": 153,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 60,
+              "Offset": 182,
+              "EndOffset": 184,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 60,
+              "Offset": 182,
+              "EndOffset": 202,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 61,
+              "Offset": 231,
+              "EndOffset": 233,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 61,
+              "Offset": 231,
+              "EndOffset": 255,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 62,
+              "Offset": 284,
+              "EndOffset": 286,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 62,
+              "Offset": 284,
+              "EndOffset": 308,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 63,
+              "Offset": 337,
+              "EndOffset": 339,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 63,
+              "Offset": 337,
+              "EndOffset": 362,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 64,
+              "Offset": 391,
+              "EndOffset": 393,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 64,
+              "Offset": 391,
+              "EndOffset": 413,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 65,
+              "Offset": 442,
+              "EndOffset": 444,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 65,
+              "Offset": 442,
+              "EndOffset": 464,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 66,
+              "Offset": 493,
+              "EndOffset": 495,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 66,
+              "Offset": 493,
+              "EndOffset": 515,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            }
+          ]
+        },
+        "TTo Sewer56.BitStream.Misc.Number::Cast(System.UInt16)": {
+          "Lines": {
+            "77": 638,
+            "78": 638,
+            "79": 638,
+            "80": 893,
+            "81": 766,
+            "82": 0,
+            "83": 0,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "87": 0,
+            "90": 0,
+            "94": 638
+          },
+          "Branches": [
+            {
+              "Line": 78,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 78,
+              "Offset": 28,
+              "EndOffset": 52,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 638
+            },
+            {
+              "Line": 79,
+              "Offset": 79,
+              "EndOffset": 81,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 79,
+              "Offset": 79,
+              "EndOffset": 104,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 638
+            },
+            {
+              "Line": 80,
+              "Offset": 133,
+              "EndOffset": 135,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 255
+            },
+            {
+              "Line": 80,
+              "Offset": 133,
+              "EndOffset": 153,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 383
+            },
+            {
+              "Line": 81,
+              "Offset": 182,
+              "EndOffset": 184,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 383
+            },
+            {
+              "Line": 81,
+              "Offset": 182,
+              "EndOffset": 202,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 82,
+              "Offset": 231,
+              "EndOffset": 233,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 82,
+              "Offset": 231,
+              "EndOffset": 255,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 83,
+              "Offset": 284,
+              "EndOffset": 286,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 83,
+              "Offset": 284,
+              "EndOffset": 308,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 84,
+              "Offset": 337,
+              "EndOffset": 339,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 84,
+              "Offset": 337,
+              "EndOffset": 362,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 85,
+              "Offset": 391,
+              "EndOffset": 393,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 85,
+              "Offset": 391,
+              "EndOffset": 413,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 86,
+              "Offset": 442,
+              "EndOffset": 444,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 86,
+              "Offset": 442,
+              "EndOffset": 464,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 87,
+              "Offset": 493,
+              "EndOffset": 495,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 87,
+              "Offset": 493,
+              "EndOffset": 515,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            }
+          ]
+        },
+        "TTo Sewer56.BitStream.Misc.Number::Cast(System.Int32)": {
+          "Lines": {
+            "98": 2359228,
+            "99": 2359228,
+            "100": 2359228,
+            "101": 2359228,
+            "102": 2359228,
+            "103": 4718456,
+            "104": 0,
+            "105": 0,
+            "106": 0,
+            "107": 0,
+            "108": 0,
+            "111": 0,
+            "115": 2359228
+          },
+          "Branches": [
+            {
+              "Line": 99,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 99,
+              "Offset": 28,
+              "EndOffset": 52,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2359228
+            },
+            {
+              "Line": 100,
+              "Offset": 79,
+              "EndOffset": 81,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 100,
+              "Offset": 79,
+              "EndOffset": 104,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2359228
+            },
+            {
+              "Line": 101,
+              "Offset": 133,
+              "EndOffset": 135,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 101,
+              "Offset": 133,
+              "EndOffset": 158,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 2359228
+            },
+            {
+              "Line": 102,
+              "Offset": 187,
+              "EndOffset": 189,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 102,
+              "Offset": 187,
+              "EndOffset": 212,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 2359228
+            },
+            {
+              "Line": 103,
+              "Offset": 241,
+              "EndOffset": 243,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 2359228
+            },
+            {
+              "Line": 103,
+              "Offset": 241,
+              "EndOffset": 261,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 104,
+              "Offset": 290,
+              "EndOffset": 292,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 104,
+              "Offset": 290,
+              "EndOffset": 310,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 105,
+              "Offset": 339,
+              "EndOffset": 341,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 105,
+              "Offset": 339,
+              "EndOffset": 364,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 106,
+              "Offset": 393,
+              "EndOffset": 395,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 106,
+              "Offset": 393,
+              "EndOffset": 415,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 107,
+              "Offset": 444,
+              "EndOffset": 446,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 107,
+              "Offset": 444,
+              "EndOffset": 461,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 108,
+              "Offset": 490,
+              "EndOffset": 492,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 108,
+              "Offset": 490,
+              "EndOffset": 512,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            }
+          ]
+        },
+        "TTo Sewer56.BitStream.Misc.Number::Cast(System.UInt32)": {
+          "Lines": {
+            "119": 2359994,
+            "120": 2359994,
+            "121": 2359994,
+            "122": 2359994,
+            "123": 2359994,
+            "124": 3539863,
+            "125": 2360250,
+            "126": 0,
+            "127": 0,
+            "128": 0,
+            "129": 0,
+            "132": 0,
+            "136": 2359994
+          },
+          "Branches": [
+            {
+              "Line": 120,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 120,
+              "Offset": 28,
+              "EndOffset": 52,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2359994
+            },
+            {
+              "Line": 121,
+              "Offset": 79,
+              "EndOffset": 81,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 121,
+              "Offset": 79,
+              "EndOffset": 104,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2359994
+            },
+            {
+              "Line": 122,
+              "Offset": 133,
+              "EndOffset": 135,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 122,
+              "Offset": 133,
+              "EndOffset": 158,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 2359994
+            },
+            {
+              "Line": 123,
+              "Offset": 187,
+              "EndOffset": 189,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 123,
+              "Offset": 187,
+              "EndOffset": 212,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 2359994
+            },
+            {
+              "Line": 124,
+              "Offset": 241,
+              "EndOffset": 243,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 1179869
+            },
+            {
+              "Line": 124,
+              "Offset": 241,
+              "EndOffset": 261,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 1180125
+            },
+            {
+              "Line": 125,
+              "Offset": 290,
+              "EndOffset": 292,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 1180125
+            },
+            {
+              "Line": 125,
+              "Offset": 290,
+              "EndOffset": 310,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 126,
+              "Offset": 339,
+              "EndOffset": 341,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 126,
+              "Offset": 339,
+              "EndOffset": 364,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 127,
+              "Offset": 393,
+              "EndOffset": 395,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 127,
+              "Offset": 393,
+              "EndOffset": 415,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 128,
+              "Offset": 444,
+              "EndOffset": 446,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 128,
+              "Offset": 444,
+              "EndOffset": 461,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 129,
+              "Offset": 490,
+              "EndOffset": 492,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 129,
+              "Offset": 490,
+              "EndOffset": 513,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            }
+          ]
+        },
+        "TTo Sewer56.BitStream.Misc.Number::Cast(System.Int64)": {
+          "Lines": {
+            "140": 0,
+            "141": 0,
+            "142": 0,
+            "143": 0,
+            "144": 0,
+            "145": 0,
+            "146": 0,
+            "147": 0,
+            "148": 0,
+            "149": 0,
+            "150": 0,
+            "153": 0,
+            "157": 0
+          },
+          "Branches": [
+            {
+              "Line": 141,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 141,
+              "Offset": 28,
+              "EndOffset": 52,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 142,
+              "Offset": 79,
+              "EndOffset": 81,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 142,
+              "Offset": 79,
+              "EndOffset": 104,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 143,
+              "Offset": 133,
+              "EndOffset": 135,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 143,
+              "Offset": 133,
+              "EndOffset": 158,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 144,
+              "Offset": 187,
+              "EndOffset": 189,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 144,
+              "Offset": 187,
+              "EndOffset": 212,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 145,
+              "Offset": 241,
+              "EndOffset": 243,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 145,
+              "Offset": 241,
+              "EndOffset": 266,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 146,
+              "Offset": 295,
+              "EndOffset": 297,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 146,
+              "Offset": 295,
+              "EndOffset": 320,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 147,
+              "Offset": 349,
+              "EndOffset": 351,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 147,
+              "Offset": 349,
+              "EndOffset": 369,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 148,
+              "Offset": 398,
+              "EndOffset": 400,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 148,
+              "Offset": 398,
+              "EndOffset": 415,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 149,
+              "Offset": 444,
+              "EndOffset": 446,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 149,
+              "Offset": 444,
+              "EndOffset": 466,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 150,
+              "Offset": 495,
+              "EndOffset": 497,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 150,
+              "Offset": 495,
+              "EndOffset": 512,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            }
+          ]
+        },
+        "TTo Sewer56.BitStream.Misc.Number::Cast(System.UInt64)": {
+          "Lines": {
+            "161": 1022,
+            "162": 1022,
+            "163": 1022,
+            "164": 1022,
+            "165": 1022,
+            "166": 1022,
+            "167": 1022,
+            "168": 1277,
+            "169": 1534,
+            "170": 0,
+            "171": 0,
+            "174": 0,
+            "178": 1022
+          },
+          "Branches": [
+            {
+              "Line": 162,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 162,
+              "Offset": 28,
+              "EndOffset": 52,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1022
+            },
+            {
+              "Line": 163,
+              "Offset": 79,
+              "EndOffset": 81,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 163,
+              "Offset": 79,
+              "EndOffset": 104,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1022
+            },
+            {
+              "Line": 164,
+              "Offset": 133,
+              "EndOffset": 135,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 164,
+              "Offset": 133,
+              "EndOffset": 158,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1022
+            },
+            {
+              "Line": 165,
+              "Offset": 187,
+              "EndOffset": 189,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 165,
+              "Offset": 187,
+              "EndOffset": 212,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 1022
+            },
+            {
+              "Line": 166,
+              "Offset": 241,
+              "EndOffset": 243,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 166,
+              "Offset": 241,
+              "EndOffset": 266,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 1022
+            },
+            {
+              "Line": 167,
+              "Offset": 295,
+              "EndOffset": 297,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 167,
+              "Offset": 295,
+              "EndOffset": 320,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 1022
+            },
+            {
+              "Line": 168,
+              "Offset": 349,
+              "EndOffset": 351,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 255
+            },
+            {
+              "Line": 168,
+              "Offset": 349,
+              "EndOffset": 369,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 767
+            },
+            {
+              "Line": 169,
+              "Offset": 398,
+              "EndOffset": 400,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 767
+            },
+            {
+              "Line": 169,
+              "Offset": 398,
+              "EndOffset": 415,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 170,
+              "Offset": 444,
+              "EndOffset": 446,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 170,
+              "Offset": 444,
+              "EndOffset": 467,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 171,
+              "Offset": 496,
+              "EndOffset": 498,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 171,
+              "Offset": 496,
+              "EndOffset": 513,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            }
+          ]
+        },
+        "TTo Sewer56.BitStream.Misc.Number::Cast(System.Single)": {
+          "Lines": {
+            "182": 0,
+            "183": 0,
+            "184": 0,
+            "185": 0,
+            "186": 0,
+            "187": 0,
+            "188": 0,
+            "189": 0,
+            "190": 0,
+            "191": 0,
+            "192": 0,
+            "195": 0,
+            "199": 0
+          },
+          "Branches": [
+            {
+              "Line": 183,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 183,
+              "Offset": 28,
+              "EndOffset": 52,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 184,
+              "Offset": 79,
+              "EndOffset": 81,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 184,
+              "Offset": 79,
+              "EndOffset": 104,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 185,
+              "Offset": 133,
+              "EndOffset": 135,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 185,
+              "Offset": 133,
+              "EndOffset": 158,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 186,
+              "Offset": 187,
+              "EndOffset": 189,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 186,
+              "Offset": 187,
+              "EndOffset": 212,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 187,
+              "Offset": 241,
+              "EndOffset": 243,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 187,
+              "Offset": 241,
+              "EndOffset": 261,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 188,
+              "Offset": 290,
+              "EndOffset": 292,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 188,
+              "Offset": 290,
+              "EndOffset": 310,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 189,
+              "Offset": 339,
+              "EndOffset": 341,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 189,
+              "Offset": 339,
+              "EndOffset": 364,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 190,
+              "Offset": 393,
+              "EndOffset": 395,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 190,
+              "Offset": 393,
+              "EndOffset": 415,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 191,
+              "Offset": 444,
+              "EndOffset": 446,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 191,
+              "Offset": 444,
+              "EndOffset": 461,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 192,
+              "Offset": 490,
+              "EndOffset": 492,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 192,
+              "Offset": 490,
+              "EndOffset": 512,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            }
+          ]
+        },
+        "TTo Sewer56.BitStream.Misc.Number::Cast(System.Double)": {
+          "Lines": {
+            "203": 0,
+            "204": 0,
+            "205": 0,
+            "206": 0,
+            "207": 0,
+            "208": 0,
+            "209": 0,
+            "210": 0,
+            "211": 0,
+            "212": 0,
+            "213": 0,
+            "216": 0,
+            "220": 0
+          },
+          "Branches": [
+            {
+              "Line": 204,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 204,
+              "Offset": 28,
+              "EndOffset": 52,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 205,
+              "Offset": 79,
+              "EndOffset": 81,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 205,
+              "Offset": 79,
+              "EndOffset": 104,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 206,
+              "Offset": 133,
+              "EndOffset": 135,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 206,
+              "Offset": 133,
+              "EndOffset": 158,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 207,
+              "Offset": 187,
+              "EndOffset": 189,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 207,
+              "Offset": 187,
+              "EndOffset": 212,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 208,
+              "Offset": 241,
+              "EndOffset": 243,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 208,
+              "Offset": 241,
+              "EndOffset": 266,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 209,
+              "Offset": 295,
+              "EndOffset": 297,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 209,
+              "Offset": 295,
+              "EndOffset": 320,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 210,
+              "Offset": 349,
+              "EndOffset": 351,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 210,
+              "Offset": 349,
+              "EndOffset": 369,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 211,
+              "Offset": 398,
+              "EndOffset": 400,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 211,
+              "Offset": 398,
+              "EndOffset": 415,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 212,
+              "Offset": 444,
+              "EndOffset": 446,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 212,
+              "Offset": 444,
+              "EndOffset": 466,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 213,
+              "Offset": 495,
+              "EndOffset": 497,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 213,
+              "Offset": 495,
+              "EndOffset": 512,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            }
+          ]
+        },
+        "TTo Sewer56.BitStream.Misc.Number::Cast(TFrom)": {
+          "Lines": {
+            "224": 2498408,
+            "225": 2636823,
+            "226": 2359993,
+            "227": 2359993,
+            "228": 2360248,
+            "229": 3539352,
+            "230": 2359993,
+            "231": 255,
+            "232": 510,
+            "233": 0,
+            "234": 0,
+            "237": 0,
+            "241": 2498408
+          },
+          "Branches": [
+            {
+              "Line": 225,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 138415
+            },
+            {
+              "Line": 225,
+              "Offset": 28,
+              "EndOffset": 49,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2359993
+            },
+            {
+              "Line": 226,
+              "Offset": 76,
+              "EndOffset": 78,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 226,
+              "Offset": 76,
+              "EndOffset": 97,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2359993
+            },
+            {
+              "Line": 227,
+              "Offset": 124,
+              "EndOffset": 126,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 227,
+              "Offset": 124,
+              "EndOffset": 145,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 2359993
+            },
+            {
+              "Line": 228,
+              "Offset": 174,
+              "EndOffset": 176,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 255
+            },
+            {
+              "Line": 228,
+              "Offset": 174,
+              "EndOffset": 195,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 2359738
+            },
+            {
+              "Line": 229,
+              "Offset": 224,
+              "EndOffset": 226,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 1179614
+            },
+            {
+              "Line": 229,
+              "Offset": 224,
+              "EndOffset": 245,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 1180124
+            },
+            {
+              "Line": 230,
+              "Offset": 274,
+              "EndOffset": 276,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 1179869
+            },
+            {
+              "Line": 230,
+              "Offset": 274,
+              "EndOffset": 295,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 255
+            },
+            {
+              "Line": 231,
+              "Offset": 324,
+              "EndOffset": 326,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 231,
+              "Offset": 324,
+              "EndOffset": 345,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 255
+            },
+            {
+              "Line": 232,
+              "Offset": 374,
+              "EndOffset": 376,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 255
+            },
+            {
+              "Line": 232,
+              "Offset": 374,
+              "EndOffset": 392,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 233,
+              "Offset": 421,
+              "EndOffset": 423,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 233,
+              "Offset": 421,
+              "EndOffset": 439,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 234,
+              "Offset": 468,
+              "EndOffset": 470,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 234,
+              "Offset": 468,
+              "EndOffset": 486,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Users\\sewer\\Desktop\\Projects\\Sewer56.BitStream\\Sewer56.BitStream\\ByteStreams\\ArrayByteStream.cs": {
+      "Sewer56.BitStream.ByteStreams.ArrayByteStream": {
+        "System.Byte[] Sewer56.BitStream.ByteStreams.ArrayByteStream::get_Array()": {
+          "Lines": {
+            "10": 9234815
+          },
+          "Branches": []
+        },
+        "System.Byte Sewer56.BitStream.ByteStreams.ArrayByteStream::Read(System.Int32)": {
+          "Lines": {
+            "12": 5124244
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.ByteStreams.ArrayByteStream::Write(System.Byte,System.Int32)": {
+          "Lines": {
+            "13": 4101987
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.ByteStreams.ArrayByteStream::.ctor(System.Byte[])": {
+          "Lines": {
+            "11": 10015
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\sewer\\Desktop\\Projects\\Sewer56.BitStream\\Sewer56.BitStream\\ByteStreams\\MemoryByteStream.cs": {
+      "Sewer56.BitStream.ByteStreams.MemoryByteStream": {
+        "System.Memory`1<System.Byte> Sewer56.BitStream.ByteStreams.MemoryByteStream::get_Array()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "System.Byte Sewer56.BitStream.ByteStreams.MemoryByteStream::Read(System.Int32)": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.ByteStreams.MemoryByteStream::Write(System.Byte,System.Int32)": {
+          "Lines": {
+            "14": 0
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.ByteStreams.MemoryByteStream::.ctor(System.Memory`1<System.Byte>)": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\sewer\\Desktop\\Projects\\Sewer56.BitStream\\Sewer56.BitStream\\ByteStreams\\PointerByteStream.cs": {
+      "Sewer56.BitStream.ByteStreams.PointerByteStream": {
+        "System.Byte* Sewer56.BitStream.ByteStreams.PointerByteStream::get_ArrayPtr()": {
+          "Lines": {
+            "10": 0
+          },
+          "Branches": []
+        },
+        "System.Byte Sewer56.BitStream.ByteStreams.PointerByteStream::Read(System.Int32)": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.ByteStreams.PointerByteStream::Write(System.Byte,System.Int32)": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.ByteStreams.PointerByteStream::.ctor(System.Byte*)": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\sewer\\Desktop\\Projects\\Sewer56.BitStream\\Sewer56.BitStream\\ByteStreams\\StreamByteStream.cs": {
+      "Sewer56.BitStream.ByteStreams.StreamByteStream": {
+        "System.IO.Stream Sewer56.BitStream.ByteStreams.StreamByteStream::get_Stream()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "System.Byte Sewer56.BitStream.ByteStreams.StreamByteStream::Read(System.Int32)": {
+          "Lines": {
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.ByteStreams.StreamByteStream::Write(System.Byte,System.Int32)": {
+          "Lines": {
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0
+          },
+          "Branches": []
+        },
+        "System.Void Sewer56.BitStream.ByteStreams.StreamByteStream::.ctor(System.IO.Stream)": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}
