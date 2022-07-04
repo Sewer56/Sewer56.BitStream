@@ -5,8 +5,6 @@ using Sewer56.BitStream.ByteStreams;
 
 namespace Sewer56.BitStream.Benchmarks
 {
-    [SimpleJob(RuntimeMoniker.CoreRt31)]
-    [SimpleJob(RuntimeMoniker.CoreRt50)]
     public class ReadBenchmarkBase
     {
         protected const int NumBytes = 10000;

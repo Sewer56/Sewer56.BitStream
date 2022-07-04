@@ -3,8 +3,6 @@ using BenchmarkDotNet.Jobs;
 
 namespace Sewer56.BitStream.Benchmarks
 {
-    [SimpleJob(RuntimeMoniker.CoreRt31)]
-    [SimpleJob(RuntimeMoniker.CoreRt50)]
     public class WriteBenchmarkBase
     {
         protected const int NumBytes = 10000;
