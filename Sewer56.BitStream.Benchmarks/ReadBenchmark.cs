@@ -4,7 +4,7 @@ using Sewer56.BitStream.ByteStreams;
 namespace Sewer56.BitStream.Benchmarks
 {
     [MemoryDiagnoser]
-    public class ReadBenchmark : ReadBenchmarkBase
+    public class ReadBenchmark : BenchmarkBase
     {
         [Benchmark]
         public int ReadBit()
