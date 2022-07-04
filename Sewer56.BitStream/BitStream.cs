@@ -95,7 +95,9 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveOptimization)]
+#endif
         public byte ReadBit()
         {
             const int bitCount = 1;
@@ -122,7 +124,9 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveOptimization)]
+#endif
         public byte Read8(int numBits)
         {
             // Calculate where we are in the stream and advance.
@@ -164,7 +168,11 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+        [MethodImpl(AggressiveInlining)]
+#endif
         public ushort Read16(int numBits)
         {
             if (numBits <= ByteNumBits)
@@ -184,7 +192,11 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+        [MethodImpl(AggressiveInlining)]
+#endif
         public uint Read32(int numBits)
         {
             if (numBits <= ShortNumBits)
@@ -204,7 +216,11 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+        [MethodImpl(AggressiveInlining)]
+#endif
         public ulong Read64(int numBits)
         {
             if (numBits <= IntNumBits)
@@ -494,7 +510,9 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveOptimization)]
+#endif
         public T ReadGeneric<T>() where T : unmanaged
         {
             Span<byte> stackSpan = stackalloc byte[sizeof(T)];
@@ -512,7 +530,9 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveOptimization)]
+#endif
         public T ReadGeneric<T>(int numBits) where T : unmanaged
         {
             Span<byte> stackSpan = stackalloc byte[sizeof(T)];
@@ -549,7 +569,9 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveOptimization)]
+#endif
         public void WriteGeneric<T>(ref T value) where T : unmanaged
         {
             var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
@@ -565,7 +587,9 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveOptimization)]
+#endif
         public void WriteGeneric<T>(T value) where T : unmanaged
         {
             var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
@@ -582,7 +606,9 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveOptimization)]
+#endif
         public void WriteGeneric<T>(ref T value, int numBits) where T : unmanaged
         {
             var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
@@ -610,7 +636,9 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveOptimization)]
+#endif
         public void WriteGeneric<T>(T value, int numBits) where T : unmanaged
         {
             var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
@@ -733,7 +761,13 @@ namespace Sewer56.BitStream
         public string ReadString(int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
         {
             encoding ??= System.Text.Encoding.UTF8;
+
+#if NETCOREAPP
             Span<byte> span = stackalloc byte[maxLengthBytes];
+#else
+            byte* ptr = stackalloc byte[maxLengthBytes];
+            Span<byte> span = new Span<byte>(ptr, maxLengthBytes);
+#endif
 
             int length = 0;
             byte currentCharacter;
@@ -744,8 +778,11 @@ namespace Sewer56.BitStream
                 length += 1;
             }
             while (currentCharacter != 0x0);
-
+#if NETCOREAPP
             return encoding.GetString(span.Slice(0, length - 1));
+#else
+            return encoding.GetString(ptr, length - 1);
+#endif
         }
 
         /// <summary>
@@ -760,10 +797,13 @@ namespace Sewer56.BitStream
         public void WriteString(string text, int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
         {
             encoding ??= System.Text.Encoding.UTF8;
+#if NETCOREAPP
             Span<byte> span = stackalloc byte[maxLengthBytes];
             int encodedBytes = encoding.GetBytes(text, span);
-
             var sliced = span.Slice(0, encodedBytes);
+#else
+            Span<byte> sliced = encoding.GetBytes(text);
+#endif
             for (int x = 0; x < sliced.Length; x++)
                 Write(sliced[x]);
 
@@ -771,9 +811,9 @@ namespace Sewer56.BitStream
             Write<byte>(0x0);
         }
 
-        #endregion
+#endregion
 
-        #region Utilities
+#region Utilities
         /// <summary>
         /// Creates a byte array from specified structure or class type with explicit StructLayout attribute.
         /// </summary>
@@ -790,25 +830,45 @@ namespace Sewer56.BitStream
         /// <summary>
         /// Gets the mask necessary to mask out a given number of bits.
         /// </summary>
+#if NETCOREAPP
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+        [MethodImpl(AggressiveInlining)]
+#endif
         private uint GetMask(int numBits) => ((uint)1 << numBits) - 1;
 
         /// <summary>
         /// Gets the mask necessary to mask out a given number of bits.
         /// </summary>
+#if NETCOREAPP
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+        [MethodImpl(AggressiveInlining)]
+#endif
         private ulong GetMaskLong(int numBits) => ((ulong)1 << numBits) - 1;
 
+#if NETCOREAPP
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+        [MethodImpl(AggressiveInlining)]
+#endif
         private int SignShrink(int value) => SignExtend(value, IntNumBits);
 
+#if NETCOREAPP
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+        [MethodImpl(AggressiveInlining)]
+#endif
         private long SignShrink(long value) => SignExtend(value, LongNumBits);
 
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+        [MethodImpl(AggressiveInlining)]
+#endif
         private int SignExtend(int value, int numBits)
         {
             var mask = 1 << (numBits - 1);
@@ -818,12 +878,16 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+        [MethodImpl(AggressiveInlining)]
+#endif
         private long SignExtend(long value, int numBits)
         {
             long mask = 1L << (numBits - 1);
             return (value ^ mask) - mask;
         }
-        #endregion
+#endregion
     }
 }
