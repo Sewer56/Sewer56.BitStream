@@ -86,17 +86,19 @@ namespace Sewer56.BitStream
         {
             BitIndex = bitIndex;
             Stream = stream;
-        }
+		}
 
-        /// <summary>
-        /// Reads a single bit from the stream.
-        /// </summary>
-        /// <returns>The read value, stored in the least-significant bits.</returns>
+		/// <summary>
+		/// Reads a single bit from the stream.
+		/// </summary>
+		/// <returns>The read value, stored in the least-significant bits.</returns>
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
+#if NETCOREAPP
         [MethodImpl(AggressiveOptimization)]
-        public byte ReadBit()
+#endif
+		public byte ReadBit()
         {
             const int bitCount = 1;
             const uint mask = 0b01;
@@ -122,8 +124,10 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
-        [MethodImpl(AggressiveOptimization)]
-        public byte Read8(int numBits)
+#if NETCOREAPP
+		[MethodImpl(AggressiveOptimization)]
+#endif
+		public byte Read8(int numBits)
         {
             // Calculate where we are in the stream and advance.
             int bitIndex = BitIndex;
@@ -156,16 +160,20 @@ namespace Sewer56.BitStream
             return (byte)(highPart | lowPart);
         }
 
-        /// <summary>
-        /// Read up to 16 bits starting at <see cref="BitIndex"/>.
-        /// </summary>
-        /// <param name="numBits">Number of bits to read.</param>
-        /// <returns>The read value, stored in the least-significant bits.</returns>
+		/// <summary>
+		/// Read up to 16 bits starting at <see cref="BitIndex"/>.
+		/// </summary>
+		/// <param name="numBits">Number of bits to read.</param>
+		/// <returns>The read value, stored in the least-significant bits.</returns>
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
-        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-        public ushort Read16(int numBits)
+#if NETCOREAPP
+		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+		[MethodImpl(AggressiveInlining)]
+#endif
+		public ushort Read16(int numBits)
         {
             if (numBits <= ByteNumBits)
                 return Read8(numBits);
@@ -184,8 +192,12 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
-        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-        public uint Read32(int numBits)
+#if NETCOREAPP
+		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+        [MethodImpl(AggressiveInlining)]
+#endif
+		public uint Read32(int numBits)
         {
             if (numBits <= ShortNumBits)
                 return Read16(numBits);
@@ -204,8 +216,12 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
-        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-        public ulong Read64(int numBits)
+#if NETCOREAPP
+		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+        [MethodImpl(AggressiveInlining)]
+#endif
+		public ulong Read64(int numBits)
         {
             if (numBits <= IntNumBits)
                 return Read32(numBits);
@@ -486,16 +502,18 @@ namespace Sewer56.BitStream
         /// <param name="bit">The bit value to add to the byte offset.</param>
         public void SeekRelative(int offset = 0, byte bit = 0) => BitIndex += (offset * ByteNumBits) + bit;
 
-        /// <summary>
-        /// Reads an unmanaged struct from the current <see cref="BitStream"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of value to be read from the stream.</typeparam>
-        /// <returns>The read in struct.</returns>
+		/// <summary>
+		/// Reads an unmanaged struct from the current <see cref="BitStream"/>.
+		/// </summary>
+		/// <typeparam name="T">The type of value to be read from the stream.</typeparam>
+		/// <returns>The read in struct.</returns>
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
-        [MethodImpl(AggressiveOptimization)]
-        public T ReadGeneric<T>() where T : unmanaged
+#if NETCOREAPP
+		[MethodImpl(AggressiveOptimization)]
+#endif
+		public T ReadGeneric<T>() where T : unmanaged
         {
             Span<byte> stackSpan = stackalloc byte[sizeof(T)];
             for (int x = 0; x < stackSpan.Length; x++)
@@ -504,16 +522,18 @@ namespace Sewer56.BitStream
             return Unsafe.ReadUnaligned<T>(ref MemoryMarshal.GetReference(stackSpan));
         }
 
-        /// <summary>
-        /// Reads an unmanaged struct from the current <see cref="BitStream"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of value to be read from the stream.</typeparam>
-        /// <returns>The read in struct.</returns>
+		/// <summary>
+		/// Reads an unmanaged struct from the current <see cref="BitStream"/>.
+		/// </summary>
+		/// <typeparam name="T">The type of value to be read from the stream.</typeparam>
+		/// <returns>The read in struct.</returns>
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
-        [MethodImpl(AggressiveOptimization)]
-        public T ReadGeneric<T>(int numBits) where T : unmanaged
+#if NETCOREAPP
+		[MethodImpl(AggressiveOptimization)]
+#endif
+		public T ReadGeneric<T>(int numBits) where T : unmanaged
         {
             Span<byte> stackSpan = stackalloc byte[sizeof(T)];
             int remainingBits = numBits;
@@ -541,49 +561,55 @@ namespace Sewer56.BitStream
         [MethodImpl(AggressiveInlining)]
         public void ReadGeneric<T>(out T value) where T : unmanaged => value = ReadGeneric<T>();
 
-        /// <summary>
-        /// Appends an unmanaged struct to the current <see cref="BitStream"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
-        /// <param name="value">The value to write to the stream.</param>
+		/// <summary>
+		/// Appends an unmanaged struct to the current <see cref="BitStream"/>.
+		/// </summary>
+		/// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
+		/// <param name="value">The value to write to the stream.</param>
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
-        [MethodImpl(AggressiveOptimization)]
-        public void WriteGeneric<T>(ref T value) where T : unmanaged
+#if NETCOREAPP
+		[MethodImpl(AggressiveOptimization)]
+#endif
+		public void WriteGeneric<T>(ref T value) where T : unmanaged
         {
             var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
             for (int x = 0; x < sizeof(T); x++)
                 Write<byte>(valuePtr[x], ByteNumBits);
         }
 
-        /// <summary>
-        /// Appends an unmanaged struct to the current <see cref="BitStream"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
-        /// <param name="value">The value to write to the stream.</param>
+		/// <summary>
+		/// Appends an unmanaged struct to the current <see cref="BitStream"/>.
+		/// </summary>
+		/// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
+		/// <param name="value">The value to write to the stream.</param>
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
-        [MethodImpl(AggressiveOptimization)]
-        public void WriteGeneric<T>(T value) where T : unmanaged
+#if NETCOREAPP
+		[MethodImpl(AggressiveOptimization)]
+#endif
+		public void WriteGeneric<T>(T value) where T : unmanaged
         {
             var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
             for (int x = 0; x < sizeof(T); x++)
                 Write<byte>(valuePtr[x], ByteNumBits);
         }
 
-        /// <summary>
-        /// Appends an unmanaged struct to the current <see cref="BitStream"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
-        /// <param name="value">The value to write to the stream.</param>
-        /// <param name="numBits">Number of bits to write to the stream.</param>
+		/// <summary>
+		/// Appends an unmanaged struct to the current <see cref="BitStream"/>.
+		/// </summary>
+		/// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
+		/// <param name="value">The value to write to the stream.</param>
+		/// <param name="numBits">Number of bits to write to the stream.</param>
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
-        [MethodImpl(AggressiveOptimization)]
-        public void WriteGeneric<T>(ref T value, int numBits) where T : unmanaged
+#if NETCOREAPP
+		[MethodImpl(AggressiveOptimization)]
+#endif
+		public void WriteGeneric<T>(ref T value, int numBits) where T : unmanaged
         {
             var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
             int remainingBits = numBits;
@@ -601,17 +627,19 @@ namespace Sewer56.BitStream
             }
         }
 
-        /// <summary>
-        /// Appends an unmanaged struct to the current <see cref="BitStream"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
-        /// <param name="value">The value to write to the stream.</param>
-        /// <param name="numBits">Number of bits to write to the stream.</param>
+		/// <summary>
+		/// Appends an unmanaged struct to the current <see cref="BitStream"/>.
+		/// </summary>
+		/// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
+		/// <param name="value">The value to write to the stream.</param>
+		/// <param name="numBits">Number of bits to write to the stream.</param>
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
-        [MethodImpl(AggressiveOptimization)]
-        public void WriteGeneric<T>(T value, int numBits) where T : unmanaged
+#if NETCOREAPP
+		[MethodImpl(AggressiveOptimization)]
+#endif
+		public void WriteGeneric<T>(T value, int numBits) where T : unmanaged
         {
             var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
             int remainingBits = numBits;
@@ -733,9 +761,15 @@ namespace Sewer56.BitStream
         public string ReadString(int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
         {
             encoding ??= System.Text.Encoding.UTF8;
-            Span<byte> span = stackalloc byte[maxLengthBytes];
 
-            int length = 0;
+#if NETCOREAPP
+            Span<byte> span = stackalloc byte[maxLengthBytes];
+#else
+			byte* ptr = stackalloc byte[maxLengthBytes];
+			Span<byte> span = new Span<byte>(ptr, maxLengthBytes);
+#endif
+
+			int length = 0;
             byte currentCharacter;
             do
             {
@@ -744,9 +778,12 @@ namespace Sewer56.BitStream
                 length += 1;
             }
             while (currentCharacter != 0x0);
-
+#if NETCOREAPP
             return encoding.GetString(span.Slice(0, length - 1));
-        }
+#else
+			return encoding.GetString(ptr, length - 1);
+#endif
+		}
 
         /// <summary>
         /// Writes a string to a given string.
@@ -760,20 +797,23 @@ namespace Sewer56.BitStream
         public void WriteString(string text, int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
         {
             encoding ??= System.Text.Encoding.UTF8;
+#if NETCOREAPP
             Span<byte> span = stackalloc byte[maxLengthBytes];
             int encodedBytes = encoding.GetBytes(text, span);
-
             var sliced = span.Slice(0, encodedBytes);
-            for (int x = 0; x < sliced.Length; x++)
+#else
+			Span<byte> sliced = encoding.GetBytes(text);
+#endif
+			for (int x = 0; x < sliced.Length; x++)
                 Write(sliced[x]);
 
             // Null delimiter
             Write<byte>(0x0);
         }
 
-        #endregion
+#endregion
 
-        #region Utilities
+#region Utilities
         /// <summary>
         /// Creates a byte array from specified structure or class type with explicit StructLayout attribute.
         /// </summary>
@@ -787,29 +827,49 @@ namespace Sewer56.BitStream
             return buffer.Slice(0, sizeof(T));
         }
 
-        /// <summary>
-        /// Gets the mask necessary to mask out a given number of bits.
-        /// </summary>
-        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-        private uint GetMask(int numBits) => ((uint)1 << numBits) - 1;
+		/// <summary>
+		/// Gets the mask necessary to mask out a given number of bits.
+		/// </summary>
+#if NETCOREAPP
+		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+		[MethodImpl(AggressiveInlining)]
+#endif
+		private uint GetMask(int numBits) => ((uint)1 << numBits) - 1;
 
-        /// <summary>
-        /// Gets the mask necessary to mask out a given number of bits.
-        /// </summary>
-        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-        private ulong GetMaskLong(int numBits) => ((ulong)1 << numBits) - 1;
+		/// <summary>
+		/// Gets the mask necessary to mask out a given number of bits.
+		/// </summary>
+#if NETCOREAPP
+		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+		[MethodImpl(AggressiveInlining)]
+#endif
+		private ulong GetMaskLong(int numBits) => ((ulong)1 << numBits) - 1;
 
-        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-        private int SignShrink(int value) => SignExtend(value, IntNumBits);
+#if NETCOREAPP
+		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+		[MethodImpl(AggressiveInlining)]
+#endif
+		private int SignShrink(int value) => SignExtend(value, IntNumBits);
 
-        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-        private long SignShrink(long value) => SignExtend(value, LongNumBits);
+#if NETCOREAPP
+		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+		[MethodImpl(AggressiveInlining)]
+#endif
+		private long SignShrink(long value) => SignExtend(value, LongNumBits);
 
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
-        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-        private int SignExtend(int value, int numBits)
+#if NETCOREAPP
+		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+		[MethodImpl(AggressiveInlining)]
+#endif
+		private int SignExtend(int value, int numBits)
         {
             var mask = 1 << (numBits - 1);
             return (value ^ mask) - mask;
@@ -818,12 +878,16 @@ namespace Sewer56.BitStream
 #if NET5_0_OR_GREATER
         [SkipLocalsInit]
 #endif
-        [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-        private long SignExtend(long value, int numBits)
+#if NETCOREAPP
+		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+		[MethodImpl(AggressiveInlining)]
+#endif
+		private long SignExtend(long value, int numBits)
         {
             long mask = 1L << (numBits - 1);
             return (value ^ mask) - mask;
         }
-        #endregion
+#endregion
     }
 }
