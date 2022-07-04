@@ -14,6 +14,8 @@
       <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
       <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
       <Version>1.2.0</Version>
+      <IsTrimmable>true</IsTrimmable>
+      <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
