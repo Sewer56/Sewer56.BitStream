@@ -5,6 +5,7 @@ using Sewer56.BitStream.ByteStreams;
 
 namespace Sewer56.BitStream.Benchmarks
 {
+    [MemoryDiagnoser]
     public class WriteBenchmark_Streams : WriteBenchmarkBase
     {
         [Benchmark]
