@@ -10,6 +10,7 @@ namespace Sewer56.BitStream.Misc;
 /// Provides zero overhead compile time zero overhead casting by abusing compile time typeof checks.
 /// Idea shamelessly stolen from from Amicitia.IO. https://github.com/TGEnigma/Amicitia.IO/blob/95a874f5d094f0487002a8b66684e67a2c461c51/src/Amicitia.IO/Generics/Number.cs
 /// </summary>
+[ExcludeFromCodeCoverage]
 public static class Number
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
