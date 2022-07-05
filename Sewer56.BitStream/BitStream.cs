@@ -841,9 +841,9 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     {
         encoding ??= System.Text.Encoding.UTF8;
 #if NETCOREAPP
-            Span<byte> span = stackalloc byte[maxLengthBytes];
-            int encodedBytes = encoding.GetBytes(text, span);
-            var sliced = span.Slice(0, encodedBytes);
+        Span<byte> span = stackalloc byte[maxLengthBytes];
+        int encodedBytes = encoding.GetBytes(text, span);
+        var sliced = span.Slice(0, encodedBytes);
 #else
         Span<byte> sliced = encoding.GetBytes(text);
 #endif
