@@ -108,14 +108,14 @@ namespace Sewer56.BitStream.Benchmarks
 
             for (; numIterations < maxNumIterations; numIterations++)
             {
-                bitStream.Write64((ulong)numIterations, 32);
-                bitStream.Write64((ulong)numIterations, 32);
-                bitStream.Write64((ulong)numIterations, 32);
-                bitStream.Write64((ulong)numIterations, 32);
-                bitStream.Write64((ulong)numIterations, 32);
-                bitStream.Write64((ulong)numIterations, 32);
-                bitStream.Write64((ulong)numIterations, 32);
-                bitStream.Write64((ulong)numIterations, 32);
+                bitStream.Write64((ulong)numIterations, 64);
+                bitStream.Write64((ulong)numIterations, 64);
+                bitStream.Write64((ulong)numIterations, 64);
+                bitStream.Write64((ulong)numIterations, 64);
+                bitStream.Write64((ulong)numIterations, 64);
+                bitStream.Write64((ulong)numIterations, 64);
+                bitStream.Write64((ulong)numIterations, 64);
+                bitStream.Write64((ulong)numIterations, 64);
             }
             
             return numIterations;
