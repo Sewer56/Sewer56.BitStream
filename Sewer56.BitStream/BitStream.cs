@@ -5,6 +5,10 @@ using System.Runtime.InteropServices;
 using Sewer56.BitStream.Misc;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 
+// TODO: The JIT is refusing to inline Read8/Write8 for Read32+ and Write32+ due to code size.
+// Inlining Read16/Write16 doesn't help either. Is there no solution short of making a mess and manually
+// duplicating Read8/Write8?
+
 namespace Sewer56.BitStream;
 
 /// <summary>
