@@ -13,7 +13,7 @@ env:
   CHANGELOG_PATH: ./Changelog.md
   CODE_COVERAGE_PATH: ./Coverage.xml
   SOLUTION_PATH: ./Sewer56.BitStream.sln
-  NUPKG_GLOB: ./**/*.nupkg
+  NUPKG_GLOB: ./Sewer56.BitStream/bin/Release/*.nupkg
   IS_RELEASE: ${{ startsWith(github.ref, 'refs/tags/') }}
   RELEASE_TAG: ${{ github.ref_name }}
 
@@ -109,7 +109,7 @@ jobs:
         NUGET_KEY: ${{ secrets.NUGET_KEY }}
       if: env.IS_RELEASE == 'true'
       run: |
-        $items = Get-ChildItem -Path "./source/*.nupkg" -Recurse
+        $items = Get-ChildItem -Path "$env:NUPKG_GLOB" -Recurse
         Foreach ($item in $items)
         {
             Write-Host "Pushing $item"
