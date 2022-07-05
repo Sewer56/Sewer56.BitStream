@@ -62,8 +62,8 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 
     /// <summary>
     /// Returns the index of the next byte to be read/written.
-    /// If bit offset within the current byte is 0, this value is equal to <see cref="BitIndex"/> % ByteNumBits
-    /// Else the value is <see cref="BitIndex"/> + 1.
+    /// If bit offset within the current byte is 0, this value is equal to <see cref="ByteOffset"/>.
+    /// Else the value is <see cref="ByteOffset"/> + 1.
     /// </summary>
     public int NextByteIndex
     {
