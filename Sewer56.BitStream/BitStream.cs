@@ -308,6 +308,11 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
+#if NETCOREAPP
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
+#endif
     public void WriteBit(byte value)
     {
         const int numBits = 1;
@@ -335,6 +340,11 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <param name="numBits">Number of bits to write.</param>
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
+#endif
+#if NETCOREAPP
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
 #endif
     public void Write8(byte value, int numBits)
     {
@@ -389,6 +399,11 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
+#if NETCOREAPP
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
+#endif
     public void Write16(ushort value, int numBits)
     {
         if (numBits <= ByteNumBits)
@@ -410,6 +425,11 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
+#if NETCOREAPP
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
+#endif
     public void Write32(uint value, int numBits)
     {
         if (numBits <= ShortNumBits)
@@ -430,6 +450,11 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <param name="numBits">Number of bits to write.</param>
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
+#endif
+#if NETCOREAPP
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
 #endif
     public void Write64(ulong value, int numBits)
     {
