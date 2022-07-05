@@ -548,7 +548,9 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     [SkipLocalsInit]
 #endif
 #if NETCOREAPP
-    [MethodImpl(AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
 #endif
     public T ReadGeneric<T>() where T : unmanaged
     {
@@ -568,7 +570,9 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     [SkipLocalsInit]
 #endif
 #if NETCOREAPP
-    [MethodImpl(AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
 #endif
     public T ReadGeneric<T>(int numBits) where T : unmanaged
     {
@@ -607,7 +611,9 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     [SkipLocalsInit]
 #endif
 #if NETCOREAPP
-    [MethodImpl(AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
 #endif
     public void WriteGeneric<T>(ref T value) where T : unmanaged
     {
@@ -625,7 +631,9 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     [SkipLocalsInit]
 #endif
 #if NETCOREAPP
-    [MethodImpl(AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
 #endif
     public void WriteGeneric<T>(T value) where T : unmanaged
     {
@@ -644,7 +652,9 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     [SkipLocalsInit]
 #endif
 #if NETCOREAPP
-    [MethodImpl(AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
 #endif
     public void WriteGeneric<T>(ref T value, int numBits) where T : unmanaged
     {
@@ -674,7 +684,9 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     [SkipLocalsInit]
 #endif
 #if NETCOREAPP
-    [MethodImpl(AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
 #endif
     public void WriteGeneric<T>(T value, int numBits) where T : unmanaged
     {
@@ -713,7 +725,11 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// Writes a <see cref="Span{T}"/> of bytes to the stream.
     /// </summary>
     /// <param name="value">The span to write.</param>
+#if NETCOREAPP
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
     [MethodImpl(AggressiveInlining)]
+#endif
     public void Write(Span<byte> value)
     {
         for (int x = 0; x < value.Length; x++)
@@ -724,7 +740,11 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// Reads a given number of bytes into a <see cref="Span{T}"/> buffer.
     /// </summary>
     /// <param name="buffer">Span to write to.</param>
+#if NETCOREAPP
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
     [MethodImpl(AggressiveInlining)]
+#endif
     public void Read(Span<byte> buffer)
     {
         for (int x = 0; x < buffer.Length; x++)
@@ -795,6 +815,11 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
+#if NETCOREAPP
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
+#endif
     public string ReadString(int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
     {
         encoding ??= System.Text.Encoding.UTF8;
@@ -830,6 +855,11 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <param name="encoding">The encoding to use.</param>
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
+#endif
+#if NETCOREAPP
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
 #endif
     public void WriteString(string text, int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
     {
