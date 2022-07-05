@@ -631,20 +631,8 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
     /// <param name="value">The value to write to the stream.</param>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-#if NETCOREAPP
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-#else
     [MethodImpl(AggressiveInlining)]
-#endif
-    public void WriteGeneric<T>(T value) where T : unmanaged
-    {
-        var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
-        for (int x = 0; x < sizeof(T); x++)
-            Write<byte>(valuePtr[x], ByteNumBits);
-    }
+    public void WriteGeneric<T>(T value) where T : unmanaged => WriteGeneric(ref value);
 
     /// <summary>
     /// Appends an unmanaged struct to the current <see cref="BitStream"/>.
@@ -692,23 +680,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #else
     [MethodImpl(AggressiveInlining)]
 #endif
-    public void WriteGeneric<T>(T value, int numBits) where T : unmanaged
-    {
-        var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
-        int remainingBits = numBits;
-
-        for (int x = 0; x < sizeof(T); x++)
-        {
-            if (remainingBits < ByteNumBits)
-            {
-                Write<byte>(valuePtr[x], remainingBits);
-                break;
-            }
-
-            Write<byte>(valuePtr[x], ByteNumBits);
-            remainingBits -= ByteNumBits;
-        }
-    }
+    public void WriteGeneric<T>(T value, int numBits) where T : unmanaged => WriteGeneric(ref value, numBits);
 
     /// <summary>
     /// Writes a seriablizable structure (see: <see cref="IBitPackable{TSelf}"/> to the stream.
