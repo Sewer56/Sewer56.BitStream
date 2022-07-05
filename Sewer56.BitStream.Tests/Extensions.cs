@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Sewer56.BitStream.ByteStreams;
 using Sewer56.BitStream.Interfaces;
 using Xunit;
@@ -130,6 +131,90 @@ public class Extensions
         }
     }
 
+    [Fact]
+    private unsafe void WriteReadGeneric()
+    {
+        const int numTestedValues = byte.MaxValue;
+
+        var arrayStream = CreateArrayStream((sizeof(TestStruct) * numTestedValues) + 1, 0b10101010);
+        var stream = new BitStream<ArrayByteStream>(arrayStream);
+
+        // Write all values
+        for (int x = 0; x < numTestedValues; x++)
+        {
+            var expected = new TestStruct
+            {
+                Byte = (byte)x,
+                Short = (short)(byte.MaxValue + x),
+                Int = short.MaxValue + x,
+                Long = (long)int.MaxValue + x,
+            };
+
+            stream.WriteGeneric(ref expected);
+        }
+
+        // Read all values.
+        stream.BitIndex = 0;
+        for (int x = 0; x < numTestedValues; x++)
+        {
+            var expected = new TestStruct
+            {
+                Byte = (byte)x,
+                Short = (short)(byte.MaxValue + x),
+                Int = short.MaxValue + x,
+                Long = (long)int.MaxValue + x,
+            };
+
+            // Read values.
+            var actual = stream.ReadGeneric<TestStruct>();
+            Assert.Equal(expected, actual);
+        }
+    }
+
+    [Fact]
+    private unsafe void WriteReadGenericWithNumBits()
+    {
+        const int numTestedValues = byte.MaxValue;
+        const int ByteAndShortBitLength = 8 + 16;
+
+        var arrayStream = CreateArrayStream((sizeof(TestStruct) * numTestedValues) + 1, 0b10101010);
+        var stream = new BitStream<ArrayByteStream>(arrayStream);
+
+        
+        // Write all values
+        for (int x = 0; x < numTestedValues; x++)
+        {
+            var expected = new TestStruct
+            {
+                Byte = (byte)x,
+                Short = (short)(byte.MaxValue + x),
+                Int = short.MaxValue + x,
+                Long = (long)int.MaxValue + x,
+            };
+
+            stream.WriteGeneric(ref expected, ByteAndShortBitLength);
+        }
+
+        // Read all values.
+        stream.BitIndex = 0;
+        for (int x = 0; x < numTestedValues; x++)
+        {
+            var expected = new TestStruct
+            {
+                Byte = (byte)x,
+                Short = (short)(byte.MaxValue + x),
+                Int = short.MaxValue + x,
+                Long = (long)int.MaxValue + x,
+            };
+
+            // Read values.
+            var actual = stream.ReadGeneric<TestStruct>(ByteAndShortBitLength);
+            Assert.Equal(expected.Byte, actual.Byte);
+            Assert.Equal(expected.Short, actual.Short);
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct TestStruct : IEquatable<TestStruct>, IBitPackable<TestStruct>
     {
         public byte     Byte;
