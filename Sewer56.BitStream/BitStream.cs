@@ -865,19 +865,6 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 
     #region Utilities
     /// <summary>
-    /// Creates a byte array from specified structure or class type with explicit StructLayout attribute.
-    /// </summary>
-    /// <param name="item">The item to convert into a byte array.</param>
-    /// <param name="buffer">Buffer inside which the result is to be stored.</param>
-    /// <returns>Original span sliced to contain only the bytes of the struct.</returns>
-    [MethodImpl(AggressiveInlining)]
-    private static Span<byte> GetBytes<T>(ref T item, Span<byte> buffer) where T : unmanaged
-    {
-        Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(buffer), item);
-        return buffer.Slice(0, sizeof(T));
-    }
-
-    /// <summary>
     /// Gets the mask necessary to mask out a given number of bits.
     /// </summary>
 #if NETCOREAPP
