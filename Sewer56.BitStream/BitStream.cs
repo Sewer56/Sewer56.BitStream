@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Sewer56.BitStream.Misc;
 using static System.Runtime.CompilerServices.MethodImplOptions;
+using System.Diagnostics.CodeAnalysis;
 
 // TODO: The JIT is refusing to inline Read8/Write8 for Read32+ and Write32+ due to code size.
 // Inlining Read16/Write16 doesn't help either. Is there no solution short of making a mess and manually
@@ -251,6 +252,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #else
     [MethodImpl(AggressiveInlining)]
 #endif
+    [ExcludeFromCodeCoverage]
     public T Read<T>(int numBits)
     {
         if (typeof(T) == typeof(byte)) return Number.Cast<T>(Read8(numBits));
@@ -284,6 +286,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #else
     [MethodImpl(AggressiveInlining)]
 #endif
+    [ExcludeFromCodeCoverage]
     public T Read<T>() where T : unmanaged
     {
         if (typeof(T) == typeof(byte)) return Number.Cast<T>(Read8(sizeof(T) * 8));
@@ -481,6 +484,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <param name="numBits">Number of bits to write.</param>
     /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
     [MethodImpl(AggressiveInlining)]
+    [ExcludeFromCodeCoverage]
     public void Write<T>(T value, int numBits)
     {
         if (typeof(T) == typeof(byte)) Write8(Number.Cast<T, byte>(value), numBits);
@@ -508,6 +512,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <param name="value">The value to write.</param>
     /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
     [MethodImpl(AggressiveInlining)]
+    [ExcludeFromCodeCoverage]
     public void Write<T>(T value) where T : unmanaged
     {
         if (typeof(T) == typeof(byte)) Write8(Number.Cast<T, byte>(value), sizeof(T) * 8);
@@ -734,6 +739,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <param name="numBits">Number of bits to read. Max: 64.</param>
     /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
     [MethodImpl(AggressiveInlining)]
+    [ExcludeFromCodeCoverage]
     public T ReadSigned<T>(int numBits)
     {
         if (typeof(T) == typeof(long)) return Number.Cast<T>(SignExtend((long)Number.Cast<T, ulong>(Read<T>(numBits)), numBits));
@@ -764,6 +770,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <param name="numBits">Number of bits to write.</param>
     /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
     [MethodImpl(AggressiveInlining)]
+    [ExcludeFromCodeCoverage]
     public void WriteSigned<T>(T value, int numBits) where T : unmanaged
     {
         if (typeof(T) == typeof(byte)) Write8((byte) SignShrink(Number.Cast<T, byte>(value)), numBits);
