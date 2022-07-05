@@ -5,6 +5,10 @@ Efficient reusable BitStream library with support for generics; no virtual funct
 	<img src="https://img.shields.io/nuget/v/Sewer56.BitStream.svg" alt="NuGet" />
 </a>
 
+<a href="https://codecov.io/Sewer56/Sewer56.BitStream">
+	<img src="https://codecov.io/gh/Sewer56/Sewer56.BitStream/branch/senpai/graph/badge.svg" alt="Coverage" />
+</a>
+
 ## Introduction
 Bitstreams unlike regular streams, operate at the bit level, allowing you to read/write bits.
 
