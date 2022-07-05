@@ -69,11 +69,8 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     {
         get
         {
-            var bitIndex = BitIndex;
-            int byteOffset = bitIndex / ByteNumBits;
-            int bitOffset = bitIndex % ByteNumBits;
-            bool extraByte = bitOffset != 0;
-            return byteOffset + Unsafe.As<bool, byte>(ref extraByte); // Branchless
+            bool extraByte = BitOffset != 0;
+            return ByteOffset + Unsafe.As<bool, byte>(ref extraByte); // Branchless
         }
     }
 
