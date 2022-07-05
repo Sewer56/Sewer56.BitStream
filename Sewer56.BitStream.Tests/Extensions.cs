@@ -250,6 +250,36 @@ public class Extensions
         }
     }
 
+    [Fact]
+    private unsafe void NextByteIndex()
+    {
+        const int numTestedValues  = 3;
+        const int numBytesPerValue = 1;
+
+        var arrayStream = CreateArrayStream((numBytesPerValue * numTestedValues) + 1, 0b10101010);
+        var stream = new BitStream<ArrayByteStream>(arrayStream);
+
+        // Check case where bitOffset == 0
+        Assert.Equal(0, stream.NextByteIndex);
+
+        // Check case where bitOffset != 0
+        for (int x = 0; x < 8; x++)
+        {
+            stream.WriteBit(0);
+            Assert.Equal(1, stream.NextByteIndex);
+        }
+
+        // Check for correct loop.
+        for (int x = 0; x < 8; x++)
+        {
+            stream.WriteBit(0);
+            Assert.Equal(2, stream.NextByteIndex);
+        }
+
+        stream.WriteBit(0);
+        Assert.Equal(3, stream.NextByteIndex);
+    }
+
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct TestStruct : IEquatable<TestStruct>, IBitPackable<TestStruct>
     {
