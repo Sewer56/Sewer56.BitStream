@@ -1,0 +1,82 @@
+﻿Sewer56.BitStream.BitStream<TByteStream>
+Sewer56.BitStream.BitStream<TByteStream>.BitIndex.get -> int
+Sewer56.BitStream.BitStream<TByteStream>.BitIndex.set -> void
+Sewer56.BitStream.BitStream<TByteStream>.BitOffset.get -> int
+Sewer56.BitStream.BitStream<TByteStream>.BitStream() -> void
+Sewer56.BitStream.BitStream<TByteStream>.BitStream(TByteStream stream, int bitIndex = 0) -> void
+Sewer56.BitStream.BitStream<TByteStream>.ByteOffset.get -> int
+Sewer56.BitStream.BitStream<TByteStream>.Deserialize<T>() -> T
+Sewer56.BitStream.BitStream<TByteStream>.NextByteIndex.get -> int
+Sewer56.BitStream.BitStream<TByteStream>.Read(System.Span<byte> buffer) -> void
+Sewer56.BitStream.BitStream<TByteStream>.Read16(int numBits) -> ushort
+Sewer56.BitStream.BitStream<TByteStream>.Read32(int numBits) -> uint
+Sewer56.BitStream.BitStream<TByteStream>.Read64(int numBits) -> ulong
+Sewer56.BitStream.BitStream<TByteStream>.Read8(int numBits) -> byte
+Sewer56.BitStream.BitStream<TByteStream>.Read<T>() -> T
+Sewer56.BitStream.BitStream<TByteStream>.Read<T>(int numBits) -> T
+Sewer56.BitStream.BitStream<TByteStream>.ReadBit() -> byte
+Sewer56.BitStream.BitStream<TByteStream>.ReadGeneric<T>() -> T
+Sewer56.BitStream.BitStream<TByteStream>.ReadGeneric<T>(int numBits) -> T
+Sewer56.BitStream.BitStream<TByteStream>.ReadGeneric<T>(out T value) -> void
+Sewer56.BitStream.BitStream<TByteStream>.ReadSigned<T>(int numBits) -> T
+Sewer56.BitStream.BitStream<TByteStream>.ReadString(int maxLengthBytes = 1024, System.Text.Encoding encoding = null) -> string
+Sewer56.BitStream.BitStream<TByteStream>.Seek(int offset, byte bit = 0) -> void
+Sewer56.BitStream.BitStream<TByteStream>.SeekRelative(int offset = 0, byte bit = 0) -> void
+Sewer56.BitStream.BitStream<TByteStream>.Serialize<T>(ref T value) -> void
+Sewer56.BitStream.BitStream<TByteStream>.Stream.get -> TByteStream
+Sewer56.BitStream.BitStream<TByteStream>.Write(System.Span<byte> value) -> void
+Sewer56.BitStream.BitStream<TByteStream>.Write16(ushort value, int numBits) -> void
+Sewer56.BitStream.BitStream<TByteStream>.Write32(uint value, int numBits) -> void
+Sewer56.BitStream.BitStream<TByteStream>.Write64(ulong value, int numBits) -> void
+Sewer56.BitStream.BitStream<TByteStream>.Write8(byte value, int numBits) -> void
+Sewer56.BitStream.BitStream<TByteStream>.Write<T>(T value) -> void
+Sewer56.BitStream.BitStream<TByteStream>.Write<T>(T value, int numBits) -> void
+Sewer56.BitStream.BitStream<TByteStream>.WriteBit(byte value) -> void
+Sewer56.BitStream.BitStream<TByteStream>.WriteGeneric<T>(ref T value) -> void
+Sewer56.BitStream.BitStream<TByteStream>.WriteGeneric<T>(ref T value, int numBits) -> void
+Sewer56.BitStream.BitStream<TByteStream>.WriteGeneric<T>(T value) -> void
+Sewer56.BitStream.BitStream<TByteStream>.WriteGeneric<T>(T value, int numBits) -> void
+Sewer56.BitStream.BitStream<TByteStream>.WriteSigned<T>(T value, int numBits) -> void
+Sewer56.BitStream.BitStream<TByteStream>.WriteString(string text, int maxLengthBytes = 1024, System.Text.Encoding encoding = null) -> void
+Sewer56.BitStream.ByteStreams.ArrayByteStream
+Sewer56.BitStream.ByteStreams.ArrayByteStream.Array.get -> byte[]
+Sewer56.BitStream.ByteStreams.ArrayByteStream.ArrayByteStream() -> void
+Sewer56.BitStream.ByteStreams.ArrayByteStream.ArrayByteStream(byte[] array) -> void
+Sewer56.BitStream.ByteStreams.ArrayByteStream.Read(int index) -> byte
+Sewer56.BitStream.ByteStreams.ArrayByteStream.Write(byte value, int index) -> void
+Sewer56.BitStream.ByteStreams.MemoryByteStream
+Sewer56.BitStream.ByteStreams.MemoryByteStream.Array.get -> System.Memory<byte>
+Sewer56.BitStream.ByteStreams.MemoryByteStream.MemoryByteStream() -> void
+Sewer56.BitStream.ByteStreams.MemoryByteStream.MemoryByteStream(System.Memory<byte> array) -> void
+Sewer56.BitStream.ByteStreams.MemoryByteStream.Read(int index) -> byte
+Sewer56.BitStream.ByteStreams.MemoryByteStream.Write(byte value, int index) -> void
+Sewer56.BitStream.ByteStreams.PointerByteStream
+Sewer56.BitStream.ByteStreams.PointerByteStream.ArrayPtr.get -> byte*
+Sewer56.BitStream.ByteStreams.PointerByteStream.PointerByteStream() -> void
+Sewer56.BitStream.ByteStreams.PointerByteStream.PointerByteStream(byte* arrayPtr) -> void
+Sewer56.BitStream.ByteStreams.PointerByteStream.Read(int index) -> byte
+Sewer56.BitStream.ByteStreams.PointerByteStream.Write(byte value, int index) -> void
+Sewer56.BitStream.ByteStreams.StreamByteStream
+Sewer56.BitStream.ByteStreams.StreamByteStream.Read(int index) -> byte
+Sewer56.BitStream.ByteStreams.StreamByteStream.Stream.get -> System.IO.Stream
+Sewer56.BitStream.ByteStreams.StreamByteStream.StreamByteStream() -> void
+Sewer56.BitStream.ByteStreams.StreamByteStream.StreamByteStream(System.IO.Stream stream) -> void
+Sewer56.BitStream.ByteStreams.StreamByteStream.Write(byte value, int index) -> void
+Sewer56.BitStream.Interfaces.IBitPackable<TSelf>
+Sewer56.BitStream.Interfaces.IBitPackable<TSelf>.FromStream<T>(ref Sewer56.BitStream.BitStream<T> stream) -> TSelf
+Sewer56.BitStream.Interfaces.IBitPackable<TSelf>.ToStream<T>(ref Sewer56.BitStream.BitStream<T> stream) -> void
+Sewer56.BitStream.Interfaces.IByteStream
+Sewer56.BitStream.Interfaces.IByteStream.Read(int index) -> byte
+Sewer56.BitStream.Interfaces.IByteStream.Write(byte value, int index) -> void
+Sewer56.BitStream.Misc.Number
+static Sewer56.BitStream.Misc.Number.Cast<TFrom, TTo>(TFrom value) -> TTo
+static Sewer56.BitStream.Misc.Number.Cast<TTo>(byte value) -> TTo
+static Sewer56.BitStream.Misc.Number.Cast<TTo>(double value) -> TTo
+static Sewer56.BitStream.Misc.Number.Cast<TTo>(float value) -> TTo
+static Sewer56.BitStream.Misc.Number.Cast<TTo>(int value) -> TTo
+static Sewer56.BitStream.Misc.Number.Cast<TTo>(long value) -> TTo
+static Sewer56.BitStream.Misc.Number.Cast<TTo>(sbyte value) -> TTo
+static Sewer56.BitStream.Misc.Number.Cast<TTo>(short value) -> TTo
+static Sewer56.BitStream.Misc.Number.Cast<TTo>(uint value) -> TTo
+static Sewer56.BitStream.Misc.Number.Cast<TTo>(ulong value) -> TTo
+static Sewer56.BitStream.Misc.Number.Cast<TTo>(ushort value) -> TTo
