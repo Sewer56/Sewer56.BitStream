@@ -96,7 +96,9 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     [SkipLocalsInit]
 #endif
 #if NETCOREAPP
-    [MethodImpl(AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
 #endif
     public byte ReadBit()
     {
@@ -125,7 +127,9 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     [SkipLocalsInit]
 #endif
 #if NETCOREAPP
-    [MethodImpl(AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
+    [MethodImpl(AggressiveInlining)]
 #endif
     public byte Read8(int numBits)
     {
@@ -238,7 +242,11 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <typeparam name="T">Any of the following: byte, sbyte, short, ushort, int, uint, long, ulong.</typeparam>
     /// <param name="numBits">Number of bits to read. Max: 64.</param>
     /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
+#if NETCOREAPP
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
     [MethodImpl(AggressiveInlining)]
+#endif
     public T Read<T>(int numBits)
     {
         if (typeof(T) == typeof(byte)) return Number.Cast<T>(Read8(numBits));
@@ -267,7 +275,11 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <typeparam name="T">Any of the following: byte, sbyte, short, ushort, int, uint, long, ulong.</typeparam>
     /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
+#if NETCOREAPP
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+#else
     [MethodImpl(AggressiveInlining)]
+#endif
     public T Read<T>() where T : unmanaged
     {
         if (typeof(T) == typeof(byte)) return Number.Cast<T>(Read8(sizeof(T) * 8));
