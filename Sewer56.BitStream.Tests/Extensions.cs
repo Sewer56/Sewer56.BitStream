@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Sewer56.BitStream.ByteStreams;
 using Sewer56.BitStream.Interfaces;
@@ -211,6 +212,41 @@ public class Extensions
             var actual = stream.ReadGeneric<TestStruct>(ByteAndShortBitLength);
             Assert.Equal(expected.Byte, actual.Byte);
             Assert.Equal(expected.Short, actual.Short);
+        }
+    }
+
+    [Fact]
+    private unsafe void WriteReadSpanArray()
+    {
+        const int numTestedValues = byte.MaxValue;
+        const int numBytesPerArray = 32;
+
+        var arrayStream = CreateArrayStream((numBytesPerArray * numTestedValues) + 1, 0b10101010);
+        var stream = new BitStream<ArrayByteStream>(arrayStream);
+
+        // Write all values
+        var readWriteBuffer = new byte[numBytesPerArray];
+        var expectedValuesArray = new byte[numTestedValues][];
+
+        for (int x = 0; x < numTestedValues; x++)
+        {
+            var random = new Random(x);
+            random.NextBytes(readWriteBuffer);
+            stream.Write(readWriteBuffer);
+            expectedValuesArray[x] = readWriteBuffer.ToArray();
+        }
+
+        // Read all values.
+        stream.BitIndex = 0;
+        for (int x = 0; x < numTestedValues; x++)
+        {
+            // Using same seed, recreate arrays and compare.
+            var random = new Random(x);
+            random.NextBytes(readWriteBuffer);
+            
+            // Read values.
+            stream.Read(readWriteBuffer);
+            Assert.Equal(expectedValuesArray[x], readWriteBuffer);
         }
     }
 
