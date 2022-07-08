@@ -45,10 +45,8 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     private const int IntNumBits = sizeof(int) * 8;
     private const int LongNumBits = sizeof(long) * 8;
 
-#if NETCOREAPP
-    private const MethodImplOptions AggressiveInliningAndOptimization = AggressiveInlining | AggressiveOptimization;
-#else
-    private const MethodImplOptions AggressiveInliningAndOptimization = AggressiveInlining;
+#if !NETCOREAPP
+    private const MethodImplOptions AggressiveOptimization = default;
 #endif
 
     /// <summary>
@@ -103,7 +101,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public byte ReadBit()
     {
         const int bitCount = 1;
@@ -130,7 +128,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public byte Read8(int numBits)
     {
         // Calculate where we are in the stream and advance.
@@ -172,7 +170,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public ushort Read16(int numBits)
     {
         if (numBits <= ByteNumBits)
@@ -192,7 +190,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public uint Read32(int numBits)
     {
         if (numBits <= ShortNumBits)
@@ -212,7 +210,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public ulong Read64(int numBits)
     {
         if (numBits <= IntNumBits)
@@ -230,7 +228,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <typeparam name="T">Any of the following: byte, sbyte, short, ushort, int, uint, long, ulong.</typeparam>
     /// <param name="numBits">Number of bits to read. Max: 64.</param>
     /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     [ExcludeFromCodeCoverage]
     public T Read<T>(int numBits)
     {
@@ -260,7 +258,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <typeparam name="T">Any of the following: byte, sbyte, short, ushort, int, uint, long, ulong.</typeparam>
     /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     [ExcludeFromCodeCoverage]
     public T Read<T>() where T : unmanaged
     {
@@ -290,7 +288,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public void WriteBit(byte value)
     {
         const int numBits = 1;
@@ -319,7 +317,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public void Write8(byte value, int numBits)
     {
         // Calculate where we are in the stream and advance.
@@ -373,7 +371,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public void Write16(ushort value, int numBits)
     {
         if (numBits <= ByteNumBits)
@@ -395,7 +393,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public void Write32(uint value, int numBits)
     {
         if (numBits <= ShortNumBits)
@@ -417,7 +415,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public void Write64(ulong value, int numBits)
     {
         if (numBits <= IntNumBits)
@@ -511,7 +509,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public T ReadGeneric<T>() where T : unmanaged
     {
         Span<byte> stackSpan = stackalloc byte[sizeof(T)];
@@ -529,7 +527,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public T ReadGeneric<T>(int numBits) where T : unmanaged
     {
         Span<byte> stackSpan = stackalloc byte[sizeof(T)];
@@ -566,7 +564,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public void WriteGeneric<T>(ref T value) where T : unmanaged
     {
         var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
@@ -591,7 +589,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public void WriteGeneric<T>(ref T value, int numBits) where T : unmanaged
     {
         var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
@@ -619,7 +617,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public void WriteGeneric<T>(T value, int numBits) where T : unmanaged => WriteGeneric(ref value, numBits);
 
     /// <summary>
@@ -641,7 +639,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// Writes a <see cref="Span{T}"/> of bytes to the stream.
     /// </summary>
     /// <param name="value">The span to write.</param>
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public void Write(Span<byte> value)
     {
         for (int x = 0; x < value.Length; x++)
@@ -652,7 +650,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// Reads a given number of bytes into a <see cref="Span{T}"/> buffer.
     /// </summary>
     /// <param name="buffer">Span to write to.</param>
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public void Read(Span<byte> buffer)
     {
         for (int x = 0; x < buffer.Length; x++)
@@ -725,7 +723,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public string ReadString(int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
     {
         encoding ??= System.Text.Encoding.UTF8;
@@ -762,7 +760,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     public void WriteString(string text, int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
     {
         encoding ??= System.Text.Encoding.UTF8;
@@ -786,25 +784,25 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <summary>
     /// Gets the mask necessary to mask out a given number of bits.
     /// </summary>
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     private uint GetMask(int numBits) => ((uint)1 << numBits) - 1;
 
     /// <summary>
     /// Gets the mask necessary to mask out a given number of bits.
     /// </summary>
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     private ulong GetMaskLong(int numBits) => ((ulong)1 << numBits) - 1;
 
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     private int SignShrink(int value) => SignExtend(value, IntNumBits);
 
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     private long SignShrink(long value) => SignExtend(value, LongNumBits);
 
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     private int SignExtend(int value, int numBits)
     {
         var mask = 1 << (numBits - 1);
@@ -814,7 +812,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
 #if NET5_0_OR_GREATER
     [SkipLocalsInit]
 #endif
-    [MethodImpl(AggressiveInliningAndOptimization)]
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
     private long SignExtend(long value, int numBits)
     {
         long mask = 1L << (numBits - 1);
