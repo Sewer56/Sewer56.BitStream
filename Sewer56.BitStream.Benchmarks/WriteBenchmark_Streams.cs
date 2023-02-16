@@ -3,18 +3,43 @@ using System.IO;
 using BenchmarkDotNet.Attributes;
 using Sewer56.BitStream.ByteStreams;
 
-namespace Sewer56.BitStream.Benchmarks
+namespace Sewer56.BitStream.Benchmarks;
+
+[MemoryDiagnoser]
+public class WriteBenchmark_Streams : BenchmarkBase
 {
-    [MemoryDiagnoser]
-    public class WriteBenchmark_Streams : BenchmarkBase
+    [Benchmark]
+    public int Write8_ArrayByteStream()
     {
-        [Benchmark]
-        public int Write8_ArrayByteStream()
+        var maxNumIterations = NumBytes / 8;
+        var numIterations = 0;
+        var stream = new ArrayByteStream(_data);
+        var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+
+        for (; numIterations < maxNumIterations; numIterations++)
         {
-            var maxNumIterations = NumBytes / 8;
-            var numIterations = 0;
-            var stream = new ArrayByteStream(_data);
-            var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+        }
+
+        return numIterations;
+    }
+
+    [Benchmark]
+    public unsafe int Write8_PointerByteStream()
+    {
+        var maxNumIterations = NumBytes / 8;
+        var numIterations = 0;
+        fixed (byte* arrayPtr = _data)
+        {
+            var stream = new PointerByteStream(arrayPtr);
+            var bitStream = new BitStream<PointerByteStream>(stream, 0);
 
             for (; numIterations < maxNumIterations; numIterations++)
             {
@@ -30,77 +55,51 @@ namespace Sewer56.BitStream.Benchmarks
 
             return numIterations;
         }
+    }
 
-        [Benchmark]
-        public unsafe int Write8_PointerByteStream()
+    [Benchmark]
+    public int Write8_StreamByteStream()
+    {
+        var maxNumIterations = NumBytes / 8;
+        var numIterations = 0;
+        var stream = new StreamByteStream(new MemoryStream(_data));
+        var bitStream = new BitStream<StreamByteStream>(stream, 0);
+
+        for (; numIterations < maxNumIterations; numIterations++)
         {
-            var maxNumIterations = NumBytes / 8;
-            var numIterations = 0;
-            fixed (byte* arrayPtr = _data)
-            {
-                var stream = new PointerByteStream(arrayPtr);
-                var bitStream = new BitStream<PointerByteStream>(stream, 0);
-
-                for (; numIterations < maxNumIterations; numIterations++)
-                {
-                    bitStream.Write8((byte)numIterations, 8);
-                    bitStream.Write8((byte)numIterations, 8);
-                    bitStream.Write8((byte)numIterations, 8);
-                    bitStream.Write8((byte)numIterations, 8);
-                    bitStream.Write8((byte)numIterations, 8);
-                    bitStream.Write8((byte)numIterations, 8);
-                    bitStream.Write8((byte)numIterations, 8);
-                    bitStream.Write8((byte)numIterations, 8);
-                }
-
-                return numIterations;
-            }
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
         }
 
-        [Benchmark]
-        public int Write8_StreamByteStream()
+        return numIterations;
+    }
+
+    [Benchmark]
+    public int Write8_MemoryByteStream()
+    {
+        var maxNumIterations = NumBytes / 8;
+        var numIterations = 0;
+        var stream = new MemoryByteStream(_data.AsMemory());
+        var bitStream = new BitStream<MemoryByteStream>(stream, 0);
+
+        for (; numIterations < maxNumIterations; numIterations++)
         {
-            var maxNumIterations = NumBytes / 8;
-            var numIterations = 0;
-            var stream = new StreamByteStream(new MemoryStream(_data));
-            var bitStream = new BitStream<StreamByteStream>(stream, 0);
-
-            for (; numIterations < maxNumIterations; numIterations++)
-            {
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-            }
-
-            return numIterations;
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
         }
 
-        [Benchmark]
-        public int Write8_MemoryByteStream()
-        {
-            var maxNumIterations = NumBytes / 8;
-            var numIterations = 0;
-            var stream = new MemoryByteStream(_data.AsMemory());
-            var bitStream = new BitStream<MemoryByteStream>(stream, 0);
-
-            for (; numIterations < maxNumIterations; numIterations++)
-            {
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-                bitStream.Write8((byte)numIterations, 8);
-            }
-
-            return numIterations;
-        }
+        return numIterations;
     }
 }
