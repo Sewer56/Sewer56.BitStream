@@ -273,7 +273,7 @@ public class Extensions
         }
     }
 
-    private static void WriteReadSpanGeneric<T>(int bytesPerArray, bool unaligned, int numTestedValues, BitStream<T> stream) where T : IByteStream
+    private static void WriteReadSpanGeneric<T>(int bytesPerArray, bool unaligned, int numTestedValues, BitStream<T> stream) where T : IByteStream, IStreamWithMemoryCopy
     {
         // Write all values
         var readWriteBuffer = new byte[bytesPerArray];
@@ -286,7 +286,7 @@ public class Extensions
         {
             var random = new Random(x);
             random.NextBytes(readWriteBuffer);
-            stream.Write(readWriteBuffer);
+            stream.WriteFast(readWriteBuffer);
             expectedValuesArray[x] = readWriteBuffer.ToArray();
         }
 
@@ -302,7 +302,7 @@ public class Extensions
             random.NextBytes(readWriteBuffer);
 
             // Read values.
-            stream.Read(readWriteBuffer);
+            stream.ReadFast(readWriteBuffer);
             Assert.Equal(expectedValuesArray[x], readWriteBuffer);
         }
     }

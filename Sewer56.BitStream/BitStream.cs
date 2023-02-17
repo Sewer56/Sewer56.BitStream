@@ -6,6 +6,7 @@ using Sewer56.BitStream.Misc;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 using System.Diagnostics.CodeAnalysis;
 using Sewer56.BitStream.ByteStreams;
+// ReSharper disable MemberCanBePrivate.Global
 
 // ReSharper disable RedundantTypeArgumentsOfMethod
 
@@ -49,10 +50,10 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
         exist after JIT-ting if the parameter value is known at JIT-time.
     */
 
-    private const int ByteNumBits = sizeof(byte) * 8;
-    private const int ShortNumBits = sizeof(short) * 8;
-    private const int IntNumBits = sizeof(int) * 8;
-    private const int LongNumBits = sizeof(long) * 8;
+    internal const int ByteNumBits = sizeof(byte) * 8;
+    internal const int ShortNumBits = sizeof(short) * 8;
+    internal const int IntNumBits = sizeof(int) * 8;
+    internal const int LongNumBits = sizeof(long) * 8;
 
     /// <summary>
     /// Absolute index of the next bit to access.
@@ -104,7 +105,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
         BitIndex = bitIndex;
         Stream = stream;
     }
-
+    
     /// <summary>
     /// Reads a single bit from the stream.
     /// </summary>
@@ -804,70 +805,43 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     {
         bool isAligned = BitIndex % 8 == 0;
         if (isAligned)
+            WriteAligned(value);
+        else
+            WriteUnaligned(value);
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    internal void WriteUnaligned(Span<byte> value)
+    {
+        for (int x = 0; x < value.Length; x++)
+            Write8(value.DangerousGetReferenceAt(x), ByteNumBits);
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    internal void WriteAligned(Span<byte> value)
+    {
+        int x;
+        if (sizeof(nuint) == 8)
         {
-            #region Ugly Devirtualisation Hacks
-            const int MinSpanMemCpyLength = 6;
-            
-            // We don't have a way to devirtualise other than this right now.
-            if (typeof(TByteStream) == typeof(PointerByteStream) && value.Length >= MinSpanMemCpyLength)
-            {
-                Unsafe.As<TByteStream, PointerByteStream>(ref _stream).Write(value, BitIndex / ByteNumBits);
-                BitIndex += value.Length * 8;
-                return;
-            }
-            
-            if (typeof(TByteStream) == typeof(ArrayByteStream) && value.Length >= MinSpanMemCpyLength)
-            {
-                Unsafe.As<TByteStream, ArrayByteStream>(ref _stream).Write(value, BitIndex / ByteNumBits);
-                BitIndex += value.Length * 8;
-                return;
-            }
-            
-            if (typeof(TByteStream) == typeof(MemoryByteStream) && value.Length >= MinSpanMemCpyLength)
-            {
-                Unsafe.As<TByteStream, MemoryByteStream>(ref _stream).Write(value, BitIndex / ByteNumBits);
-                BitIndex += value.Length * 8;
-                return;
-            }
-            
-#if NETCOREAPP3_1_OR_GREATER
-            if (typeof(TByteStream) == typeof(StreamByteStream) && value.Length >= MinSpanMemCpyLength)
-            {
-                Unsafe.As<TByteStream, StreamByteStream>(ref _stream).Write(value, BitIndex / ByteNumBits);
-                BitIndex += value.Length * 8;
-                return;
-            }
-#endif
-            #endregion
+            var bufferLong = value.CastFast<byte, ulong>();
+            var numInts = value.Length / sizeof(ulong);
+            for (x = 0; x < numInts; x++)
+                Write64Aligned(bufferLong.DangerousGetReferenceAt(x));
 
-            int x;
-            if (sizeof(nuint) == 8)
-            {
-                var bufferLong = value.CastFast<byte, ulong>();
-                var numInts   = value.Length / sizeof(ulong);
-                for (x = 0; x < numInts; x++)
-                    Write64Aligned(bufferLong.DangerousGetReferenceAt(x));
-
-                x *= sizeof(ulong);
-            }
-            else
-            {
-                var bufferInt = value.CastFast<byte, uint>();
-                var numInts   = value.Length / sizeof(uint);
-                for (x = 0; x < numInts; x++)
-                    Write32Aligned(bufferInt.DangerousGetReferenceAt(x));
-                
-                x *= sizeof(uint);
-            }
-
-            for (; x < value.Length; x++)
-                Write8Aligned(value.DangerousGetReferenceAt(x));
+            x *= sizeof(ulong);
         }
         else
         {
-            for (int x = 0; x < value.Length; x++)
-                Write8(value.DangerousGetReferenceAt(x), ByteNumBits);
+            var bufferInt = value.CastFast<byte, uint>();
+            var numInts = value.Length / sizeof(uint);
+            for (x = 0; x < numInts; x++)
+                Write32Aligned(bufferInt.DangerousGetReferenceAt(x));
+
+            x *= sizeof(uint);
         }
+
+        for (; x < value.Length; x++)
+            Write8Aligned(value.DangerousGetReferenceAt(x));
     }
 
     /// <summary>
@@ -880,70 +854,43 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
         bool isAligned = BitIndex % 8 == 0;
 
         if (isAligned)
-        {
-            #region Ugly Devirtualisation Hacks
-            const int MinSpanMemCpyLength = 4;
-            
-            // We don't have a way to devirtualise other than this right now.
-            if (typeof(TByteStream) == typeof(PointerByteStream) && buffer.Length >= MinSpanMemCpyLength)
-            {
-                Unsafe.As<TByteStream, PointerByteStream>(ref _stream).Read(buffer, BitIndex / ByteNumBits);
-                BitIndex += buffer.Length * 8;
-                return;
-            }
-            
-            if (typeof(TByteStream) == typeof(ArrayByteStream) && buffer.Length >= MinSpanMemCpyLength)
-            {
-                Unsafe.As<TByteStream, ArrayByteStream>(ref _stream).Read(buffer, BitIndex / ByteNumBits);
-                BitIndex += buffer.Length * 8;
-                return;
-            }
-            
-            if (typeof(TByteStream) == typeof(MemoryByteStream) && buffer.Length >= MinSpanMemCpyLength)
-            {
-                Unsafe.As<TByteStream, MemoryByteStream>(ref _stream).Read(buffer, BitIndex / ByteNumBits);
-                BitIndex += buffer.Length * 8;
-                return;
-            }
-            
-#if NETCOREAPP3_1_OR_GREATER
-            if (typeof(TByteStream) == typeof(StreamByteStream) && buffer.Length >= MinSpanMemCpyLength)
-            {
-                Unsafe.As<TByteStream, StreamByteStream>(ref _stream).Read(buffer, BitIndex / ByteNumBits);
-                BitIndex += buffer.Length * 8;
-                return;
-            }
-#endif
-            #endregion
-            
-            int x;
-            if (sizeof(nuint) == 8)
-            {
-                var bufferLong = buffer.CastFast<byte, ulong>();
-                var numLongs   = buffer.Length / sizeof(ulong);
-                for (x = 0; x < numLongs; x++)
-                    bufferLong.DangerousGetReferenceAt(x) = Read64Aligned();
-                
-                x *= sizeof(ulong);
-            }
-            else
-            {
-                var bufferInt = buffer.CastFast<byte, uint>();
-                var numInts   = buffer.Length / sizeof(uint);
-                for (x = 0; x < numInts; x++)
-                    bufferInt.DangerousGetReferenceAt(x) = Read32Aligned();
-                
-                x *= sizeof(uint);
-            }
+            ReadAligned(buffer);
+        else
+            ReadUnaligned(buffer);
+    }
 
-            for (; x < buffer.Length; x++)
-                buffer.DangerousGetReferenceAt(x) = Read8Aligned();
+    [MethodImpl(AggressiveInlining)]
+    internal void ReadUnaligned(Span<byte> buffer)
+    {
+        for (int x = 0; x < buffer.Length; x++)
+            buffer.DangerousGetReferenceAt(x) = Read8(ByteNumBits);
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    internal void ReadAligned(Span<byte> buffer)
+    {
+        int x;
+        if (sizeof(nuint) == 8)
+        {
+            var bufferLong = buffer.CastFast<byte, ulong>();
+            var numLongs = buffer.Length / sizeof(ulong);
+            for (x = 0; x < numLongs; x++)
+                bufferLong.DangerousGetReferenceAt(x) = Read64Aligned();
+
+            x *= sizeof(ulong);
         }
         else
         {
-            for (int x = 0; x < buffer.Length; x++)
-                buffer.DangerousGetReferenceAt(x) = Read8(ByteNumBits);
+            var bufferInt = buffer.CastFast<byte, uint>();
+            var numInts = buffer.Length / sizeof(uint);
+            for (x = 0; x < numInts; x++)
+                bufferInt.DangerousGetReferenceAt(x) = Read32Aligned();
+
+            x *= sizeof(uint);
         }
+
+        for (; x < buffer.Length; x++)
+            buffer.DangerousGetReferenceAt(x) = Read8Aligned();
     }
 
     /// <summary>
