@@ -1,1 +1,21 @@
-﻿
+﻿Sewer56.BitStream.BitStream<TByteStream>.Read16Aligned() -> ushort
+Sewer56.BitStream.BitStream<TByteStream>.Read32Aligned() -> uint
+Sewer56.BitStream.BitStream<TByteStream>.Read64Aligned() -> ulong
+Sewer56.BitStream.BitStream<TByteStream>.Read8Aligned() -> byte
+Sewer56.BitStream.BitStream<TByteStream>.ReadAligned<T>() -> T
+Sewer56.BitStream.BitStream<TByteStream>.Write16Aligned(ushort value) -> void
+Sewer56.BitStream.BitStream<TByteStream>.Write32Aligned(uint value) -> void
+Sewer56.BitStream.BitStream<TByteStream>.Write64Aligned(ulong value) -> void
+Sewer56.BitStream.BitStream<TByteStream>.Write8Aligned(byte value) -> void
+Sewer56.BitStream.BitStream<TByteStream>.WriteAligned<T>(T value) -> void
+Sewer56.BitStream.ByteStreams.ArrayByteStream.Read(System.Span<byte> data, int index) -> void
+Sewer56.BitStream.ByteStreams.ArrayByteStream.Write(System.Span<byte> value, int index) -> void
+Sewer56.BitStream.ByteStreams.MemoryByteStream.Read(System.Span<byte> data, int index) -> void
+Sewer56.BitStream.ByteStreams.MemoryByteStream.Write(System.Span<byte> value, int index) -> void
+Sewer56.BitStream.ByteStreams.PointerByteStream.Read(System.Span<byte> data, int index) -> void
+Sewer56.BitStream.ByteStreams.PointerByteStream.Write(System.Span<byte> value, int index) -> void
+Sewer56.BitStream.ByteStreams.StreamByteStream.Read(System.Span<byte> data, int index) -> void
+Sewer56.BitStream.ByteStreams.StreamByteStream.Write(System.Span<byte> value, int index) -> void
+Sewer56.BitStream.Interfaces.IStreamWithMemoryCopy
+Sewer56.BitStream.Interfaces.IStreamWithMemoryCopy.Read(System.Span<byte> data, int index) -> void
+Sewer56.BitStream.Interfaces.IStreamWithMemoryCopy.Write(System.Span<byte> value, int index) -> void

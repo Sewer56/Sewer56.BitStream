@@ -17,6 +17,8 @@ internal class Program
         BenchmarkRunner.Run<ReadBenchmark_Streams>(config);
         BenchmarkRunner.Run<WriteBenchmark>(config);
         BenchmarkRunner.Run<WriteBenchmark_Streams>(config);
+        BenchmarkRunner.Run<ReadSpanBenchmark>(config);
+        BenchmarkRunner.Run<WriteSpanBenchmark>(config);
     }
 }
 

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp3.1;net5.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
       <LangVersion>preview</LangVersion>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <Authors>Sewer56</Authors>
@@ -16,6 +16,8 @@
       <Version>1.2.1</Version>
       <IsTrimmable>true</IsTrimmable>
       <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+      <NoWarn>CS1591</NoWarn>
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">

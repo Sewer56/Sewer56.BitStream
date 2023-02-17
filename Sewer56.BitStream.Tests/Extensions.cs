@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Sewer56.BitStream.ByteStreams;
@@ -132,8 +134,10 @@ public class Extensions
         }
     }
 
-    [Fact]
-    private unsafe void WriteReadGeneric()
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    private unsafe void WriteReadGeneric(bool unaligned)
     {
         const int numTestedValues = byte.MaxValue;
 
@@ -141,6 +145,9 @@ public class Extensions
         var stream = new BitStream<ArrayByteStream>(arrayStream);
 
         // Write all values
+        if (unaligned)
+            stream.WriteBit(1);
+        
         for (int x = 0; x < numTestedValues; x++)
         {
             var expected = new TestStruct
@@ -156,6 +163,9 @@ public class Extensions
 
         // Read all values.
         stream.BitIndex = 0;
+        if (unaligned)
+            stream.ReadBit();
+        
         for (int x = 0; x < numTestedValues; x++)
         {
             var expected = new TestStruct
@@ -215,18 +225,62 @@ public class Extensions
         }
     }
 
-    [Fact]
-    private unsafe void WriteReadSpanArray()
+    [Theory]
+    [ClassData(typeof(CalculatorTestData))]
+    private unsafe void WriteReadSpanArray(int bytesPerArray, bool unaligned)
     {
         const int numTestedValues = byte.MaxValue;
-        const int numBytesPerArray = 32;
 
-        var arrayStream = CreateArrayStream((numBytesPerArray * numTestedValues) + 1, 0b10101010);
+        var arrayStream = CreateArrayStream((bytesPerArray * numTestedValues) + 1, 0b10101010);
         var stream = new BitStream<ArrayByteStream>(arrayStream);
+        WriteReadSpanGeneric(bytesPerArray, unaligned, numTestedValues, stream);
+    }
+    
+    [Theory]
+    [ClassData(typeof(CalculatorTestData))]
+    private unsafe void WriteReadSpanMemory(int bytesPerArray, bool unaligned)
+    {
+        const int numTestedValues = byte.MaxValue;
 
+        var arrayStream = CreateMemoryStream((bytesPerArray * numTestedValues) + 1, 0b10101010);
+        var stream = new BitStream<MemoryByteStream>(arrayStream);
+        WriteReadSpanGeneric(bytesPerArray, unaligned, numTestedValues, stream);
+    }
+    
+    [Theory]
+    [ClassData(typeof(CalculatorTestData))]
+    private unsafe void WriteReadSpanStream(int bytesPerArray, bool unaligned)
+    {
+        const int numTestedValues = byte.MaxValue;
+
+        var arrayStream = CreateStreamStream((bytesPerArray * numTestedValues) + 1, 0b10101010);
+        var stream = new BitStream<StreamByteStream>(arrayStream);
+        WriteReadSpanGeneric(bytesPerArray, unaligned, numTestedValues, stream);
+    }
+    
+    [Theory]
+    [ClassData(typeof(CalculatorTestData))]
+    private unsafe void WriteReadSpanPointer(int bytesPerArray, bool unaligned)
+    {
+        const int numTestedValues = byte.MaxValue;
+
+        var buffer = new byte[(bytesPerArray * numTestedValues) + 1];
+        fixed (byte* bufferPtr = &buffer[0])
+        {
+            var arrayStream = CreatePointerStream(bufferPtr, buffer.Length, 0b10101010);
+            var stream = new BitStream<PointerByteStream>(arrayStream);
+            WriteReadSpanGeneric(bytesPerArray, unaligned, numTestedValues, stream);
+        }
+    }
+
+    private static void WriteReadSpanGeneric<T>(int bytesPerArray, bool unaligned, int numTestedValues, BitStream<T> stream) where T : IByteStream
+    {
         // Write all values
-        var readWriteBuffer = new byte[numBytesPerArray];
+        var readWriteBuffer = new byte[bytesPerArray];
         var expectedValuesArray = new byte[numTestedValues][];
+
+        if (unaligned)
+            stream.WriteBit(0);
 
         for (int x = 0; x < numTestedValues; x++)
         {
@@ -238,18 +292,44 @@ public class Extensions
 
         // Read all values.
         stream.BitIndex = 0;
+        if (unaligned)
+            stream.ReadBit();
+
         for (int x = 0; x < numTestedValues; x++)
         {
             // Using same seed, recreate arrays and compare.
             var random = new Random(x);
             random.NextBytes(readWriteBuffer);
-            
+
             // Read values.
             stream.Read(readWriteBuffer);
             Assert.Equal(expectedValuesArray[x], readWriteBuffer);
         }
     }
+    
+    public class CalculatorTestData : IEnumerable<object[]>
+    {
+        public IEnumerator<object[]> GetEnumerator()
+        {
+            for (int x = 1; x < 256; x *= 2)
+            {
+                yield return new object[] { x, true };
+                yield return new object[] { x, false };
+                
+                yield return new object[] { x + 1, true };
+                yield return new object[] { x + 1, false };
 
+                if (x <= 1) 
+                    continue;
+                
+                yield return new object[] { x - 1, true };
+                yield return new object[] { x - 1, false };
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+    
     [Fact]
     private unsafe void NextByteIndex()
     {

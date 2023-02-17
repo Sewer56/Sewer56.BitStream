@@ -5,10 +5,19 @@ using System.Runtime.InteropServices;
 using Sewer56.BitStream.Misc;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 using System.Diagnostics.CodeAnalysis;
+using Sewer56.BitStream.ByteStreams;
+
+// ReSharper disable RedundantTypeArgumentsOfMethod
 
 // TODO: The JIT is refusing to inline Read8/Write8 for Read32+ and Write32+ due to code size.
 // Inlining Read16/Write16 doesn't help either. Is there no solution short of making a mess and manually
 // duplicating Read8/Write8?
+
+#if NET5_0_OR_GREATER
+    [module: SkipLocalsInit]
+#endif
+
+[assembly: InternalsVisibleTo("Sewer56.BitStream.Benchmarks")]
 
 namespace Sewer56.BitStream;
 
@@ -45,10 +54,6 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     private const int IntNumBits = sizeof(int) * 8;
     private const int LongNumBits = sizeof(long) * 8;
 
-#if !NETCOREAPP
-    private const MethodImplOptions AggressiveOptimization = default;
-#endif
-
     /// <summary>
     /// Absolute index of the next bit to access.
     /// </summary>
@@ -81,7 +86,13 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <summary>
     /// The stream to read from.
     /// </summary>
-    public TByteStream Stream { get; private set; }
+    public TByteStream Stream
+    {
+        readonly get => _stream;
+        private set => _stream = value;
+    }
+    
+    private TByteStream _stream;
 
     /// <summary>
     /// Constructs a new instance of the BitStream.
@@ -98,10 +109,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// Reads a single bit from the stream.
     /// </summary>
     /// <returns>The read value, stored in the least-significant bits.</returns>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public byte ReadBit()
     {
         const int bitCount = 1;
@@ -125,10 +133,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <param name="numBits">Number of bits to read.</param>
     /// <returns>The read value, stored in the least-significant bits.</returns>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public byte Read8(int numBits)
     {
         // Calculate where we are in the stream and advance.
@@ -167,10 +172,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <param name="numBits">Number of bits to read.</param>
     /// <returns>The read value, stored in the least-significant bits.</returns>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public ushort Read16(int numBits)
     {
         if (numBits <= ByteNumBits)
@@ -187,10 +189,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <param name="numBits">Number of bits to read.</param>
     /// <returns>The read value, stored in the least-significant bits.</returns>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public uint Read32(int numBits)
     {
         if (numBits <= ShortNumBits)
@@ -207,10 +206,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <param name="numBits">Number of bits to read.</param>
     /// <returns>The read value, stored in the least-significant bits.</returns>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public ulong Read64(int numBits)
     {
         if (numBits <= IntNumBits)
@@ -228,7 +224,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <typeparam name="T">Any of the following: byte, sbyte, short, ushort, int, uint, long, ulong.</typeparam>
     /// <param name="numBits">Number of bits to read. Max: 64.</param>
     /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     [ExcludeFromCodeCoverage]
     public T Read<T>(int numBits)
     {
@@ -253,12 +249,88 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     }
 
     /// <summary>
+    /// [ASSUMES ALIGNMENT. INCORRECT USE IF <see cref="BitIndex"/> IS NOT MULTIPLE OF 8]
+    /// Reads a byte from the stream.
+    /// </summary>
+    /// <returns>The read value.</returns>
+    [MethodImpl(AggressiveInlining)]
+    public byte Read8Aligned()
+    {
+        // Calculate where we are in the stream and advance.
+        int byteOffset = BitIndex / ByteNumBits;
+        var result = Stream.Read(byteOffset);
+        BitIndex += ByteNumBits;
+        return result;
+    }
+    
+    /// <summary>
+    /// [ASSUMES ALIGNMENT. INCORRECT USE IF <see cref="BitIndex"/> IS NOT MULTIPLE OF 8]
+    /// Reads a short from the stream.
+    /// </summary>
+    /// <returns>The read value.</returns>
+    [MethodImpl(AggressiveInlining)]
+    public ushort Read16Aligned()
+    {
+        // Calculate where we are in the stream and advance.
+        int byteOffset = BitIndex / ByteNumBits;
+        var high = Stream.Read(byteOffset) << 8;
+        var low  = Stream.Read(byteOffset + 1);
+        BitIndex += ShortNumBits;
+        return (ushort)(high | low);
+    }
+    
+    /// <summary>
+    /// [ASSUMES ALIGNMENT. INCORRECT USE IF <see cref="BitIndex"/> IS NOT MULTIPLE OF 8]
+    /// Reads a int from the stream.
+    /// </summary>
+    /// <returns>The read value.</returns>
+    [MethodImpl(AggressiveInlining)]
+    public uint Read32Aligned()
+    {
+        // Calculate where we are in the stream and advance.
+        int byteOffset = BitIndex / ByteNumBits;
+        var b0 = Stream.Read(byteOffset) << 24;
+        var b1 = Stream.Read(byteOffset + 1) << 16;
+        var b2 = Stream.Read(byteOffset + 2) << 8;
+        var b3 = Stream.Read(byteOffset + 3);
+        BitIndex += IntNumBits;
+        return (uint)(b0 | b1 | b2 | b3);
+    }
+    
+    /// <summary>
+    /// [ASSUMES ALIGNMENT. INCORRECT USE IF <see cref="BitIndex"/> IS NOT MULTIPLE OF 8]
+    /// Reads a int from the stream.
+    /// </summary>
+    /// <returns>The read value.</returns>
+    [MethodImpl(AggressiveInlining)]
+    public ulong Read64Aligned()
+    {
+        // Note: This could be better optimised on x86 but for now it's ok; this is a cold path.
+        // Calculate where we are in the stream and advance.
+        int byteOffset = BitIndex / ByteNumBits;
+        var b0 = (ulong) Stream.Read(byteOffset) << 56;
+        var b1 = (ulong) Stream.Read(byteOffset + 1) << 48;
+        var b2 = (ulong) Stream.Read(byteOffset + 2) << 40;
+        var b3 = (ulong) Stream.Read(byteOffset + 3) << 32;
+
+        b0 = b0 | b1 | b2 | b3;
+        var b4 = (ulong) Stream.Read(byteOffset + 4) << 24;
+        var b5 = (ulong) Stream.Read(byteOffset + 5) << 16;
+        var b6 = (ulong) Stream.Read(byteOffset + 6) << 8;
+        var b7 = (ulong) Stream.Read(byteOffset + 7);
+        
+        b4 = b4 | b5 | b6 | b7;
+        BitIndex += LongNumBits;
+        return b0 | b4;
+    }
+    
+    /// <summary>
     /// Reads a specified type (up to 64 bits) from the stream.
     /// Number of bits determined from type.
     /// </summary>
     /// <typeparam name="T">Any of the following: byte, sbyte, short, ushort, int, uint, long, ulong.</typeparam>
     /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     [ExcludeFromCodeCoverage]
     public T Read<T>() where T : unmanaged
     {
@@ -280,15 +352,41 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
         else return default;
 #endif
     }
+    
+    /// <summary>
+    /// Reads a specified type (up to 64 bits) from the stream.
+    /// Number of bits determined from type.
+    /// </summary>
+    /// <typeparam name="T">Any of the following: byte, sbyte, short, ushort, int, uint, long, ulong.</typeparam>
+    /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
+    [MethodImpl(AggressiveInlining)]
+    [ExcludeFromCodeCoverage]
+    public T ReadAligned<T>() where T : unmanaged
+    {
+        if (typeof(T) == typeof(byte)) return Number.Cast<T>(Read8Aligned());
+        else if (typeof(T) == typeof(sbyte)) return Number.Cast<T>(Read8Aligned());
+
+        else if (typeof(T) == typeof(short)) return Number.Cast<T>(Read16Aligned());
+        else if (typeof(T) == typeof(ushort)) return Number.Cast<T>(Read16Aligned());
+
+        else if (typeof(T) == typeof(int)) return Number.Cast<T>(Read32Aligned());
+        else if (typeof(T) == typeof(uint)) return Number.Cast<T>(Read32Aligned());
+
+        else if (typeof(T) == typeof(long)) return Number.Cast<T>(Read64Aligned());
+        else if (typeof(T) == typeof(ulong)) return Number.Cast<T>(Read64Aligned());
+#if DEBUG
+        // Debug-only because exceptions prevent inlining.
+        else throw new InvalidCastException();
+#else
+        else return default;
+#endif
+    }
 
     /// <summary>
     /// Writes a single bit starting at <see cref="BitIndex"/>.
     /// </summary>
     /// <param name="value">Value to write.</param>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public void WriteBit(byte value)
     {
         const int numBits = 1;
@@ -314,10 +412,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <param name="value">Value to write.</param>
     /// <param name="numBits">Number of bits to write.</param>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public void Write8(byte value, int numBits)
     {
         // Calculate where we are in the stream and advance.
@@ -368,10 +463,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <param name="value">Value to write.</param>
     /// <param name="numBits">Number of bits to write.</param>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public void Write16(ushort value, int numBits)
     {
         if (numBits <= ByteNumBits)
@@ -390,10 +482,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <param name="value">Value to write.</param>
     /// <param name="numBits">Number of bits to write.</param>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public void Write32(uint value, int numBits)
     {
         if (numBits <= ShortNumBits)
@@ -412,10 +501,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <param name="value">Value to write.</param>
     /// <param name="numBits">Number of bits to write.</param>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public void Write64(ulong value, int numBits)
     {
         if (numBits <= IntNumBits)
@@ -427,6 +513,73 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
         int numLow = numBits - IntNumBits;
         Write32((uint)((value & (uint.MaxValue << numLow)) >> numLow), IntNumBits);
         Write32((uint)(value & GetMaskLong(numLow)), numLow);
+    }
+    
+    /// <summary>
+    /// [ASSUMES ALIGNMENT. INCORRECT USE IF <see cref="BitIndex"/> IS NOT MULTIPLE OF 8]
+    /// Writes a byte to the position starting at <see cref="BitIndex"/>.
+    /// </summary>
+    /// <param name="value">Value to write.</param>
+    [MethodImpl(AggressiveInlining)]
+    public void Write8Aligned(byte value)
+    {
+        // Calculate where we are in the stream and advance.
+        int localByteIndex = BitIndex / ByteNumBits;
+        Stream.Write(value, localByteIndex);
+        BitIndex += ByteNumBits;
+    }
+    
+    /// <summary>
+    /// [ASSUMES ALIGNMENT. INCORRECT USE IF <see cref="BitIndex"/> IS NOT MULTIPLE OF 8]
+    /// Writes 2 bytes to the position starting at <see cref="BitIndex"/>.
+    /// </summary>
+    /// <param name="value">Value to write.</param>
+    [MethodImpl(AggressiveInlining)]
+    public void Write16Aligned(ushort value)
+    {
+        // Calculate where we are in the stream and advance.
+        int localByteIndex = BitIndex / ByteNumBits;
+        Stream.Write((byte)value, localByteIndex + 1);
+        Stream.Write(*((byte*)&value + 1), localByteIndex);
+        BitIndex += ShortNumBits;
+    }
+    
+    /// <summary>
+    /// [ASSUMES ALIGNMENT. INCORRECT USE IF <see cref="BitIndex"/> IS NOT MULTIPLE OF 8]
+    /// Writes 4 bytes to the position starting at <see cref="BitIndex"/>.
+    /// </summary>
+    /// <param name="value">Value to write.</param>
+    [MethodImpl(AggressiveInlining)]
+    public void Write32Aligned(uint value)
+    {
+        // Calculate where we are in the stream and advance.
+        int localByteIndex = BitIndex / ByteNumBits;
+        Stream.Write((byte)value, localByteIndex + 3);
+        Stream.Write(*((byte*)&value + 1), localByteIndex + 2);
+        Stream.Write(*((byte*)&value + 2), localByteIndex + 1);
+        Stream.Write(*((byte*)&value + 3), localByteIndex);
+        BitIndex += IntNumBits;
+    }
+    
+    /// <summary>
+    /// [ASSUMES ALIGNMENT. INCORRECT USE IF <see cref="BitIndex"/> IS NOT MULTIPLE OF 8]
+    /// Writes 8 bytes to the position starting at <see cref="BitIndex"/>.
+    /// </summary>
+    /// <param name="value">Value to write.</param>
+    [MethodImpl(AggressiveInlining)]
+    public void Write64Aligned(ulong value)
+    {
+        // Calculate where we are in the stream and advance.
+        int localByteIndex = BitIndex / ByteNumBits;
+        Stream.Write((byte)value, localByteIndex + 7);
+        Stream.Write(*((byte*)&value + 1), localByteIndex + 6);
+        Stream.Write(*((byte*)&value + 2), localByteIndex + 5);
+        Stream.Write(*((byte*)&value + 3), localByteIndex + 4);
+        Stream.Write(*((byte*)&value + 4), localByteIndex + 3);
+        Stream.Write(*((byte*)&value + 5), localByteIndex + 2);
+        Stream.Write(*((byte*)&value + 6), localByteIndex + 1);
+        Stream.Write(*((byte*)&value + 7), localByteIndex);
+        BitIndex += LongNumBits;
     }
 
     /// <summary>
@@ -484,6 +637,35 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
         else throw new InvalidCastException();
 #endif
     }
+    
+    /// <summary>
+    /// [ASSUMES ALIGNMENT. INCORRECT USE IF <see cref="BitIndex"/> IS NOT MULTIPLE OF 8]
+    /// Writes a specified type (up to 64 bits) to the stream.
+    /// Number of bits determined from type.
+    /// </summary>
+    /// <typeparam name="T">Any of the following: byte, sbyte, short, ushort, int, uint, long, ulong.</typeparam>
+    /// <param name="value">The value to write.</param>
+    /// <remarks>Using this method has no additional overhead compared to the other methods in Release mode.</remarks>
+    [MethodImpl(AggressiveInlining)]
+    [ExcludeFromCodeCoverage]
+    public void WriteAligned<T>(T value) where T : unmanaged
+    {
+        if (typeof(T) == typeof(byte)) Write8Aligned(Number.Cast<T, byte>(value));
+        else if (typeof(T) == typeof(sbyte)) Write8Aligned(Number.Cast<T, byte>(value));
+
+        else if (typeof(T) == typeof(short)) Write16Aligned(Number.Cast<T, ushort>(value));
+        else if (typeof(T) == typeof(ushort)) Write16Aligned(Number.Cast<T, ushort>(value));
+
+        else if (typeof(T) == typeof(int)) Write32Aligned(Number.Cast<T, uint>(value));
+        else if (typeof(T) == typeof(uint)) Write32Aligned(Number.Cast<T, uint>(value));
+
+        else if (typeof(T) == typeof(long)) Write64Aligned(Number.Cast<T, ulong>(value));
+        else if (typeof(T) == typeof(ulong)) Write64Aligned(Number.Cast<T, ulong>(value));
+#if DEBUG
+        // Debug-only because exceptions prevent inlining.
+        else throw new InvalidCastException();
+#endif
+    }
 
     #region Extensions
 
@@ -506,17 +688,12 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <typeparam name="T">The type of value to be read from the stream.</typeparam>
     /// <returns>The read in struct.</returns>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public T ReadGeneric<T>() where T : unmanaged
     {
-        Span<byte> stackSpan = stackalloc byte[sizeof(T)];
-        for (int x = 0; x < stackSpan.Length; x++)
-            stackSpan[x] = Read<byte>(ByteNumBits);
-
-        return Unsafe.ReadUnaligned<T>(ref MemoryMarshal.GetReference(stackSpan));
+        T value;
+        Read(new Span<byte>(&value, sizeof(T)));
+        return value;
     }
 
     /// <summary>
@@ -524,10 +701,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <typeparam name="T">The type of value to be read from the stream.</typeparam>
     /// <returns>The read in struct.</returns>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public T ReadGeneric<T>(int numBits) where T : unmanaged
     {
         Span<byte> stackSpan = stackalloc byte[sizeof(T)];
@@ -561,16 +735,8 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
     /// <param name="value">The value to write to the stream.</param>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public void WriteGeneric<T>(ref T value) where T : unmanaged
-    {
-        var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
-        for (int x = 0; x < sizeof(T); x++)
-            Write<byte>(valuePtr[x], ByteNumBits);
-    }
+    [MethodImpl(AggressiveInlining)]
+    public void WriteGeneric<T>(ref T value) where T : unmanaged => Write(new Span<byte>(Unsafe.AsPointer(ref value), sizeof(T)));
 
     /// <summary>
     /// Appends an unmanaged struct to the current <see cref="BitStream"/>.
@@ -586,10 +752,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
     /// <param name="value">The value to write to the stream.</param>
     /// <param name="numBits">Number of bits to write to the stream.</param>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public void WriteGeneric<T>(ref T value, int numBits) where T : unmanaged
     {
         var valuePtr = (byte*)(Unsafe.AsPointer(ref value));
@@ -614,10 +777,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <typeparam name="T">The type of value to be written onto the stream.</typeparam>
     /// <param name="value">The value to write to the stream.</param>
     /// <param name="numBits">Number of bits to write to the stream.</param>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public void WriteGeneric<T>(T value, int numBits) where T : unmanaged => WriteGeneric(ref value, numBits);
 
     /// <summary>
@@ -639,22 +799,151 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// Writes a <see cref="Span{T}"/> of bytes to the stream.
     /// </summary>
     /// <param name="value">The span to write.</param>
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public void Write(Span<byte> value)
     {
-        for (int x = 0; x < value.Length; x++)
-            Write8(value[x], ByteNumBits);
+        bool isAligned = BitIndex % 8 == 0;
+        if (isAligned)
+        {
+            #region Ugly Devirtualisation Hacks
+            const int MinSpanMemCpyLength = 6;
+            
+            // We don't have a way to devirtualise other than this right now.
+            if (typeof(TByteStream) == typeof(PointerByteStream) && value.Length >= MinSpanMemCpyLength)
+            {
+                Unsafe.As<TByteStream, PointerByteStream>(ref _stream).Write(value, BitIndex / ByteNumBits);
+                BitIndex += value.Length * 8;
+                return;
+            }
+            
+            if (typeof(TByteStream) == typeof(ArrayByteStream) && value.Length >= MinSpanMemCpyLength)
+            {
+                Unsafe.As<TByteStream, ArrayByteStream>(ref _stream).Write(value, BitIndex / ByteNumBits);
+                BitIndex += value.Length * 8;
+                return;
+            }
+            
+            if (typeof(TByteStream) == typeof(MemoryByteStream) && value.Length >= MinSpanMemCpyLength)
+            {
+                Unsafe.As<TByteStream, MemoryByteStream>(ref _stream).Write(value, BitIndex / ByteNumBits);
+                BitIndex += value.Length * 8;
+                return;
+            }
+            
+#if NETCOREAPP3_1_OR_GREATER
+            if (typeof(TByteStream) == typeof(StreamByteStream) && value.Length >= MinSpanMemCpyLength)
+            {
+                Unsafe.As<TByteStream, StreamByteStream>(ref _stream).Write(value, BitIndex / ByteNumBits);
+                BitIndex += value.Length * 8;
+                return;
+            }
+#endif
+            #endregion
+
+            int x;
+            if (sizeof(nuint) == 8)
+            {
+                var bufferLong = value.CastFast<byte, ulong>();
+                var numInts   = value.Length / sizeof(ulong);
+                for (x = 0; x < numInts; x++)
+                    Write64Aligned(bufferLong.DangerousGetReferenceAt(x));
+
+                x *= sizeof(ulong);
+            }
+            else
+            {
+                var bufferInt = value.CastFast<byte, uint>();
+                var numInts   = value.Length / sizeof(uint);
+                for (x = 0; x < numInts; x++)
+                    Write32Aligned(bufferInt.DangerousGetReferenceAt(x));
+                
+                x *= sizeof(uint);
+            }
+
+            for (; x < value.Length; x++)
+                Write8Aligned(value.DangerousGetReferenceAt(x));
+        }
+        else
+        {
+            for (int x = 0; x < value.Length; x++)
+                Write8(value.DangerousGetReferenceAt(x), ByteNumBits);
+        }
     }
 
     /// <summary>
     /// Reads a given number of bytes into a <see cref="Span{T}"/> buffer.
     /// </summary>
     /// <param name="buffer">Span to write to.</param>
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public void Read(Span<byte> buffer)
     {
-        for (int x = 0; x < buffer.Length; x++)
-            buffer[x] = Read8(ByteNumBits);
+        bool isAligned = BitIndex % 8 == 0;
+
+        if (isAligned)
+        {
+            #region Ugly Devirtualisation Hacks
+            const int MinSpanMemCpyLength = 4;
+            
+            // We don't have a way to devirtualise other than this right now.
+            if (typeof(TByteStream) == typeof(PointerByteStream) && buffer.Length >= MinSpanMemCpyLength)
+            {
+                Unsafe.As<TByteStream, PointerByteStream>(ref _stream).Read(buffer, BitIndex / ByteNumBits);
+                BitIndex += buffer.Length * 8;
+                return;
+            }
+            
+            if (typeof(TByteStream) == typeof(ArrayByteStream) && buffer.Length >= MinSpanMemCpyLength)
+            {
+                Unsafe.As<TByteStream, ArrayByteStream>(ref _stream).Read(buffer, BitIndex / ByteNumBits);
+                BitIndex += buffer.Length * 8;
+                return;
+            }
+            
+            if (typeof(TByteStream) == typeof(MemoryByteStream) && buffer.Length >= MinSpanMemCpyLength)
+            {
+                Unsafe.As<TByteStream, MemoryByteStream>(ref _stream).Read(buffer, BitIndex / ByteNumBits);
+                BitIndex += buffer.Length * 8;
+                return;
+            }
+            
+#if NETCOREAPP3_1_OR_GREATER
+            if (typeof(TByteStream) == typeof(StreamByteStream) && buffer.Length >= MinSpanMemCpyLength)
+            {
+                Unsafe.As<TByteStream, StreamByteStream>(ref _stream).Read(buffer, BitIndex / ByteNumBits);
+                BitIndex += buffer.Length * 8;
+                return;
+            }
+#endif
+            #endregion
+            
+            int x;
+            if (sizeof(nuint) == 8)
+            {
+                var bufferLong = buffer.CastFast<byte, ulong>();
+                var numLongs   = buffer.Length / sizeof(ulong);
+                for (x = 0; x < numLongs; x++)
+                    bufferLong.DangerousGetReferenceAt(x) = Read64Aligned();
+                
+                x *= sizeof(ulong);
+            }
+            else
+            {
+                var bufferInt = buffer.CastFast<byte, uint>();
+                var numInts   = buffer.Length / sizeof(uint);
+                for (x = 0; x < numInts; x++)
+                    bufferInt.DangerousGetReferenceAt(x) = Read32Aligned();
+                
+                x *= sizeof(uint);
+            }
+
+            for (; x < buffer.Length; x++)
+                buffer.DangerousGetReferenceAt(x) = Read8Aligned();
+        }
+        else
+        {
+            for (int x = 0; x < buffer.Length; x++)
+                buffer.DangerousGetReferenceAt(x) = Read8(ByteNumBits);
+        }
     }
 
     /// <summary>
@@ -720,10 +1009,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// </summary>
     /// <param name="maxLengthBytes">Maximum length in bytes.</param>
     /// <param name="encoding">The encoding to use.</param>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public string ReadString(int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
     {
         encoding ??= System.Text.Encoding.UTF8;
@@ -757,10 +1043,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <param name="text">The text to write to the stream.</param>
     /// <param name="maxLengthBytes">Maximum length in bytes.</param>
     /// <param name="encoding">The encoding to use.</param>
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     public void WriteString(string text, int maxLengthBytes = 1024, System.Text.Encoding encoding = null)
     {
         encoding ??= System.Text.Encoding.UTF8;
@@ -784,35 +1067,29 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     /// <summary>
     /// Gets the mask necessary to mask out a given number of bits.
     /// </summary>
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     private uint GetMask(int numBits) => ((uint)1 << numBits) - 1;
 
     /// <summary>
     /// Gets the mask necessary to mask out a given number of bits.
     /// </summary>
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     private ulong GetMaskLong(int numBits) => ((ulong)1 << numBits) - 1;
 
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     private int SignShrink(int value) => SignExtend(value, IntNumBits);
 
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    [MethodImpl(AggressiveInlining)]
     private long SignShrink(long value) => SignExtend(value, LongNumBits);
-
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    
+    [MethodImpl(AggressiveInlining)]
     private int SignExtend(int value, int numBits)
     {
         var mask = 1 << (numBits - 1);
         return (value ^ mask) - mask;
     }
-
-#if NET5_0_OR_GREATER
-    [SkipLocalsInit]
-#endif
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    
+    [MethodImpl(AggressiveInlining)]
     private long SignExtend(long value, int numBits)
     {
         long mask = 1L << (numBits - 1);
