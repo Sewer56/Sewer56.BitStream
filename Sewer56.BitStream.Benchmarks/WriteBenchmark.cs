@@ -39,7 +39,6 @@ public class WriteBenchmark : BenchmarkBase
 
         for (; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Write8((byte) numIterations, 8);
             bitStream.Write8((byte)numIterations, 8);
             bitStream.Write8((byte)numIterations, 8);
             bitStream.Write8((byte)numIterations, 8);
@@ -47,6 +46,30 @@ public class WriteBenchmark : BenchmarkBase
             bitStream.Write8((byte)numIterations, 8);
             bitStream.Write8((byte)numIterations, 8);
             bitStream.Write8((byte)numIterations, 8);
+            bitStream.Write8((byte)numIterations, 8);
+        }
+
+        return numIterations;
+    }
+    
+    [Benchmark]
+    public int Write8Aligned()
+    {
+        var maxNumIterations = NumBytes / 8;
+        var numIterations = 0;
+        var stream = new ArrayByteStream(_data);
+        var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+
+        for (; numIterations < maxNumIterations; numIterations++)
+        {
+            bitStream.Write8Aligned((byte)numIterations);
+            bitStream.Write8Aligned((byte)numIterations);
+            bitStream.Write8Aligned((byte)numIterations);
+            bitStream.Write8Aligned((byte)numIterations);
+            bitStream.Write8Aligned((byte)numIterations);
+            bitStream.Write8Aligned((byte)numIterations);
+            bitStream.Write8Aligned((byte)numIterations);
+            bitStream.Write8Aligned((byte)numIterations);
         }
 
         return numIterations;
@@ -74,6 +97,29 @@ public class WriteBenchmark : BenchmarkBase
 
         return numIterations;
     }
+    
+    [Benchmark]
+    public int Write16Aligned()
+    {
+        var maxNumIterations = NumBytes / 2 / 8;
+        var numIterations = 0;
+        var stream = new ArrayByteStream(_data);
+        var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+
+        for (; numIterations < maxNumIterations; numIterations++)
+        {
+            bitStream.Write16Aligned((ushort)numIterations);
+            bitStream.Write16Aligned((ushort)numIterations);
+            bitStream.Write16Aligned((ushort)numIterations);
+            bitStream.Write16Aligned((ushort)numIterations);
+            bitStream.Write16Aligned((ushort)numIterations);
+            bitStream.Write16Aligned((ushort)numIterations);
+            bitStream.Write16Aligned((ushort)numIterations);
+            bitStream.Write16Aligned((ushort)numIterations);
+        }
+
+        return numIterations;
+    }
 
     [Benchmark]
     public int Write32()
@@ -97,6 +143,29 @@ public class WriteBenchmark : BenchmarkBase
 
         return numIterations;
     }
+    
+    [Benchmark]
+    public int Write32Aligned()
+    {
+        var maxNumIterations = NumBytes / 4 / 8;
+        var numIterations = 0;
+        var stream = new ArrayByteStream(_data);
+        var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+
+        for (; numIterations < maxNumIterations; numIterations++)
+        {
+            bitStream.Write32Aligned((uint)numIterations);
+            bitStream.Write32Aligned((uint)numIterations);
+            bitStream.Write32Aligned((uint)numIterations);
+            bitStream.Write32Aligned((uint)numIterations);
+            bitStream.Write32Aligned((uint)numIterations);
+            bitStream.Write32Aligned((uint)numIterations);
+            bitStream.Write32Aligned((uint)numIterations);
+            bitStream.Write32Aligned((uint)numIterations);
+        }
+
+        return numIterations;
+    }
 
     [Benchmark]
     public int Write64()
@@ -116,6 +185,29 @@ public class WriteBenchmark : BenchmarkBase
             bitStream.Write64((ulong)numIterations, 64);
             bitStream.Write64((ulong)numIterations, 64);
             bitStream.Write64((ulong)numIterations, 64);
+        }
+            
+        return numIterations;
+    }
+    
+    [Benchmark]
+    public int Write64Aligned()
+    {
+        var maxNumIterations = NumBytes / 8 / 8;
+        var numIterations = 0;
+        var stream = new ArrayByteStream(_data);
+        var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+
+        for (; numIterations < maxNumIterations; numIterations++)
+        {
+            bitStream.Write64Aligned((ulong)numIterations);
+            bitStream.Write64Aligned((ulong)numIterations);
+            bitStream.Write64Aligned((ulong)numIterations);
+            bitStream.Write64Aligned((ulong)numIterations);
+            bitStream.Write64Aligned((ulong)numIterations);
+            bitStream.Write64Aligned((ulong)numIterations);
+            bitStream.Write64Aligned((ulong)numIterations);
+            bitStream.Write64Aligned((ulong)numIterations);
         }
             
         return numIterations;

@@ -53,6 +53,29 @@ public class ReadBenchmark : BenchmarkBase
     }
 
     [Benchmark]
+    public int Read8Aligned()
+    {
+        var maxNumIterations = NumBytes / 8;
+        var numIterations = 0;
+        var stream = new ArrayByteStream(_data);
+        var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+
+        for (; numIterations < maxNumIterations; numIterations++)
+        {
+            bitStream.Read8Aligned();
+            bitStream.Read8Aligned();
+            bitStream.Read8Aligned();
+            bitStream.Read8Aligned();
+            bitStream.Read8Aligned();
+            bitStream.Read8Aligned();
+            bitStream.Read8Aligned();
+            bitStream.Read8Aligned();
+        }
+
+        return numIterations;
+    }
+    
+    [Benchmark]
     public int Read16()
     {
         var maxNumIterations = NumBytes / 2 / 8;
@@ -70,6 +93,29 @@ public class ReadBenchmark : BenchmarkBase
             bitStream.Read16(16);
             bitStream.Read16(16);
             bitStream.Read16(16);
+        }
+
+        return numIterations;
+    }
+    
+    [Benchmark]
+    public int Read16Aligned()
+    {
+        var maxNumIterations = NumBytes / 2 / 8;
+        var numIterations = 0;
+        var stream = new ArrayByteStream(_data);
+        var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+
+        for (; numIterations < maxNumIterations; numIterations++)
+        {
+            bitStream.Read16Aligned();
+            bitStream.Read16Aligned();
+            bitStream.Read16Aligned();
+            bitStream.Read16Aligned();
+            bitStream.Read16Aligned();
+            bitStream.Read16Aligned();
+            bitStream.Read16Aligned();
+            bitStream.Read16Aligned();
         }
 
         return numIterations;
@@ -97,6 +143,29 @@ public class ReadBenchmark : BenchmarkBase
 
         return numIterations;
     }
+    
+    [Benchmark]
+    public int Read32Aligned()
+    {
+        var maxNumIterations = NumBytes / 4 / 8;
+        var numIterations = 0;
+        var stream = new ArrayByteStream(_data);
+        var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+
+        for (; numIterations < maxNumIterations; numIterations++)
+        {
+            bitStream.Read32Aligned();
+            bitStream.Read32Aligned();
+            bitStream.Read32Aligned();
+            bitStream.Read32Aligned();
+            bitStream.Read32Aligned();
+            bitStream.Read32Aligned();
+            bitStream.Read32Aligned();
+            bitStream.Read32Aligned();
+        }
+
+        return numIterations;
+    }
 
     [Benchmark]
     public int Read64()
@@ -116,6 +185,29 @@ public class ReadBenchmark : BenchmarkBase
             bitStream.Read64(64);
             bitStream.Read64(64);
             bitStream.Read64(64);
+        }
+            
+        return numIterations;
+    }
+    
+    [Benchmark]
+    public int Read64Aligned()
+    {
+        var maxNumIterations = NumBytes / 8 / 8;
+        var numIterations = 0;
+        var stream = new ArrayByteStream(_data);
+        var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+
+        for (; numIterations < maxNumIterations; numIterations++)
+        {
+            bitStream.Read64Aligned();
+            bitStream.Read64Aligned();
+            bitStream.Read64Aligned();
+            bitStream.Read64Aligned();
+            bitStream.Read64Aligned();
+            bitStream.Read64Aligned();
+            bitStream.Read64Aligned();
+            bitStream.Read64Aligned();
         }
             
         return numIterations;

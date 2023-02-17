@@ -67,8 +67,42 @@ Seeking in a BitStream uses the `Seek(long offset, int bit)` and `SeekRelative(l
 
 Alternatively you can modify the `BitIndex` to set the absolute bit index.
 
-### Reading/Writing Structures
+### Usage as a ByteStream
 
+While this library was originally optimised for the purpose of reading/writing bit-packed messages, it can also be used as a Byte Stream. For this purpose, the APIs `Read.*Aligned` are provided; which assume that `BitIndex is a multiple of 8`:  
+
+```
+|        Method |      Mean |     Error |    StdDev | Speed (MB/s) | Allocated |
+|-------------- |----------:|----------:|----------:|------------- |----------:|
+|         Read8 |  9.077 μs | 0.0313 μs | 0.0293 μs |      1101.68 |         - |
+|  Read8Aligned |  5.006 μs | 0.0295 μs | 0.0276 μs |      1997.69 |         - |
+|        Read16 |  8.867 μs | 0.0424 μs | 0.0397 μs |      1127.82 |         - |
+| Read16Aligned |  2.346 μs | 0.0050 μs | 0.0047 μs |      4263.00 |         - |
+|        Read32 | 11.626 μs | 0.0260 μs | 0.0243 μs |       860.14 |         - |
+| Read32Aligned |  1.671 μs | 0.0037 μs | 0.0033 μs |      5983.25 |         - |
+```
+
+Example:  
+```csharp
+// [Assuming BitIndex aligned to start of a byte]
+// Reads 4 bytes from the stream. 
+bitStream.ReadAligned<uint>();
+
+// Reads 4 bytes from the stream using optimised function (if available for the `IByteStream`).
+bitStream.ReadAlignedFast<uint>();
+```
+
+#### Optimised Read/Write Functions
+
+Optimised read/write functions are provided as extension methods for `IByteStreams` which support them.  
+
+They are provided by the following interfaces.  
+- `IStreamWithMemoryCopy`: Provides optimised aligned Read/Write operations for `Span<byte>`.  
+- `IStreamWithReadBasicPrimiitves`: Provides optimised Read/Write operations for 2/4/8 byte values.  
+
+These are suffixed with `Fast`, so for `Write` you'd have `WriteFast`. 
+
+### Reading/Writing Structures
 In order to read/write structures, you should implement the `IBitPackable` interface.
 
 Example:
@@ -108,7 +142,7 @@ For performance reasons, it's generally recommended to use `structs` instead of 
 You can then use the `Serialize<T>` and `Deserialize<T>` methods to read/write packable structs.
 
 ```csharp
- var expected = new TestStruct
+var expected = new TestStruct
 {
     Byte  = (byte)x,
     Short = (short)(byte.MaxValue + x),
