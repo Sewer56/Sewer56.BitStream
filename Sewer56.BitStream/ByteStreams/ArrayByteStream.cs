@@ -13,8 +13,8 @@ public readonly struct ArrayByteStream : IByteStream, IStreamWithMemoryCopy, ISt
 {
     public byte[] Array { get; }
     public ArrayByteStream(byte[] array) => Array = array;
-    public byte Read(int index) => Array[index];
-    public void Write(byte value, int index) => Array[index] = value;
+    public byte Read(int index) => Array.DangerousGetReferenceAt(index);
+    public void Write(byte value, int index) => Array.DangerousGetReferenceAt(index) = value;
     
     public void Read(Span<byte> data, int index) => Array.AsSpanFast(index, data.Length).CopyTo(data);
     public void Write(Span<byte> value, int index) => value.CopyTo(Array.AsSpanFast(index, value.Length));

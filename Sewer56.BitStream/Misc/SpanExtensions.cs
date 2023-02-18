@@ -92,9 +92,7 @@ internal static class SpanExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ref T DangerousGetReferenceAt<T>(this Span<T> span, int i)
     {
-        ref T r0 = ref MemoryMarshal.GetReference(span);
-        ref T ri = ref Unsafe.Add(ref r0, (nint)(uint)i);
-        return ref ri;
+        return ref Unsafe.Add(ref MemoryMarshal.GetReference(span), (nint)(uint)i);
     }
     
     /// <summary>
@@ -109,9 +107,7 @@ internal static class SpanExtensions
     public static ref T DangerousGetReferenceAt<T>(this T[] array, int i)
     {
 #if NET5_0_OR_GREATER
-        ref T r0 = ref MemoryMarshal.GetArrayDataReference(array);
-        ref T ri = ref Unsafe.Add(ref r0, (nint)(uint)i);
-        return ref ri;
+        return ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(array), (nint)(uint)i);
 #else
         return ref DangerousGetReferenceAt(array.AsSpan(), i);
 #endif
