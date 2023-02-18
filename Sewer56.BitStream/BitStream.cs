@@ -540,8 +540,9 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     {
         // Calculate where we are in the stream and advance.
         int localByteIndex = BitIndex / ByteNumBits;
-        Stream.Write((byte)value, localByteIndex + 1);
-        Stream.Write(*((byte*)&value + 1), localByteIndex);
+        var valuePtr = (byte*)&value;
+        Stream.Write(*valuePtr, localByteIndex + 1);
+        Stream.Write(*(valuePtr + 1), localByteIndex);
         BitIndex += ShortNumBits;
     }
     
@@ -555,10 +556,11 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     {
         // Calculate where we are in the stream and advance.
         int localByteIndex = BitIndex / ByteNumBits;
-        Stream.Write((byte)value, localByteIndex + 3);
-        Stream.Write(*((byte*)&value + 1), localByteIndex + 2);
-        Stream.Write(*((byte*)&value + 2), localByteIndex + 1);
-        Stream.Write(*((byte*)&value + 3), localByteIndex);
+        var valuePtr = (byte*)&value;
+        Stream.Write(*valuePtr, localByteIndex + 3);
+        Stream.Write(*(valuePtr + 1), localByteIndex + 2);
+        Stream.Write(*(valuePtr + 2), localByteIndex + 1);
+        Stream.Write(*(valuePtr + 3), localByteIndex);
         BitIndex += IntNumBits;
     }
     
@@ -572,14 +574,15 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     {
         // Calculate where we are in the stream and advance.
         int localByteIndex = BitIndex / ByteNumBits;
-        Stream.Write((byte)value, localByteIndex + 7);
-        Stream.Write(*((byte*)&value + 1), localByteIndex + 6);
-        Stream.Write(*((byte*)&value + 2), localByteIndex + 5);
-        Stream.Write(*((byte*)&value + 3), localByteIndex + 4);
-        Stream.Write(*((byte*)&value + 4), localByteIndex + 3);
-        Stream.Write(*((byte*)&value + 5), localByteIndex + 2);
-        Stream.Write(*((byte*)&value + 6), localByteIndex + 1);
-        Stream.Write(*((byte*)&value + 7), localByteIndex);
+        var valuePtr = (byte*)&value;
+        Stream.Write(*valuePtr, localByteIndex + 7);
+        Stream.Write(*(valuePtr + 1), localByteIndex + 6);
+        Stream.Write(*(valuePtr + 2), localByteIndex + 5);
+        Stream.Write(*(valuePtr + 3), localByteIndex + 4);
+        Stream.Write(*(valuePtr + 4), localByteIndex + 3);
+        Stream.Write(*(valuePtr + 5), localByteIndex + 2);
+        Stream.Write(*(valuePtr + 6), localByteIndex + 1);
+        Stream.Write(*(valuePtr + 7), localByteIndex);
         BitIndex += LongNumBits;
     }
 
