@@ -3,6 +3,7 @@ using Sewer56.BitStream.ByteStreams;
 
 namespace Sewer56.BitStream.Benchmarks;
 
+[DisassemblyDiagnoser]
 [MemoryDiagnoser]
 public class WriteBenchmark : BenchmarkBase
 {
@@ -102,10 +103,9 @@ public class WriteBenchmark : BenchmarkBase
     public int Write16Aligned()
     {
         var maxNumIterations = NumBytes / 2 / 8;
+        var bitStream = new BitStream<ArrayByteStream>(new ArrayByteStream(_data), 0);
+        
         var numIterations = 0;
-        var stream = new ArrayByteStream(_data);
-        var bitStream = new BitStream<ArrayByteStream>(stream, 0);
-
         for (; numIterations < maxNumIterations; numIterations++)
         {
             bitStream.Write16Aligned((ushort)numIterations);

@@ -3,305 +3,306 @@ using Sewer56.BitStream.ByteStreams;
 
 namespace Sewer56.BitStream.Benchmarks;
 
+[DisassemblyDiagnoser]
 [MemoryDiagnoser]
 public class ReadBenchmark : BenchmarkBase
 {
     [Benchmark]
-    public int ReadBit()
+    public nuint ReadBit()
     {
         var maxNumIterations = (NumBytes * 8) / 8;
-        var numIterations    = 0;
         var stream           = new ArrayByteStream(_data); 
         var bitStream        = new BitStream<ArrayByteStream>(stream, 0);
-
-        for (; numIterations < maxNumIterations; numIterations++)
+        nuint result = 0;
+        
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.ReadBit();
-            bitStream.ReadBit();
-            bitStream.ReadBit();
-            bitStream.ReadBit();
-            bitStream.ReadBit();
-            bitStream.ReadBit();
-            bitStream.ReadBit();
-            bitStream.ReadBit();
+            result += bitStream.ReadBit();
+            result += bitStream.ReadBit();
+            result += bitStream.ReadBit();
+            result += bitStream.ReadBit();
+            result += bitStream.ReadBit();
+            result += bitStream.ReadBit();
+            result += bitStream.ReadBit();
+            result += bitStream.ReadBit();
         }
 
-        return numIterations;
+        return result;
     }
 
     [Benchmark]
-    public int Read8()
+    public nuint Read8()
     {
         var maxNumIterations = NumBytes / 8;
-        var numIterations = 0;
         var stream = new ArrayByteStream(_data);
         var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+        nuint result = 0;
 
-        for (; numIterations < maxNumIterations; numIterations++)
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Read8(8);
-            bitStream.Read8(8);
-            bitStream.Read8(8);
-            bitStream.Read8(8);
-            bitStream.Read8(8);
-            bitStream.Read8(8);
-            bitStream.Read8(8);
-            bitStream.Read8(8);
+            result += bitStream.Read8(8);
+            result += bitStream.Read8(8);
+            result += bitStream.Read8(8);
+            result += bitStream.Read8(8);
+            result += bitStream.Read8(8);
+            result += bitStream.Read8(8);
+            result += bitStream.Read8(8);
+            result += bitStream.Read8(8);
         }
 
-        return numIterations;
+        return result;
     }
 
     [Benchmark]
-    public int Read8Aligned()
+    public nuint Read8Aligned()
     {
         var maxNumIterations = NumBytes / 8;
-        var numIterations = 0;
         var stream = new ArrayByteStream(_data);
         var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+        nuint result = 0;
 
-        for (; numIterations < maxNumIterations; numIterations++)
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Read8Aligned();
-            bitStream.Read8Aligned();
-            bitStream.Read8Aligned();
-            bitStream.Read8Aligned();
-            bitStream.Read8Aligned();
-            bitStream.Read8Aligned();
-            bitStream.Read8Aligned();
-            bitStream.Read8Aligned();
+            result += bitStream.Read8Aligned();
+            result += bitStream.Read8Aligned();
+            result += bitStream.Read8Aligned();
+            result += bitStream.Read8Aligned();
+            result += bitStream.Read8Aligned();
+            result += bitStream.Read8Aligned();
+            result += bitStream.Read8Aligned();
+            result += bitStream.Read8Aligned();
         }
 
-        return numIterations;
+        return result;
     }
     
     [Benchmark]
-    public int Read16()
+    public nuint Read16()
     {
         var maxNumIterations = NumBytes / 2 / 8;
-        var numIterations = 0;
         var stream = new ArrayByteStream(_data);
         var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+        nuint result = 0;
 
-        for (; numIterations < maxNumIterations; numIterations++)
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Read16(16);
-            bitStream.Read16(16);
-            bitStream.Read16(16);
-            bitStream.Read16(16);
-            bitStream.Read16(16);
-            bitStream.Read16(16);
-            bitStream.Read16(16);
-            bitStream.Read16(16);
+            result += bitStream.Read16(16);
+            result += bitStream.Read16(16);
+            result += bitStream.Read16(16);
+            result += bitStream.Read16(16);
+            result += bitStream.Read16(16);
+            result += bitStream.Read16(16);
+            result += bitStream.Read16(16);
+            result += bitStream.Read16(16);
         }
 
-        return numIterations;
+        return result;
     }
     
     [Benchmark]
-    public int Read16Aligned()
+    public nuint Read16Aligned()
     {
         var maxNumIterations = NumBytes / 2 / 8;
-        var numIterations = 0;
         var stream = new ArrayByteStream(_data);
         var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+        nuint result = 0;
 
-        for (; numIterations < maxNumIterations; numIterations++)
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Read16Aligned();
-            bitStream.Read16Aligned();
-            bitStream.Read16Aligned();
-            bitStream.Read16Aligned();
-            bitStream.Read16Aligned();
-            bitStream.Read16Aligned();
-            bitStream.Read16Aligned();
-            bitStream.Read16Aligned();
+            result += bitStream.Read16Aligned();
+            result += bitStream.Read16Aligned();
+            result += bitStream.Read16Aligned();
+            result += bitStream.Read16Aligned();
+            result += bitStream.Read16Aligned();
+            result += bitStream.Read16Aligned();
+            result += bitStream.Read16Aligned();
+            result += bitStream.Read16Aligned();
         }
 
-        return numIterations;
+        return result;
     }
     
     [Benchmark]
-    public int Read16AlignedFast()
+    public nuint Read16AlignedFast()
     {
         var maxNumIterations = NumBytes / 2 / 8;
-        var numIterations = 0;
         var stream = new ArrayByteStream(_data);
         var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+        nuint result = 0;
 
-        for (; numIterations < maxNumIterations; numIterations++)
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Read16AlignedFast();
-            bitStream.Read16AlignedFast();
-            bitStream.Read16AlignedFast();
-            bitStream.Read16AlignedFast();
-            bitStream.Read16AlignedFast();
-            bitStream.Read16AlignedFast();
-            bitStream.Read16AlignedFast();
-            bitStream.Read16AlignedFast();
+            result += bitStream.Read16AlignedFast();
+            result += bitStream.Read16AlignedFast();
+            result += bitStream.Read16AlignedFast();
+            result += bitStream.Read16AlignedFast();
+            result += bitStream.Read16AlignedFast();
+            result += bitStream.Read16AlignedFast();
+            result += bitStream.Read16AlignedFast();
+            result += bitStream.Read16AlignedFast();
         }
 
-        return numIterations;
+        return result;
     }
-
+    
     [Benchmark]
-    public int Read32()
+    public nuint Read32()
     {
         var maxNumIterations = NumBytes / 4 / 8;
-        var numIterations = 0;
         var stream = new ArrayByteStream(_data);
         var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+        nuint result = 0;
 
-        for (; numIterations < maxNumIterations; numIterations++)
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Read32(32);
-            bitStream.Read32(32);
-            bitStream.Read32(32);
-            bitStream.Read32(32);
-            bitStream.Read32(32);
-            bitStream.Read32(32);
-            bitStream.Read32(32);
-            bitStream.Read32(32);
+            result += bitStream.Read32(32);
+            result += bitStream.Read32(32);
+            result += bitStream.Read32(32);
+            result += bitStream.Read32(32);
+            result += bitStream.Read32(32);
+            result += bitStream.Read32(32);
+            result += bitStream.Read32(32);
+            result += bitStream.Read32(32);
         }
 
-        return numIterations;
+        return result;
     }
     
     [Benchmark]
-    public int Read32Aligned()
+    public nuint Read32Aligned()
     {
         var maxNumIterations = NumBytes / 4 / 8;
-        var numIterations = 0;
         var stream = new ArrayByteStream(_data);
         var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+        nuint result = 0;
 
-        for (; numIterations < maxNumIterations; numIterations++)
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Read32Aligned();
-            bitStream.Read32Aligned();
-            bitStream.Read32Aligned();
-            bitStream.Read32Aligned();
-            bitStream.Read32Aligned();
-            bitStream.Read32Aligned();
-            bitStream.Read32Aligned();
-            bitStream.Read32Aligned();
+            result += bitStream.Read32Aligned();
+            result += bitStream.Read32Aligned();
+            result += bitStream.Read32Aligned();
+            result += bitStream.Read32Aligned();
+            result += bitStream.Read32Aligned();
+            result += bitStream.Read32Aligned();
+            result += bitStream.Read32Aligned();
+            result += bitStream.Read32Aligned();
         }
 
-        return numIterations;
+        return result;
     }
     
     [Benchmark]
-    public int Read32AlignedFast()
+    public nuint Read32AlignedFast()
     {
         var maxNumIterations = NumBytes / 4 / 8;
-        var numIterations = 0;
         var stream = new ArrayByteStream(_data);
         var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+        nuint result = 0;
 
-        for (; numIterations < maxNumIterations; numIterations++)
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Read32AlignedFast();
-            bitStream.Read32AlignedFast();
-            bitStream.Read32AlignedFast();
-            bitStream.Read32AlignedFast();
-            bitStream.Read32AlignedFast();
-            bitStream.Read32AlignedFast();
-            bitStream.Read32AlignedFast();
-            bitStream.Read32AlignedFast();
+            result += bitStream.Read32AlignedFast();
+            result += bitStream.Read32AlignedFast();
+            result += bitStream.Read32AlignedFast();
+            result += bitStream.Read32AlignedFast();
+            result += bitStream.Read32AlignedFast();
+            result += bitStream.Read32AlignedFast();
+            result += bitStream.Read32AlignedFast();
+            result += bitStream.Read32AlignedFast();
         }
 
-        return numIterations;
+        return result;
     }
 
     [Benchmark]
-    public int Read64()
+    public nuint Read64()
     {
         var maxNumIterations = NumBytes / 8 / 8;
-        var numIterations = 0;
         var stream = new ArrayByteStream(_data);
         var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+        nuint result = 0;
 
-        for (; numIterations < maxNumIterations; numIterations++)
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Read64(64);
-            bitStream.Read64(64);
-            bitStream.Read64(64);
-            bitStream.Read64(64);
-            bitStream.Read64(64);
-            bitStream.Read64(64);
-            bitStream.Read64(64);
-            bitStream.Read64(64);
+            result += (nuint)bitStream.Read64(64);
+            result += (nuint)bitStream.Read64(64);
+            result += (nuint)bitStream.Read64(64);
+            result += (nuint)bitStream.Read64(64);
+            result += (nuint)bitStream.Read64(64);
+            result += (nuint)bitStream.Read64(64);
+            result += (nuint)bitStream.Read64(64);
+            result += (nuint)bitStream.Read64(64);
         }
             
-        return numIterations;
+        return result;
     }
     
     [Benchmark]
-    public int Read64Aligned()
+    public nuint Read64Aligned()
     {
         var maxNumIterations = NumBytes / 8 / 8;
-        var numIterations = 0;
         var stream = new ArrayByteStream(_data);
         var bitStream = new BitStream<ArrayByteStream>(stream, 0);
+        nuint result = 0;
 
-        for (; numIterations < maxNumIterations; numIterations++)
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Read64Aligned();
-            bitStream.Read64Aligned();
-            bitStream.Read64Aligned();
-            bitStream.Read64Aligned();
-            bitStream.Read64Aligned();
-            bitStream.Read64Aligned();
-            bitStream.Read64Aligned();
-            bitStream.Read64Aligned();
+            result += (nuint)bitStream.Read64Aligned();
+            result += (nuint)bitStream.Read64Aligned();
+            result += (nuint)bitStream.Read64Aligned();
+            result += (nuint)bitStream.Read64Aligned();
+            result += (nuint)bitStream.Read64Aligned();
+            result += (nuint)bitStream.Read64Aligned();
+            result += (nuint)bitStream.Read64Aligned();
+            result += (nuint)bitStream.Read64Aligned();
         }
             
-        return numIterations;
+        return result;
     }
     
     [Benchmark]
-    public int Read64AlignedFast()
+    public nuint Read64AlignedFast()
     {
         var maxNumIterations = NumBytes / 8 / 8;
-        var numIterations = 0;
         var stream = new ArrayByteStream(_data);
         var bitStream = new BitStream<ArrayByteStream>(stream, 0);
-
-        for (; numIterations < maxNumIterations; numIterations++)
+        nuint result = 0;
+        
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Read64AlignedFast();
-            bitStream.Read64AlignedFast();
-            bitStream.Read64AlignedFast();
-            bitStream.Read64AlignedFast();
-            bitStream.Read64AlignedFast();
-            bitStream.Read64AlignedFast();
-            bitStream.Read64AlignedFast();
-            bitStream.Read64AlignedFast();
+            result += (nuint)bitStream.Read64AlignedFast();
+            result += (nuint)bitStream.Read64AlignedFast();
+            result += (nuint)bitStream.Read64AlignedFast();
+            result += (nuint)bitStream.Read64AlignedFast();
+            result += (nuint)bitStream.Read64AlignedFast();
+            result += (nuint)bitStream.Read64AlignedFast();
+            result += (nuint)bitStream.Read64AlignedFast();
+            result += (nuint)bitStream.Read64AlignedFast();
         }
             
-        return numIterations;
+        return result;
     }
 
     [Benchmark]
-    public int Read8Generic()
+    public nuint Read8Generic()
     {
         var maxNumIterations = NumBytes / 8;
-        var numIterations = 0;
         var stream = new ArrayByteStream(_data);
         var bitStream = new BitStream<ArrayByteStream>(stream, 0);
-
-        for (; numIterations < maxNumIterations; numIterations++)
+        nuint result = 0;
+        
+        for (var numIterations = 0; numIterations < maxNumIterations; numIterations++)
         {
-            bitStream.Read<byte>();
-            bitStream.Read<byte>();
-            bitStream.Read<byte>();
-            bitStream.Read<byte>();
-            bitStream.Read<byte>();
-            bitStream.Read<byte>();
-            bitStream.Read<byte>();
-            bitStream.Read<byte>();
+            result += bitStream.Read<byte>();
+            result += bitStream.Read<byte>();
+            result += bitStream.Read<byte>();
+            result += bitStream.Read<byte>();
+            result += bitStream.Read<byte>();
+            result += bitStream.Read<byte>();
+            result += bitStream.Read<byte>();
+            result += bitStream.Read<byte>();
         }
 
-        return numIterations;
+        return result;
     }
 }
