@@ -18,7 +18,13 @@ Sewer56.BitStream.ByteStreams.ArrayByteStream.Write2(ushort value, int index) ->
 Sewer56.BitStream.ByteStreams.ArrayByteStream.Write4(uint value, int index) -> void
 Sewer56.BitStream.ByteStreams.ArrayByteStream.Write8(ulong value, int index) -> void
 Sewer56.BitStream.ByteStreams.MemoryByteStream.Read(System.Span<byte> data, int index) -> void
+Sewer56.BitStream.ByteStreams.MemoryByteStream.Read2(int index) -> ushort
+Sewer56.BitStream.ByteStreams.MemoryByteStream.Read4(int index) -> uint
+Sewer56.BitStream.ByteStreams.MemoryByteStream.Read8(int index) -> ulong
 Sewer56.BitStream.ByteStreams.MemoryByteStream.Write(System.Span<byte> value, int index) -> void
+Sewer56.BitStream.ByteStreams.MemoryByteStream.Write2(ushort value, int index) -> void
+Sewer56.BitStream.ByteStreams.MemoryByteStream.Write4(uint value, int index) -> void
+Sewer56.BitStream.ByteStreams.MemoryByteStream.Write8(ulong value, int index) -> void
 Sewer56.BitStream.ByteStreams.PointerByteStream.Read(System.Span<byte> data, int index) -> void
 Sewer56.BitStream.ByteStreams.PointerByteStream.Read2(int index) -> ushort
 Sewer56.BitStream.ByteStreams.PointerByteStream.Read4(int index) -> uint
