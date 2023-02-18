@@ -10,15 +10,42 @@ Sewer56.BitStream.BitStream<TByteStream>.Write8Aligned(byte value) -> void
 Sewer56.BitStream.BitStream<TByteStream>.WriteAligned<T>(T value) -> void
 Sewer56.BitStream.BitStreamExtensions
 Sewer56.BitStream.ByteStreams.ArrayByteStream.Read(System.Span<byte> data, int index) -> void
+Sewer56.BitStream.ByteStreams.ArrayByteStream.Read2(int index) -> ushort
+Sewer56.BitStream.ByteStreams.ArrayByteStream.Read4(int index) -> uint
+Sewer56.BitStream.ByteStreams.ArrayByteStream.Read8(int index) -> ulong
 Sewer56.BitStream.ByteStreams.ArrayByteStream.Write(System.Span<byte> value, int index) -> void
+Sewer56.BitStream.ByteStreams.ArrayByteStream.Write2(ushort value, int index) -> void
+Sewer56.BitStream.ByteStreams.ArrayByteStream.Write4(uint value, int index) -> void
+Sewer56.BitStream.ByteStreams.ArrayByteStream.Write8(ulong value, int index) -> void
 Sewer56.BitStream.ByteStreams.MemoryByteStream.Read(System.Span<byte> data, int index) -> void
 Sewer56.BitStream.ByteStreams.MemoryByteStream.Write(System.Span<byte> value, int index) -> void
 Sewer56.BitStream.ByteStreams.PointerByteStream.Read(System.Span<byte> data, int index) -> void
+Sewer56.BitStream.ByteStreams.PointerByteStream.Read2(int index) -> ushort
+Sewer56.BitStream.ByteStreams.PointerByteStream.Read4(int index) -> uint
+Sewer56.BitStream.ByteStreams.PointerByteStream.Read8(int index) -> ulong
 Sewer56.BitStream.ByteStreams.PointerByteStream.Write(System.Span<byte> value, int index) -> void
+Sewer56.BitStream.ByteStreams.PointerByteStream.Write2(ushort value, int index) -> void
+Sewer56.BitStream.ByteStreams.PointerByteStream.Write4(uint value, int index) -> void
+Sewer56.BitStream.ByteStreams.PointerByteStream.Write8(ulong value, int index) -> void
 Sewer56.BitStream.ByteStreams.StreamByteStream.Read(System.Span<byte> data, int index) -> void
 Sewer56.BitStream.ByteStreams.StreamByteStream.Write(System.Span<byte> value, int index) -> void
 Sewer56.BitStream.Interfaces.IStreamWithMemoryCopy
 Sewer56.BitStream.Interfaces.IStreamWithMemoryCopy.Read(System.Span<byte> data, int index) -> void
 Sewer56.BitStream.Interfaces.IStreamWithMemoryCopy.Write(System.Span<byte> value, int index) -> void
-static Sewer56.BitStream.BitStreamExtensions.ReadFast<T>(this Sewer56.BitStream.BitStream<T> bitStream, System.Span<byte> buffer) -> void
-static Sewer56.BitStream.BitStreamExtensions.WriteFast<T>(this Sewer56.BitStream.BitStream<T> bitStream, System.Span<byte> value) -> void
+Sewer56.BitStream.Interfaces.IStreamWithReadBasicPrimitives
+Sewer56.BitStream.Interfaces.IStreamWithReadBasicPrimitives.Read2(int index) -> ushort
+Sewer56.BitStream.Interfaces.IStreamWithReadBasicPrimitives.Read4(int index) -> uint
+Sewer56.BitStream.Interfaces.IStreamWithReadBasicPrimitives.Read8(int index) -> ulong
+Sewer56.BitStream.Interfaces.IStreamWithReadBasicPrimitives.Write2(ushort value, int index) -> void
+Sewer56.BitStream.Interfaces.IStreamWithReadBasicPrimitives.Write4(uint value, int index) -> void
+Sewer56.BitStream.Interfaces.IStreamWithReadBasicPrimitives.Write8(ulong value, int index) -> void
+static Sewer56.BitStream.BitStreamExtensions.Read16AlignedFast<T>(this ref Sewer56.BitStream.BitStream<T> bitStream) -> ushort
+static Sewer56.BitStream.BitStreamExtensions.Read32AlignedFast<T>(this ref Sewer56.BitStream.BitStream<T> bitStream) -> uint
+static Sewer56.BitStream.BitStreamExtensions.Read64AlignedFast<T>(this ref Sewer56.BitStream.BitStream<T> bitStream) -> ulong
+static Sewer56.BitStream.BitStreamExtensions.ReadAlignedFast<TStream, T>(this ref Sewer56.BitStream.BitStream<TStream> bitStream) -> T
+static Sewer56.BitStream.BitStreamExtensions.ReadFast<T>(this ref Sewer56.BitStream.BitStream<T> bitStream, System.Span<byte> buffer) -> void
+static Sewer56.BitStream.BitStreamExtensions.Write16AlignedFast<T>(this ref Sewer56.BitStream.BitStream<T> bitStream, ushort value) -> void
+static Sewer56.BitStream.BitStreamExtensions.Write32AlignedFast<T>(this ref Sewer56.BitStream.BitStream<T> bitStream, uint value) -> void
+static Sewer56.BitStream.BitStreamExtensions.Write64AlignedFast<T>(this ref Sewer56.BitStream.BitStream<T> bitStream, ulong value) -> void
+static Sewer56.BitStream.BitStreamExtensions.WriteAlignedFast<TStream, T>(this ref Sewer56.BitStream.BitStream<TStream> bitStream, T value) -> void
+static Sewer56.BitStream.BitStreamExtensions.WriteFast<T>(this ref Sewer56.BitStream.BitStream<T> bitStream, System.Span<byte> value) -> void

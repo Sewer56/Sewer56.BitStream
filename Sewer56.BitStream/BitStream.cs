@@ -300,7 +300,7 @@ public unsafe struct BitStream<TByteStream> where TByteStream : IByteStream
     
     /// <summary>
     /// [ASSUMES ALIGNMENT. INCORRECT USE IF <see cref="BitIndex"/> IS NOT MULTIPLE OF 8]
-    /// Reads a int from the stream.
+    /// Reads a long from the stream.
     /// </summary>
     /// <returns>The read value.</returns>
     [MethodImpl(AggressiveInlining)]

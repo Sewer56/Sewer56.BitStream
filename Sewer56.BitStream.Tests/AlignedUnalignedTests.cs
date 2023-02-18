@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using Sewer56.BitStream.ByteStreams;
+using Sewer56.BitStream.Interfaces;
 using Xunit;
 using static Sewer56.BitStream.Tests.Helpers.Helpers;
 
@@ -38,7 +39,7 @@ public class AlignedUnalignedTests
             Assert.Equal(unaligned, aligned);
         }
     }
-    
+
     [Fact]
     public void AlignedWriteMatches()
     {

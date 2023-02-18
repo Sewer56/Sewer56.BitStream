@@ -10,10 +10,11 @@ Efficient reusable BitStream library with support for generics; no virtual funct
 </a>
 
 ## Introduction
-Bitstreams unlike regular streams, operate at the bit level, allowing you to read/write bits.
+Bitstreams unlike regular streams, operate at the bit level, allowing you to read/write bits.  
 
-This minimalistic library adds bit level manipulation to a user provided stream which can be backed by an arbitrary source such as a byte array, `Memory<T>` or `Stream`.
-This library project attempts to add bit manipulation to a stream while using known `Stream`, `BinaryReader` and `BinaryWriter` class methods
+This minimalistic library adds bit level manipulation to a user provided stream which can be backed by an arbitrary source such as a byte array, `Memory<T>` or `Stream`.  
+
+This library project attempts to add bit manipulation to a stream while using known `Stream`, `BinaryReader` and `BinaryWriter` class methods.  
 
 ## Usage
 Initialize a `BitStream` using an implementation of `IByteStream` as Generic parameter.
@@ -89,8 +90,10 @@ Example:
 bitStream.ReadAligned<uint>();
 
 // Reads 4 bytes from the stream using optimised function (if available for the `IByteStream`).
-bitStream.ReadAlignedFast<uint>();
+bitStream.ReadAlignedFast<TStream, uint>();
 ```
+
+Please note: Anything written to this byte stream is Big Endian.
 
 #### Optimised Read/Write Functions
 
@@ -98,7 +101,7 @@ Optimised read/write functions are provided as extension methods for `IByteStrea
 
 They are provided by the following interfaces.  
 - `IStreamWithMemoryCopy`: Provides optimised aligned Read/Write operations for `Span<byte>`.  
-- `IStreamWithReadBasicPrimiitves`: Provides optimised Read/Write operations for 2/4/8 byte values.  
+- `IStreamWithReadBasicPrimitives`: Provides optimised Read/Write operations for 2/4/8 byte values.  
 
 These are suffixed with `Fast`, so for `Write` you'd have `WriteFast`. 
 
