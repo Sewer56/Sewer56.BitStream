@@ -73,14 +73,19 @@ Alternatively you can modify the `BitIndex` to set the absolute bit index.
 While this library was originally optimised for the purpose of reading/writing bit-packed messages, it can also be used as a Byte Stream. For this purpose, the APIs `Read.*Aligned` are provided; which assume that `BitIndex is a multiple of 8`:  
 
 ```
-|        Method |      Mean |     Error |    StdDev | Speed (MB/s) | Allocated |
-|-------------- |----------:|----------:|----------:|------------- |----------:|
-|         Read8 |  9.077 μs | 0.0313 μs | 0.0293 μs |      1101.68 |         - |
-|  Read8Aligned |  5.006 μs | 0.0295 μs | 0.0276 μs |      1997.69 |         - |
-|        Read16 |  8.867 μs | 0.0424 μs | 0.0397 μs |      1127.82 |         - |
-| Read16Aligned |  2.346 μs | 0.0050 μs | 0.0047 μs |      4263.00 |         - |
-|        Read32 | 11.626 μs | 0.0260 μs | 0.0243 μs |       860.14 |         - |
-| Read32Aligned |  1.671 μs | 0.0037 μs | 0.0033 μs |      5983.25 |         - |
+|            Method |        Mean |     Error |    StdDev | Speed (MB/s) | Code Size | Allocated |
+|------------------ |------------:|----------:|----------:|------------- |----------:|----------:|
+|             Read8 | 12,834.8 ns |  77.08 ns |  64.37 ns |       779.13 |   1,548 B |         - |
+|      Read8Aligned |  4,866.0 ns |  44.23 ns |  41.37 ns |      2055.09 |     297 B |         - |
+|            Read16 | 12,430.5 ns |  54.80 ns |  48.58 ns |       804.47 |   2,990 B |         - |
+|     Read16Aligned |  3,293.8 ns |  30.49 ns |  28.52 ns |      3036.03 |     502 B |         - |
+| Read16AlignedFast |  2,633.4 ns |  18.13 ns |  16.96 ns |      3797.37 |     345 B |         - |
+|            Read32 | 15,155.6 ns |  92.38 ns |  86.41 ns |       659.82 |   6,035 B |         - |
+|     Read32Aligned |  2,577.6 ns |  14.90 ns |  13.94 ns |      3879.54 |     720 B |         - |
+| Read32AlignedFast |  1,260.5 ns |   7.29 ns |   6.82 ns |      7933.57 |     313 B |         - |
+|            Read64 | 14,497.0 ns | 118.25 ns | 110.61 ns |       689.80 |   7,567 B |         - |
+|     Read64Aligned |  3,141.3 ns |  22.59 ns |  21.13 ns |      3183.41 |   1,669 B |         - |
+| Read64AlignedFast |    630.6 ns |   4.72 ns |   4.41 ns |     15857.05 |     289 B |         - |
 ```
 
 Example:  
