@@ -13,7 +13,7 @@
       <RepositoryUrl>https://github.com/Sewer56/Sewer56.BitStream</RepositoryUrl>
       <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
       <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-      <Version>1.2.1</Version>
+      <Version>1.3.0</Version>
       <IsTrimmable>true</IsTrimmable>
       <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
       <NoWarn>CS1591</NoWarn>
