@@ -9,7 +9,7 @@ namespace Sewer56.BitStream.ByteStreams;
 /// <summary>
 /// A byte stream representing a .NET Stream.
 /// </summary>
-public struct StreamByteStream : IByteStream 
+public struct StreamByteStream : IByteStream
 #if NETCOREAPP3_1_OR_GREATER
     , IStreamWithMemoryCopy
 #endif

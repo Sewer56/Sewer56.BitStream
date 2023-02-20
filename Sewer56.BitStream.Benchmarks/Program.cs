@@ -1,4 +1,4 @@
-﻿using BenchmarkDotNet.Columns;
+using BenchmarkDotNet.Columns;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Reports;
@@ -27,7 +27,7 @@ internal class InProcessConfig : ManualConfig
     public InProcessConfig()
     {
         Add(DefaultConfig.Instance);
-        AddJob(Job.MediumRun.WithLaunchCount(1).WithToolchain(new InProcessEmitToolchain(true)));
+        AddJob(Job.MediumRun.WithLaunchCount(1));
         AddColumn(new Speed());
     }
 }

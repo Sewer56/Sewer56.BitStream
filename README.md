@@ -10,10 +10,11 @@ Efficient reusable BitStream library with support for generics; no virtual funct
 </a>
 
 ## Introduction
-Bitstreams unlike regular streams, operate at the bit level, allowing you to read/write bits.
+Bitstreams unlike regular streams, operate at the bit level, allowing you to read/write bits.  
 
-This minimalistic library adds bit level manipulation to a user provided stream which can be backed by an arbitrary source such as a byte array, `Memory<T>` or `Stream`.
-This library project attempts to add bit manipulation to a stream while using known `Stream`, `BinaryReader` and `BinaryWriter` class methods
+This minimalistic library adds bit level manipulation to a user provided stream which can be backed by an arbitrary source such as a byte array, `Memory<T>` or `Stream`.  
+
+This library project attempts to add bit manipulation to a stream while using known `Stream`, `BinaryReader` and `BinaryWriter` class methods.  
 
 ## Usage
 Initialize a `BitStream` using an implementation of `IByteStream` as Generic parameter.
@@ -67,8 +68,49 @@ Seeking in a BitStream uses the `Seek(long offset, int bit)` and `SeekRelative(l
 
 Alternatively you can modify the `BitIndex` to set the absolute bit index.
 
-### Reading/Writing Structures
+### Usage as a ByteStream
 
+While this library was originally optimised for the purpose of reading/writing bit-packed messages, it can also be used as a Byte Stream. For this purpose, the APIs `Read.*Aligned` are provided; which assume that `BitIndex is a multiple of 8`:  
+
+```
+|            Method |        Mean |     Error |    StdDev | Speed (MB/s) | Code Size | Allocated |
+|------------------ |------------:|----------:|----------:|------------- |----------:|----------:|
+|             Read8 | 12,834.8 ns |  77.08 ns |  64.37 ns |       779.13 |   1,548 B |         - |
+|      Read8Aligned |  4,866.0 ns |  44.23 ns |  41.37 ns |      2055.09 |     297 B |         - |
+|            Read16 | 12,430.5 ns |  54.80 ns |  48.58 ns |       804.47 |   2,990 B |         - |
+|     Read16Aligned |  3,293.8 ns |  30.49 ns |  28.52 ns |      3036.03 |     502 B |         - |
+| Read16AlignedFast |  2,633.4 ns |  18.13 ns |  16.96 ns |      3797.37 |     345 B |         - |
+|            Read32 | 15,155.6 ns |  92.38 ns |  86.41 ns |       659.82 |   6,035 B |         - |
+|     Read32Aligned |  2,577.6 ns |  14.90 ns |  13.94 ns |      3879.54 |     720 B |         - |
+| Read32AlignedFast |  1,260.5 ns |   7.29 ns |   6.82 ns |      7933.57 |     313 B |         - |
+|            Read64 | 14,497.0 ns | 118.25 ns | 110.61 ns |       689.80 |   7,567 B |         - |
+|     Read64Aligned |  3,141.3 ns |  22.59 ns |  21.13 ns |      3183.41 |   1,669 B |         - |
+| Read64AlignedFast |    630.6 ns |   4.72 ns |   4.41 ns |     15857.05 |     289 B |         - |
+```
+
+Example:  
+```csharp
+// [Assuming BitIndex aligned to start of a byte]
+// Reads 4 bytes from the stream. 
+bitStream.ReadAligned<uint>();
+
+// Reads 4 bytes from the stream using optimised function (if available for the `IByteStream`).
+bitStream.ReadAlignedFast<TStream, uint>();
+```
+
+Please note: Anything written to this byte stream is Big Endian.
+
+#### Optimised Read/Write Functions
+
+Optimised read/write functions are provided as extension methods for `IByteStreams` which support them.  
+
+They are provided by the following interfaces.  
+- `IStreamWithMemoryCopy`: Provides optimised aligned Read/Write operations for `Span<byte>`.  
+- `IStreamWithReadBasicPrimitives`: Provides optimised Read/Write operations for 2/4/8 byte values.  
+
+These are suffixed with `Fast`, so for `Write` you'd have `WriteFast`. 
+
+### Reading/Writing Structures
 In order to read/write structures, you should implement the `IBitPackable` interface.
 
 Example:
@@ -108,7 +150,7 @@ For performance reasons, it's generally recommended to use `structs` instead of 
 You can then use the `Serialize<T>` and `Deserialize<T>` methods to read/write packable structs.
 
 ```csharp
- var expected = new TestStruct
+var expected = new TestStruct
 {
     Byte  = (byte)x,
     Short = (short)(byte.MaxValue + x),

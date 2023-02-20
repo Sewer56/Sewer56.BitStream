@@ -92,8 +92,56 @@ internal static class SpanExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ref T DangerousGetReferenceAt<T>(this Span<T> span, int i)
     {
-        ref T r0 = ref MemoryMarshal.GetReference(span);
-        ref T ri = ref Unsafe.Add(ref r0, (nint)(uint)i);
-        return ref ri;
+        return ref Unsafe.Add(ref MemoryMarshal.GetReference(span), (nint)(uint)i);
+    }
+    
+    /// <summary>
+    /// Returns a reference to an element at a specified index within a given <typeparamref name="T"/> array, with no bounds checks.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the input <typeparamref name="T"/> array instance.</typeparam>
+    /// <param name="array">The input <typeparamref name="T"/> array instance.</param>
+    /// <param name="i">The index of the element to retrieve within <paramref name="array"/>.</param>
+    /// <returns>A reference to the element within <paramref name="array"/> at the index specified by <paramref name="i"/>.</returns>
+    /// <remarks>This method doesn't do any bounds checks, therefore it is responsibility of the caller to ensure the <paramref name="i"/> parameter is valid.</remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static ref T DangerousGetReferenceAt<T>(this T[] array, int i)
+    {
+#if NET5_0_OR_GREATER
+        return ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(array), (nint)(uint)i);
+#else
+        return ref DangerousGetReferenceAt(array.AsSpan(), i);
+#endif
+    }
+
+    /// <summary>
+    /// Returns a reference to an element at a specified index within a given <typeparamref name="T"/> array, with no bounds checks,
+    /// as a specified type.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the input <typeparamref name="T"/> array instance.</typeparam>
+    /// <typeparam name="TType">Type to return the reference as.</typeparam>
+    /// <param name="array">The input <typeparamref name="T"/> array instance.</param>
+    /// <param name="i">The index of the element to retrieve within <paramref name="array"/>.</param>
+    /// <returns>A reference to the element within <paramref name="array"/> at the index specified by <paramref name="i"/>.</returns>
+    /// <remarks>This method doesn't do any bounds checks, therefore it is responsibility of the caller to ensure the <paramref name="i"/> parameter is valid.</remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static ref TType DangerousGetReferenceAtAs<T, TType>(this T[] array, int i)
+    {
+        return ref Unsafe.As<T, TType>(ref array.DangerousGetReferenceAt(i));
+    }
+    
+    /// <summary>
+    /// Returns a reference to an element at a specified index within a given <typeparamref name="T"/> array, with no bounds checks,
+    /// as a specified type.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the input <typeparamref name="T"/> array instance.</typeparam>
+    /// <typeparam name="TType">Type to return the reference as.</typeparam>
+    /// <param name="span">The input <typeparamref name="T"/> array instance.</param>
+    /// <param name="i">The index of the element to retrieve within <paramref name="span"/>.</param>
+    /// <returns>A reference to the element within <paramref name="span"/> at the index specified by <paramref name="i"/>.</returns>
+    /// <remarks>This method doesn't do any bounds checks, therefore it is responsibility of the caller to ensure the <paramref name="i"/> parameter is valid.</remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static ref TType DangerousGetReferenceAtAs<T, TType>(this Span<T> span, int i)
+    {
+        return ref Unsafe.As<T, TType>(ref span.DangerousGetReferenceAt(i));
     }
 }

@@ -19,7 +19,7 @@ public class WriteSpanBenchmark : BenchmarkBase
         {
             var stream = new PointerByteStream(bytePtr);
             var bitStream = new BitStream<PointerByteStream>(stream, 0);
-            bitStream.Write(_data);
+            bitStream.WriteFast(_data);
         }
     }
     
@@ -35,10 +35,10 @@ public class WriteSpanBenchmark : BenchmarkBase
             // Unroll a bit for accuracy.
             for (int x = 0; x < _data.Length; x += 16)
             {
-                bitStream.Write(dataSpan.SliceFast(x, 4));
-                bitStream.Write(dataSpan.SliceFast(x + 4, 4));
-                bitStream.Write(dataSpan.SliceFast(x + 8, 4));
-                bitStream.Write(dataSpan.SliceFast(x + 12, 4));
+                bitStream.WriteFast(dataSpan.SliceFast(x, 4));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 4, 4));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 8, 4));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 12, 4));
             }
         }
     }
@@ -55,10 +55,10 @@ public class WriteSpanBenchmark : BenchmarkBase
             // Unroll a bit for accuracy.
             for (int x = 0; x < _data.Length; x += 32)
             {
-                bitStream.Write(dataSpan.SliceFast(x, 8));
-                bitStream.Write(dataSpan.SliceFast(x + 8, 8));
-                bitStream.Write(dataSpan.SliceFast(x + 16, 8));
-                bitStream.Write(dataSpan.SliceFast(x + 24, 8));
+                bitStream.WriteFast(dataSpan.SliceFast(x, 8));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 8, 8));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 16, 8));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 24, 8));
             }
         }
     }
@@ -75,10 +75,10 @@ public class WriteSpanBenchmark : BenchmarkBase
             // Unroll a bit for accuracy.
             for (int x = 0; x < _data.Length; x += 64)
             {
-                bitStream.Write(dataSpan.SliceFast(x, 16));
-                bitStream.Write(dataSpan.SliceFast(x + 16, 16));
-                bitStream.Write(dataSpan.SliceFast(x + 32, 16));
-                bitStream.Write(dataSpan.SliceFast(x + 48, 16));
+                bitStream.WriteFast(dataSpan.SliceFast(x, 16));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 16, 16));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 32, 16));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 48, 16));
             }
         }
     }
@@ -95,10 +95,10 @@ public class WriteSpanBenchmark : BenchmarkBase
             // Unroll a bit for accuracy.
             for (int x = 0; x < _data.Length; x += 128)
             {
-                bitStream.Write(dataSpan.SliceFast(x, 32));
-                bitStream.Write(dataSpan.SliceFast(x + 32, 32));
-                bitStream.Write(dataSpan.SliceFast(x + 64, 32));
-                bitStream.Write(dataSpan.SliceFast(x + 96, 32));
+                bitStream.WriteFast(dataSpan.SliceFast(x, 32));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 32, 32));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 64, 32));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 96, 32));
             }
         }
     }
@@ -115,10 +115,10 @@ public class WriteSpanBenchmark : BenchmarkBase
             // Unroll a bit for accuracy.
             for (int x = 0; x < _data.Length; x += 256)
             {
-                bitStream.Write(dataSpan.SliceFast(x, 64));
-                bitStream.Write(dataSpan.SliceFast(x + 64, 64));
-                bitStream.Write(dataSpan.SliceFast(x + 128, 64));
-                bitStream.Write(dataSpan.SliceFast(x + 192, 64));
+                bitStream.WriteFast(dataSpan.SliceFast(x, 64));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 64, 64));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 128, 64));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 192, 64));
             }
         }
     }
@@ -135,10 +135,10 @@ public class WriteSpanBenchmark : BenchmarkBase
             // Unroll a bit for accuracy.
             for (int x = 0; x < _data.Length; x += 512)
             {
-                bitStream.Write(dataSpan.SliceFast(x, 128));
-                bitStream.Write(dataSpan.SliceFast(x + 128, 128));
-                bitStream.Write(dataSpan.SliceFast(x + 256, 128));
-                bitStream.Write(dataSpan.SliceFast(x + 384, 128));
+                bitStream.WriteFast(dataSpan.SliceFast(x, 128));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 128, 128));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 256, 128));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 384, 128));
             }
         }
     }
@@ -155,10 +155,10 @@ public class WriteSpanBenchmark : BenchmarkBase
             // Unroll a bit for accuracy.
             for (int x = 0; x < _data.Length; x += 1024)
             {
-                bitStream.Write(dataSpan.SliceFast(x, 256));
-                bitStream.Write(dataSpan.SliceFast(x + 256, 256));
-                bitStream.Write(dataSpan.SliceFast(x + 512, 256));
-                bitStream.Write(dataSpan.SliceFast(x + 768, 256));
+                bitStream.WriteFast(dataSpan.SliceFast(x, 256));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 256, 256));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 512, 256));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 768, 256));
             }
         }
     }
@@ -175,10 +175,10 @@ public class WriteSpanBenchmark : BenchmarkBase
             // Unroll a bit for accuracy.
             for (int x = 0; x < _data.Length; x += 2048)
             {
-                bitStream.Write(dataSpan.SliceFast(x, 512));
-                bitStream.Write(dataSpan.SliceFast(x + 512, 512));
-                bitStream.Write(dataSpan.SliceFast(x + 1024, 512));
-                bitStream.Write(dataSpan.SliceFast(x + 1536, 512));
+                bitStream.WriteFast(dataSpan.SliceFast(x, 512));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 512, 512));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 1024, 512));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 1536, 512));
             }
         }
     }
@@ -195,10 +195,10 @@ public class WriteSpanBenchmark : BenchmarkBase
             // Unroll a bit for accuracy.
             for (int x = 0; x < _data.Length; x += 4096)
             {
-                bitStream.Write(dataSpan.SliceFast(x, 1024));
-                bitStream.Write(dataSpan.SliceFast(x + 1024, 1024));
-                bitStream.Write(dataSpan.SliceFast(x + 2048, 1024));
-                bitStream.Write(dataSpan.SliceFast(x + 3072, 1024));
+                bitStream.WriteFast(dataSpan.SliceFast(x, 1024));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 1024, 1024));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 2048, 1024));
+                bitStream.WriteFast(dataSpan.SliceFast(x + 3072, 1024));
             }
         }
     }
@@ -211,7 +211,7 @@ public class WriteSpanBenchmark : BenchmarkBase
             var stream = new PointerByteStream(bytePtr);
             var bitStream = new BitStream<PointerByteStream>(stream, 0);
             bitStream.WriteBit(1);
-            bitStream.Write(_data.AsSpan(0, _data.Length - 1));
+            bitStream.WriteFast(_data.AsSpan(0, _data.Length - 1));
         }
     }
 }
